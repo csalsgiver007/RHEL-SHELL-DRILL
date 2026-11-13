@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { SlidersHorizontal, RotateCcw } from 'lucide-react';
 import { TopBar } from './components/TopBar';
 import { TerminalPane } from './components/TerminalPane';
@@ -7,6 +7,7 @@ import { SessionConfigModal } from './components/SessionConfigModal';
 import { SessionSummary } from './components/SessionSummary';
 import { CurriculumBrowser } from './components/CurriculumBrowser';
 import { CliPackageView } from './components/CliPackageView';
+import { buildVirtualFiles, executeInBrowserSandbox } from './utils/browserSandbox';
 import type {
   ActiveView,
   QuestionOutcome,
@@ -70,19 +71,36 @@ export default function App() {
   const [revealedSolution, setRevealedSolution] = useState<string | null>(null);
   const [isExecuting, setIsExecuting] = useState<boolean>(false);
 
+  const staticModeRef = useRef<boolean>(false);
+  const scenariosByIdRef = useRef<Map<string, ScenarioItem>>(new Map());
+  const filesRef = useRef<SandboxFile[]>([]);
+  filesRef.current = files;
+
   const setupSandboxForScenario = useCallback(
     async (scenarioId: string) => {
+      if (staticModeRef.current) {
+        const sc = scenariosByIdRef.current.get(scenarioId);
+        setFiles(sc ? buildVirtualFiles(sc) : []);
+        return;
+      }
       try {
         const res = await fetch('/api/sandbox/setup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, scenarioId }),
         });
-        if (!res.ok) return;
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('application/json')) {
+          staticModeRef.current = true;
+          const sc = scenariosByIdRef.current.get(scenarioId);
+          setFiles(sc ? buildVirtualFiles(sc) : []);
+          return;
+        }
         const data = (await res.json()) as { files?: SandboxFile[] };
         setFiles(data.files ?? []);
       } catch {
-        setFiles([]);
+        const sc = scenariosByIdRef.current.get(scenarioId);
+        setFiles(sc ? buildVirtualFiles(sc) : []);
       }
     },
     [sessionId],
@@ -147,20 +165,46 @@ export default function App() {
       setLoading(true);
       setLoadError(null);
       try {
-        const res = await fetch('/api/scenarios');
-        if (!res.ok) {
-          throw new Error(`Server returned ${res.status}`);
+        let loadedScenarios: ScenarioItem[] = [];
+        let counts: Record<string, number> = {};
+        let usedBackend = false;
+
+        try {
+          const res = await fetch('/api/scenarios');
+          const contentType = res.headers.get('content-type') || '';
+          if (res.ok && contentType.includes('application/json')) {
+            const data = (await res.json()) as {
+              scenarios: ScenarioItem[];
+              categoryCounts: Record<string, number>;
+            };
+            loadedScenarios = data.scenarios;
+            counts = data.categoryCounts;
+            usedBackend = true;
+          }
+        } catch {
+          // Fall back to static scenario JSON bundle
         }
-        const data = (await res.json()) as {
-          scenarios: ScenarioItem[];
-          categoryCounts: Record<string, number>;
-        };
+
+        if (!usedBackend) {
+          staticModeRef.current = true;
+          const staticRes = await fetch('/all_scenarios.json');
+          if (!staticRes.ok) {
+            throw new Error(`Failed to fetch scenario bundle (${staticRes.status})`);
+          }
+          const rawList = (await staticRes.json()) as ScenarioItem[];
+          loadedScenarios = rawList;
+          for (const s of rawList) {
+            counts[s.category] = (counts[s.category] || 0) + 1;
+          }
+        }
+
         if (cancelled) return;
-        setAllScenarios(data.scenarios);
-        setCategoryCounts(data.categoryCounts);
+        scenariosByIdRef.current = new Map(loadedScenarios.map((s) => [s.id, s]));
+        setAllScenarios(loadedScenarios);
+        setCategoryCounts(counts);
         startNewSession(
           { category: 'All', difficulty: 'All', count: 10, shuffled: false },
-          data.scenarios,
+          loadedScenarios,
         );
       } catch (err) {
         if (!cancelled) {
@@ -216,17 +260,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('/api/sandbox/execute', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionId,
-          scenarioId: currentScenario.id,
-          command: trimmed,
-          grade,
-        }),
-      });
-      const data = (await res.json()) as {
+      let data: {
         passed: boolean | null;
         stdout: string;
         stderr: string;
@@ -234,6 +268,28 @@ export default function App() {
         feedback: string;
         files?: SandboxFile[];
       };
+
+      if (staticModeRef.current) {
+        data = executeInBrowserSandbox(trimmed, currentScenario, filesRef.current, grade);
+      } else {
+        const res = await fetch('/api/sandbox/execute', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId,
+            scenarioId: currentScenario.id,
+            command: trimmed,
+            grade,
+          }),
+        });
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('application/json')) {
+          staticModeRef.current = true;
+          data = executeInBrowserSandbox(trimmed, currentScenario, filesRef.current, grade);
+        } else {
+          data = (await res.json()) as typeof data;
+        }
+      }
 
       if (data.files) {
         setFiles(data.files);
@@ -308,12 +364,19 @@ export default function App() {
       return;
     }
     try {
-      const res = await fetch(`/api/scenarios/${encodeURIComponent(currentScenario.id)}/reveal`, {
-        method: 'POST',
-      });
-      if (!res.ok) return;
-      const data = (await res.json()) as { solution: string };
-      setRevealedSolution(data.solution);
+      let solutionText = currentScenario.solution ?? '';
+      if (!staticModeRef.current) {
+        const res = await fetch(`/api/scenarios/${encodeURIComponent(currentScenario.id)}/reveal`, {
+          method: 'POST',
+        });
+        const contentType = res.headers.get('content-type') || '';
+        if (res.ok && contentType.includes('application/json')) {
+          const data = (await res.json()) as { solution: string };
+          solutionText = data.solution;
+        }
+      }
+      if (!solutionText) return;
+      setRevealedSolution(solutionText);
       setStreak(0);
       setOutcomes((prev) =>
         prev.map((o, i) =>

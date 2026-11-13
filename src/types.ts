@@ -8,6 +8,8 @@ export interface ScenarioItem {
   hints: string[];
   setup_files: Record<string, string>;
   setup_perms: Record<string, number>;
+  solution?: string;
+  accepted_regex?: string[];
 }
 
 export interface SandboxFile {
