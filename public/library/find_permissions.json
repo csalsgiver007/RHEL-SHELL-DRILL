@@ -1,0 +1,1147 @@
+[
+  {
+    "id": "find-01",
+    "category": "Find & Permissions",
+    "title": "Locate Insecure World-Writable Files",
+    "difficulty": "Intermediate",
+    "description": "Search './target_dir' for regular files with permissions 0777 (world-writable).",
+    "objective": "find ./target_dir -type f -perm 0777",
+    "hints": [
+      "Command: find ./target_dir -type f -perm 0777"
+    ],
+    "solution": "find ./target_dir -type f -perm 0777",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?target_dir\\s+(-type\\s+f\\s+-perm\\s+(0?777)|-perm\\s+(0?777)\\s+-type\\s+f)"
+    ],
+    "setup_files": {
+      "target_dir/safe.sh": "ok",
+      "target_dir/insecure.tmp": "bad"
+    },
+    "setup_perms": {
+      "target_dir/safe.sh": 493,
+      "target_dir/insecure.tmp": 511
+    },
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-02",
+    "category": "Find & Permissions",
+    "title": "Find Log Files Modified Within Last 24 Hours",
+    "difficulty": "Intermediate",
+    "description": "Search './var_logs' for files ending in '.log' modified within the last 1 day.",
+    "objective": "find ./var_logs -name '*.log' -mtime -1",
+    "hints": [
+      "Command: find ./var_logs -name '*.log' -mtime -1"
+    ],
+    "solution": "find ./var_logs -name '*.log' -mtime -1",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?var_logs\\s+.*-name\\s+['\\\"]?\\*\\.log['\\\"]?.*-mtime\\s+-1"
+    ],
+    "setup_files": {
+      "var_logs/app.log": "today",
+      "var_logs/old.txt": "text"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-03",
+    "category": "Find & Permissions",
+    "title": "Find SUID Binaries on System",
+    "difficulty": "Advanced",
+    "description": "Search './bin_dir' for regular files that have SUID (octal 4000) permission bit set.",
+    "objective": "find ./bin_dir -type f -perm -4000",
+    "hints": [
+      "Command: find ./bin_dir -type f -perm -4000"
+    ],
+    "solution": "find ./bin_dir -type f -perm -4000",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?bin_dir\\s+(-type\\s+f\\s+-perm\\s+[-/]4000|-perm\\s+[-/]4000\\s+-type\\s+f)"
+    ],
+    "setup_files": {
+      "bin_dir/suid_prog": "bin",
+      "bin_dir/norm_prog": "bin"
+    },
+    "setup_perms": {
+      "bin_dir/suid_prog": 2541,
+      "bin_dir/norm_prog": 493
+    },
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-04",
+    "category": "Find & Permissions",
+    "title": "Find Files Larger Than 10 Megabytes",
+    "difficulty": "Intermediate",
+    "description": "Search './data_store' for regular files strictly larger than 10 Megabytes (+10M).",
+    "objective": "find ./data_store -type f -size +10M",
+    "hints": [
+      "Command: find ./data_store -type f -size +10M"
+    ],
+    "solution": "find ./data_store -type f -size +10M",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?data_store\\s+(-type\\s+f\\s+-size\\s+\\+10M|-size\\s+\\+10M\\s+-type\\s+f)"
+    ],
+    "setup_files": {
+      "data_store/s.txt": "small",
+      "data_store/b.img": "__SPARSE_BYTES:12582912"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-05",
+    "category": "Find & Permissions",
+    "title": "Find All Empty Directories",
+    "difficulty": "Easy",
+    "description": "Search './tree' for directories that contain no files or subdirectories.",
+    "objective": "find ./tree -type d -empty",
+    "hints": [
+      "Command: find ./tree -type d -empty"
+    ],
+    "solution": "find ./tree -type d -empty",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?tree\\s+(-type\\s+d\\s+-empty|-empty\\s+-type\\s+d)"
+    ],
+    "setup_files": {
+      "tree/not_empty/a": "1",
+      "tree/empty_dir/.keep": ""
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-06",
+    "category": "Find & Permissions",
+    "title": "Find and Execute Chmod in Batches",
+    "difficulty": "Intermediate",
+    "description": "Find all *.sh files under './scripts' and chmod them to 755 using -exec ... {} +.",
+    "objective": "find ./scripts -type f -name '*.sh' -exec chmod 755 {} +",
+    "hints": [
+      "Command: find ./scripts -type f -name '*.sh' -exec chmod 755 {} +"
+    ],
+    "solution": "find ./scripts -type f -name '*.sh' -exec chmod 755 {} +",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?scripts\\s+.*-name\\s+['\\\"]?\\*\\.sh['\\\"]?\\s+-exec\\s+chmod\\s+755\\s+\\{\\}\\s+\\+"
+    ],
+    "setup_files": {
+      "scripts/run.sh": "echo 1\n",
+      "scripts/test.sh": "echo 2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-07",
+    "category": "Find & Permissions",
+    "title": "Find Files Owned by Specific User",
+    "difficulty": "Easy",
+    "description": "Search directory './home' for files owned by user 'nobody'.",
+    "objective": "find ./home -user nobody",
+    "hints": [
+      "Command: find ./home -user nobody"
+    ],
+    "solution": "find ./home -user nobody",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?home\\s+.*-user\\s+nobody"
+    ],
+    "setup_files": {
+      "home/user_file": "data"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-08",
+    "category": "Find & Permissions",
+    "title": "Find SGID Binaries on Directory",
+    "difficulty": "Advanced",
+    "description": "Search './bin_dir' for files with SGID bit set (octal 2000).",
+    "objective": "find ./bin_dir -type f -perm -2000",
+    "hints": [
+      "Command: find ./bin_dir -type f -perm -2000"
+    ],
+    "solution": "find ./bin_dir -type f -perm -2000",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?bin_dir\\s+.*-perm\\s+[-/]2000"
+    ],
+    "setup_files": {
+      "bin_dir/sgid_bin": "b"
+    },
+    "setup_perms": {
+      "bin_dir/sgid_bin": 1517
+    },
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-09",
+    "category": "Find & Permissions",
+    "title": "Find Files Modified in Last 30 Minutes",
+    "difficulty": "Intermediate",
+    "description": "Locate regular files in /tmp modified less than 30 minutes ago (-mmin -30).",
+    "objective": "find /tmp -type f -mmin -30",
+    "hints": [
+      "Command: find /tmp -type f -mmin -30"
+    ],
+    "solution": "find /tmp -type f -mmin -30",
+    "accepted_regex": [
+      "find\\s+\\/tmp\\s+(-type\\s+f\\s+-mmin\\s+-30|-mmin\\s+-30\\s+-type\\s+f)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-10",
+    "category": "Find & Permissions",
+    "title": "Limit Search Depth to Maximum 2 Directories",
+    "difficulty": "Easy",
+    "description": "Find all .conf files under './etc' without descending more than 2 levels deep.",
+    "objective": "find ./etc -maxdepth 2 -name '*.conf'",
+    "hints": [
+      "Command: find ./etc -maxdepth 2 -name '*.conf'"
+    ],
+    "solution": "find ./etc -maxdepth 2 -name '*.conf'",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?etc\\s+.*-maxdepth\\s+2.*-name\\s+['\\\"]?\\*\\.conf['\\\"]?"
+    ],
+    "setup_files": {
+      "etc/app.conf": "1",
+      "etc/sub/deep.conf": "2"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-11",
+    "category": "Find & Permissions",
+    "title": "Find Broken Symbolic Links",
+    "difficulty": "Advanced",
+    "description": "Find broken/dangling symbolic links in directory './links'.",
+    "objective": "find ./links -xtype l",
+    "hints": [
+      "Command: find ./links -xtype l"
+    ],
+    "solution": "find ./links -xtype l",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?links\\s+.*-xtype\\s+l"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-12",
+    "category": "Find & Permissions",
+    "title": "Case-Insensitive Filename Search",
+    "difficulty": "Easy",
+    "description": "Search directory './docs' for files matching 'readme.txt' case-insensitively.",
+    "objective": "find ./docs -iname 'readme.txt'",
+    "hints": [
+      "Command: find ./docs -iname 'readme.txt'"
+    ],
+    "solution": "find ./docs -iname 'readme.txt'",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?docs\\s+.*-iname\\s+['\\\"]?readme\\.txt['\\\"]?"
+    ],
+    "setup_files": {
+      "docs/README.TXT": "docs"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-13",
+    "category": "Find & Permissions",
+    "title": "Find Files with Read-Only Permissions 0444",
+    "difficulty": "Intermediate",
+    "description": "Search './archive' for files with exact permissions 0444 (read-only for all).",
+    "objective": "find ./archive -type f -perm 0444",
+    "hints": [
+      "Command: find ./archive -type f -perm 0444"
+    ],
+    "solution": "find ./archive -type f -perm 0444",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?archive\\s+.*-perm\\s+(0?444)"
+    ],
+    "setup_files": {
+      "archive/locked.txt": "1"
+    },
+    "setup_perms": {
+      "archive/locked.txt": 292
+    },
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-14",
+    "category": "Find & Permissions",
+    "title": "Find and Delete Files Matching Pattern Directly",
+    "difficulty": "Intermediate",
+    "description": "Find all *.tmp files in './scratch' and delete them using find's -delete action.",
+    "objective": "find ./scratch -type f -name '*.tmp' -delete",
+    "hints": [
+      "Command: find ./scratch -type f -name '*.tmp' -delete"
+    ],
+    "solution": "find ./scratch -type f -name '*.tmp' -delete",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?scratch\\s+.*-name\\s+['\\\"]?\\*\\.tmp['\\\"]?\\s+-delete"
+    ],
+    "setup_files": {
+      "scratch/temp1.tmp": "1"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-15",
+    "category": "Find & Permissions",
+    "title": "Find Files Accessed More Than 30 Days Ago",
+    "difficulty": "Intermediate",
+    "description": "Locate files in './cache' that have not been accessed in over 30 days (-atime +30).",
+    "objective": "find ./cache -type f -atime +30",
+    "hints": [
+      "Command: find ./cache -type f -atime +30"
+    ],
+    "solution": "find ./cache -type f -atime +30",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?cache\\s+.*-atime\\s+\\+30"
+    ],
+    "setup_files": {
+      "cache/old.bin": "bin"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-16",
+    "category": "Find & Permissions",
+    "title": "Find Directories with Sticky Bit Set",
+    "difficulty": "Advanced",
+    "description": "Search /tmp for directories having the sticky bit set (octal 1000).",
+    "objective": "find /tmp -type d -perm -1000",
+    "hints": [
+      "Command: find /tmp -type d -perm -1000"
+    ],
+    "solution": "find /tmp -type d -perm -1000",
+    "accepted_regex": [
+      "find\\s+\\/tmp\\s+(-type\\s+d\\s+-perm\\s+[-/]1000|-perm\\s+[-/]1000\\s+-type\\s+d)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-17",
+    "category": "Find & Permissions",
+    "title": "Find Regular Files Between 1M and 5M in Size",
+    "difficulty": "Intermediate",
+    "description": "Locate files under './media' whose size is between 1 Megabyte and 5 Megabytes.",
+    "objective": "find ./media -type f -size +1M -size -5M",
+    "hints": [
+      "Command: find ./media -type f -size +1M -size -5M"
+    ],
+    "solution": "find ./media -type f -size +1M -size -5M",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?media\\s+.*-size\\s+\\+1M\\s+-size\\s+-5M"
+    ],
+    "setup_files": {
+      "media/song.mp3": "__SPARSE_BYTES:2621440"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-18",
+    "category": "Find & Permissions",
+    "title": "Find Files Not Owned by Current User",
+    "difficulty": "Intermediate",
+    "description": "Search './shared' for files not owned by root (! -user root).",
+    "objective": "find ./shared ! -user root",
+    "hints": [
+      "Command: find ./shared ! -user root"
+    ],
+    "solution": "find ./shared ! -user root",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?shared\\s+(!\\s+-user\\s+root|-not\\s+-user\\s+root)"
+    ],
+    "setup_files": {
+      "shared/data": "content"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-19",
+    "category": "Find & Permissions",
+    "title": "Find and Print Formatted Output with -printf",
+    "difficulty": "Advanced",
+    "description": "Find regular files in './logs' and print '%p: %s bytes\\n'.",
+    "objective": "find ./logs -type f -printf \"%p: %s bytes\\n\"",
+    "hints": [
+      "Command: find ./logs -type f -printf \"%p: %s bytes\\n\""
+    ],
+    "solution": "find ./logs -type f -printf \"%p: %s bytes\\n\"",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?logs\\s+.*-printf\\s+[\"\\'].*%p.*%s"
+    ],
+    "setup_files": {
+      "logs/sys.log": "data"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-20",
+    "category": "Find & Permissions",
+    "title": "Find Files Matching Either of Two Names",
+    "difficulty": "Intermediate",
+    "description": "Search './project' for files named either '*.c' or '*.h' using -o (OR).",
+    "objective": "find ./project -name '*.c' -o -name '*.h'",
+    "hints": [
+      "Command: find ./project -name '*.c' -o -name '*.h'"
+    ],
+    "solution": "find ./project -name '*.c' -o -name '*.h'",
+    "accepted_regex": [
+      "find\\s+(\\.\\/)?project\\s+.*-name\\s+['\\\"]?\\*\\.c['\\\"]\\s+-o\\s+-name\\s+['\\\"]?\\*\\.h['\\\"]"
+    ],
+    "setup_files": {
+      "project/main.c": "1",
+      "project/main.h": "2"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-21",
+    "category": "Find & Permissions",
+    "title": "Find Large Files Over 100MB",
+    "difficulty": "Intermediate",
+    "description": "Find all regular files in /var/log exceeding 100 Megabytes in size.",
+    "objective": "find /var/log -type f -size +100M",
+    "hints": [
+      "Use -size +100M and -type f",
+      "Command: find /var/log -type f -size +100M"
+    ],
+    "solution": "find /var/log -type f -size +100M",
+    "accepted_regex": [
+      "find\\s+\\/var\\/log\\s+.*-type\\s+f.*-size\\s+\\+100M",
+      "find\\s+\\/var\\/log\\s+.*-size\\s+\\+100M.*-type\\s+f"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-22",
+    "category": "Find & Permissions",
+    "title": "Set Sticky Bit on Shared Temporary Directory",
+    "difficulty": "Intermediate",
+    "description": "Set the sticky bit on directory /shared/tmp (chmod +t or chmod 1777) so only file owners can delete their files.",
+    "objective": "chmod +t /shared/tmp",
+    "hints": [
+      "Use chmod +t or chmod 1777",
+      "Command: chmod +t /shared/tmp"
+    ],
+    "solution": "chmod +t /shared/tmp",
+    "accepted_regex": [
+      "chmod\\s+(\\+t|1[0-7]{3})\\s+\\/shared\\/tmp"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-23",
+    "category": "Find & Permissions",
+    "title": "Set SGID on Directory for Group Collaboration",
+    "difficulty": "Intermediate",
+    "description": "Set the SetGID (SGID) bit on /opt/project so all newly created files inherit the directory's owning group.",
+    "objective": "chmod g+s /opt/project",
+    "hints": [
+      "Use chmod g+s or chmod 2775",
+      "Command: chmod g+s /opt/project"
+    ],
+    "solution": "chmod g+s /opt/project",
+    "accepted_regex": [
+      "chmod\\s+(g\\+s|2[0-7]{3})\\s+\\/opt\\/project"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-24",
+    "category": "Find & Permissions",
+    "title": "Locate Broken or Dead Symlinks",
+    "difficulty": "Intermediate",
+    "description": "Find all broken symbolic links in /etc using find -xtype l.",
+    "objective": "find /etc -xtype l",
+    "hints": [
+      "Use -xtype l to test target existence",
+      "Command: find /etc -xtype l"
+    ],
+    "solution": "find /etc -xtype l",
+    "accepted_regex": [
+      "find\\s+\\/etc\\s+-xtype\\s+l"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-25",
+    "category": "Find & Permissions",
+    "title": "Find Files Modified in the Last 24 Hours",
+    "difficulty": "Easy",
+    "description": "Find all files in /etc modified within the last 24 hours (-mtime -1).",
+    "objective": "find /etc -mtime -1",
+    "hints": [
+      "Use -mtime -1",
+      "Command: find /etc -mtime -1"
+    ],
+    "solution": "find /etc -mtime -1",
+    "accepted_regex": [
+      "find\\s+\\/etc\\s+.*-mtime\\s+-1"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-26",
+    "category": "Find & Permissions",
+    "title": "Find Files Modified in Past 24 Hours (-mtime 0)",
+    "difficulty": "Easy",
+    "description": "Search /var/log for files whose modification time is within the last 24 hours.",
+    "objective": "find /var/log -type f -mtime 0",
+    "hints": [
+      "Command: find /var/log -type f -mtime 0"
+    ],
+    "solution": "find /var/log -type f -mtime 0",
+    "accepted_regex": [
+      "find\\s+\\/var\\/log\\s+.*-type\\s+f.*-mtime\\s+0"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-27",
+    "category": "Find & Permissions",
+    "title": "Find Files Accessed Within Past 30 Minutes (-amin)",
+    "difficulty": "Intermediate",
+    "description": "Search /tmp for files accessed within the last 30 minutes (-amin -30).",
+    "objective": "find /tmp -type f -amin -30",
+    "hints": [
+      "Command: find /tmp -type f -amin -30"
+    ],
+    "solution": "find /tmp -type f -amin -30",
+    "accepted_regex": [
+      "find\\s+\\/tmp\\s+.*-type\\s+f.*-amin\\s+-30"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-28",
+    "category": "Find & Permissions",
+    "title": "Find Files Modified More Than 30 Days Ago",
+    "difficulty": "Easy",
+    "description": "Locate files under /archive modified more than 30 days ago (+30).",
+    "objective": "find /archive -type f -mtime +30",
+    "hints": [
+      "Command: find /archive -type f -mtime +30"
+    ],
+    "solution": "find /archive -type f -mtime +30",
+    "accepted_regex": [
+      "find\\s+\\/archive\\s+.*-type\\s+f.*-mtime\\s+\\+30"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-29",
+    "category": "Find & Permissions",
+    "title": "Find Symbolic Links Pointing to Non-Existent Files (Broken Symlinks)",
+    "difficulty": "Intermediate",
+    "description": "Find broken symlinks in /etc using find's -xtype l test.",
+    "objective": "find /etc -xtype l",
+    "hints": [
+      "Command: find /etc -xtype l"
+    ],
+    "solution": "find /etc -xtype l",
+    "accepted_regex": [
+      "find\\s+\\/etc\\s+.*-xtype\\s+l"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-30",
+    "category": "Find & Permissions",
+    "title": "Find Files Owned by Specific User ID",
+    "difficulty": "Easy",
+    "description": "Search /home for files owned by numeric UID 1000.",
+    "objective": "find /home -uid 1000",
+    "hints": [
+      "Command: find /home -uid 1000"
+    ],
+    "solution": "find /home -uid 1000",
+    "accepted_regex": [
+      "find\\s+\\/home\\s+.*-uid\\s+1000"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-31",
+    "category": "Find & Permissions",
+    "title": "Find Files Owned by Specific Group ID",
+    "difficulty": "Easy",
+    "description": "Search /var for files belonging to numeric GID 50.",
+    "objective": "find /var -gid 50",
+    "hints": [
+      "Command: find /var -gid 50"
+    ],
+    "solution": "find /var -gid 50",
+    "accepted_regex": [
+      "find\\s+\\/var\\s+.*-gid\\s+50"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-32",
+    "category": "Find & Permissions",
+    "title": "Find Empty Directories and Prune/Delete Them",
+    "difficulty": "Intermediate",
+    "description": "Find all empty directories under /tmp/scratch and delete them using -empty -delete.",
+    "objective": "find /tmp/scratch -type d -empty -delete",
+    "hints": [
+      "Command: find /tmp/scratch -type d -empty -delete"
+    ],
+    "solution": "find /tmp/scratch -type d -empty -delete",
+    "accepted_regex": [
+      "find\\s+\\/tmp\\/scratch\\s+.*-type\\s+d.*-empty.*-delete"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-33",
+    "category": "Find & Permissions",
+    "title": "Find Files Newer Than Reference File (-newer)",
+    "difficulty": "Intermediate",
+    "description": "Find files under /data modified more recently than reference file /var/log/checkpoint.",
+    "objective": "find /data -newer /var/log/checkpoint",
+    "hints": [
+      "Command: find /data -newer /var/log/checkpoint"
+    ],
+    "solution": "find /data -newer /var/log/checkpoint",
+    "accepted_regex": [
+      "find\\s+\\/data\\s+.*-newer\\s+\\/var\\/log\\/checkpoint"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-34",
+    "category": "Find & Permissions",
+    "title": "Limit Find Search Depth to Current Directory Only",
+    "difficulty": "Easy",
+    "description": "Search only the immediate top level of /var/log without recursing into subdirectories (-maxdepth 1).",
+    "objective": "find /var/log -maxdepth 1 -type f",
+    "hints": [
+      "Command: find /var/log -maxdepth 1 -type f"
+    ],
+    "solution": "find /var/log -maxdepth 1 -type f",
+    "accepted_regex": [
+      "find\\s+\\/var\\/log\\s+.*-maxdepth\\s+1.*-type\\s+f"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-35",
+    "category": "Find & Permissions",
+    "title": "Restrict Find Search by Minimum Depth (-mindepth)",
+    "difficulty": "Intermediate",
+    "description": "Search /srv for directories starting at depth 2 or deeper (-mindepth 2).",
+    "objective": "find /srv -mindepth 2 -type d",
+    "hints": [
+      "Command: find /srv -mindepth 2 -type d"
+    ],
+    "solution": "find /srv -mindepth 2 -type d",
+    "accepted_regex": [
+      "find\\s+\\/srv\\s+.*-mindepth\\s+2.*-type\\s+d"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-36",
+    "category": "Find & Permissions",
+    "title": "Find Files with Exact 3 Hard Links",
+    "difficulty": "Intermediate",
+    "description": "Locate files under /data having exactly 3 hard link references (-links 3).",
+    "objective": "find /data -type f -links 3",
+    "hints": [
+      "Command: find /data -type f -links 3"
+    ],
+    "solution": "find /data -type f -links 3",
+    "accepted_regex": [
+      "find\\s+\\/data\\s+.*-type\\s+f.*-links\\s+3"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-37",
+    "category": "Find & Permissions",
+    "title": "Find Block Special Device Files",
+    "difficulty": "Easy",
+    "description": "Search /dev for block device nodes (-type b).",
+    "objective": "find /dev -type b",
+    "hints": [
+      "Command: find /dev -type b"
+    ],
+    "solution": "find /dev -type b",
+    "accepted_regex": [
+      "find\\s+\\/dev\\s+.*-type\\s+b"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-38",
+    "category": "Find & Permissions",
+    "title": "Find Character Special Device Files",
+    "difficulty": "Easy",
+    "description": "Search /dev for character device nodes (-type c).",
+    "objective": "find /dev -type c",
+    "hints": [
+      "Command: find /dev -type c"
+    ],
+    "solution": "find /dev -type c",
+    "accepted_regex": [
+      "find\\s+\\/dev\\s+.*-type\\s+c"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-39",
+    "category": "Find & Permissions",
+    "title": "Find Named Pipe FIFO Files",
+    "difficulty": "Easy",
+    "description": "Search /run for named pipe FIFO files (-type p).",
+    "objective": "find /run -type p",
+    "hints": [
+      "Command: find /run -type p"
+    ],
+    "solution": "find /run -type p",
+    "accepted_regex": [
+      "find\\s+\\/run\\s+.*-type\\s+p"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-40",
+    "category": "Find & Permissions",
+    "title": "Find Unix Domain Socket Files",
+    "difficulty": "Easy",
+    "description": "Search /run for active Unix domain socket files (-type s).",
+    "objective": "find /run -type s",
+    "hints": [
+      "Command: find /run -type s"
+    ],
+    "solution": "find /run -type s",
+    "accepted_regex": [
+      "find\\s+\\/run\\s+.*-type\\s+s"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-41",
+    "category": "Find & Permissions",
+    "title": "Find Files Without Descending Past Mount Points (-xdev)",
+    "difficulty": "Intermediate",
+    "description": "Search root filesystem '/' for files > 1GB without crossing into mounted filesystems (-xdev).",
+    "objective": "find / -xdev -type f -size +1G",
+    "hints": [
+      "Command: find / -xdev -type f -size +1G"
+    ],
+    "solution": "find / -xdev -type f -size +1G",
+    "accepted_regex": [
+      "find\\s+\\/\\s+.*-xdev.*-type\\s+f.*-size\\s+\\+1G"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-42",
+    "category": "Find & Permissions",
+    "title": "Set Default POSIX Access Control List on Directory",
+    "difficulty": "Intermediate",
+    "description": "Configure default ACL so group 'developers' receives rwx on newly created files in /shared/project.",
+    "objective": "setfacl -d -m g:developers:rwx /shared/project",
+    "hints": [
+      "Command: setfacl -d -m g:developers:rwx /shared/project"
+    ],
+    "solution": "setfacl -d -m g:developers:rwx /shared/project",
+    "accepted_regex": [
+      "setfacl\\s+.*-d.*-m\\s+g:developers:rwx\\s+\\/shared\\/project"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-43",
+    "category": "Find & Permissions",
+    "title": "Remove Specific User Entry from File ACL",
+    "difficulty": "Intermediate",
+    "description": "Remove user 'bob' from the ACL entries of secure.dat using setfacl -x.",
+    "objective": "setfacl -x u:bob secure.dat",
+    "hints": [
+      "Command: setfacl -x u:bob secure.dat"
+    ],
+    "solution": "setfacl -x u:bob secure.dat",
+    "accepted_regex": [
+      "setfacl\\s+-x\\s+u:bob\\s+secure\\.dat"
+    ],
+    "setup_files": {
+      "secure.dat": "secret data\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-44",
+    "category": "Find & Permissions",
+    "title": "Remove All Extended ACL Entries Recursively",
+    "difficulty": "Intermediate",
+    "description": "Completely remove all extended ACL entries from /shared/project recursively using setfacl -b -R.",
+    "objective": "setfacl -R -b /shared/project",
+    "hints": [
+      "Command: setfacl -R -b /shared/project"
+    ],
+    "solution": "setfacl -R -b /shared/project",
+    "accepted_regex": [
+      "setfacl\\s+(-R\\s+-b|-b\\s+-R|-Rb|-bR)\\s+\\/shared\\/project"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-45",
+    "category": "Find & Permissions",
+    "title": "Inspect File Access Control List with getfacl",
+    "difficulty": "Easy",
+    "description": "View POSIX ACL entries on /shared/data using getfacl.",
+    "objective": "getfacl /shared/data",
+    "hints": [
+      "Command: getfacl /shared/data"
+    ],
+    "solution": "getfacl /shared/data",
+    "accepted_regex": [
+      "getfacl\\s+\\/shared\\/data"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-46",
+    "category": "Find & Permissions",
+    "title": "Set Linux File Immutable Attribute with chattr",
+    "difficulty": "Intermediate",
+    "description": "Prevent /etc/resolv.conf from being modified, overwritten, or deleted using chattr +i.",
+    "objective": "chattr +i /etc/resolv.conf",
+    "hints": [
+      "Command: chattr +i /etc/resolv.conf"
+    ],
+    "solution": "chattr +i /etc/resolv.conf",
+    "accepted_regex": [
+      "chattr\\s+\\+i\\s+\\/etc\\/resolv\\.conf"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-47",
+    "category": "Find & Permissions",
+    "title": "Remove Immutable Attribute with chattr",
+    "difficulty": "Intermediate",
+    "description": "Remove the immutable attribute from /etc/resolv.conf so it can be updated again.",
+    "objective": "chattr -i /etc/resolv.conf",
+    "hints": [
+      "Command: chattr -i /etc/resolv.conf"
+    ],
+    "solution": "chattr -i /etc/resolv.conf",
+    "accepted_regex": [
+      "chattr\\s+-i\\s+\\/etc\\/resolv\\.conf"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-48",
+    "category": "Find & Permissions",
+    "title": "Set Append-Only Attribute with chattr",
+    "difficulty": "Intermediate",
+    "description": "Configure log file /var/log/audit.custom to be append-only using chattr +a.",
+    "objective": "chattr +a /var/log/audit.custom",
+    "hints": [
+      "Command: chattr +a /var/log/audit.custom"
+    ],
+    "solution": "chattr +a /var/log/audit.custom",
+    "accepted_regex": [
+      "chattr\\s+\\+a\\s+\\/var\\/log\\/audit\\.custom"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-49",
+    "category": "Find & Permissions",
+    "title": "List Ext4/XFS File Attributes with lsattr",
+    "difficulty": "Easy",
+    "description": "Inspect file attributes on /etc/shadow using lsattr.",
+    "objective": "lsattr /etc/shadow",
+    "hints": [
+      "Command: lsattr /etc/shadow"
+    ],
+    "solution": "lsattr /etc/shadow",
+    "accepted_regex": [
+      "lsattr\\s+\\/etc\\/shadow"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-50",
+    "category": "Find & Permissions",
+    "title": "Find Files Without Read Permission for Current User",
+    "difficulty": "Intermediate",
+    "description": "Find files under /secure that are not readable by the current user (! -readable).",
+    "objective": "find /secure ! -readable",
+    "hints": [
+      "Command: find /secure ! -readable"
+    ],
+    "solution": "find /secure ! -readable",
+    "accepted_regex": [
+      "find\\s+\\/secure\\s+.*!\\s+-readable"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-51",
+    "category": "Find & Permissions",
+    "title": "Find Files That Are World-Writable",
+    "difficulty": "Intermediate",
+    "description": "Audit security finding all files under /var/tmp that have world-writable permission (perm -002).",
+    "objective": "find /var/tmp -type f -perm -002",
+    "hints": [
+      "Command: find /var/tmp -type f -perm -002"
+    ],
+    "solution": "find /var/tmp -type f -perm -002",
+    "accepted_regex": [
+      "find\\s+\\/var\\/tmp\\s+.*-type\\s+f.*-perm\\s+(-002|-0002)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-52",
+    "category": "Find & Permissions",
+    "title": "Change Group Ownership Recursively",
+    "difficulty": "Easy",
+    "description": "Change group ownership of /opt/app to 'wheel' recursively.",
+    "objective": "chgrp -R wheel /opt/app",
+    "hints": [
+      "Command: chgrp -R wheel /opt/app"
+    ],
+    "solution": "chgrp -R wheel /opt/app",
+    "accepted_regex": [
+      "chgrp\\s+-R\\s+wheel\\s+\\/opt\\/app"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-53",
+    "category": "Find & Permissions",
+    "title": "Change Owner and Group Simultaneously",
+    "difficulty": "Easy",
+    "description": "Set user 'nginx' and group 'nginx' on /usr/share/nginx/html recursively.",
+    "objective": "chown -R nginx:nginx /usr/share/nginx/html",
+    "hints": [
+      "Command: chown -R nginx:nginx /usr/share/nginx/html"
+    ],
+    "solution": "chown -R nginx:nginx /usr/share/nginx/html",
+    "accepted_regex": [
+      "chown\\s+-R\\s+nginx:nginx\\s+\\/usr\\/share\\/nginx\\/html"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-54",
+    "category": "Find & Permissions",
+    "title": "Preserve Symlink Targets During Chown",
+    "difficulty": "Intermediate",
+    "description": "Change ownership of symlink itself (/opt/link) without affecting target using chown -h.",
+    "objective": "chown -h appuser:appgroup /opt/link",
+    "hints": [
+      "Command: chown -h appuser:appgroup /opt/link"
+    ],
+    "solution": "chown -h appuser:appgroup /opt/link",
+    "accepted_regex": [
+      "chown\\s+-h\\s+appuser:appgroup\\s+\\/opt\\/link"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-55",
+    "category": "Find & Permissions",
+    "title": "Copy Permissions from Reference File with Chmod --reference",
+    "difficulty": "Intermediate",
+    "description": "Apply the exact same permissions from template.conf to new.conf.",
+    "objective": "chmod --reference=template.conf new.conf",
+    "hints": [
+      "Command: chmod --reference=template.conf new.conf"
+    ],
+    "solution": "chmod --reference=template.conf new.conf",
+    "accepted_regex": [
+      "chmod\\s+--reference=template\\.conf\\s+new\\.conf"
+    ],
+    "setup_files": {
+      "template.conf": "content\n",
+      "new.conf": "content\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-56",
+    "category": "Find & Permissions",
+    "title": "Display Octal Permissions with Stat",
+    "difficulty": "Easy",
+    "description": "Print only the 3/4-digit octal permission string of file script.sh using stat -c '%a'.",
+    "objective": "stat -c '%a' script.sh",
+    "hints": [
+      "Command: stat -c '%a' script.sh"
+    ],
+    "solution": "stat -c '%a' script.sh",
+    "accepted_regex": [
+      "stat\\s+(-c\\s+['\\\"]?%a['\\\"]?|--format=['\\\"]?%a['\\\"]?)\\s+script\\.sh"
+    ],
+    "setup_files": {
+      "script.sh": "#!/bin/bash\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-57",
+    "category": "Find & Permissions",
+    "title": "Find Files Modified Between Specific Timestamps",
+    "difficulty": "Advanced",
+    "description": "Find files under /var/log modified newer than '2026-10-01' but older than '2026-10-05' using -newermt.",
+    "objective": "find /var/log -newermt '2026-10-01' ! -newermt '2026-10-05'",
+    "hints": [
+      "Command: find /var/log -newermt '2026-10-01' ! -newermt '2026-10-05'"
+    ],
+    "solution": "find /var/log -newermt '2026-10-01' ! -newermt '2026-10-05'",
+    "accepted_regex": [
+      "find\\s+\\/var\\/log\\s+.*-newermt\\s+['\\\"]?2026-10-01.*!\\s+-newermt\\s+['\\\"]?2026-10-05"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-58",
+    "category": "Find & Permissions",
+    "title": "Find Files Matching Regex Path Pattern",
+    "difficulty": "Intermediate",
+    "description": "Find files under /data whose full path matches regex '.*\\.bak[0-9]+' using -regex.",
+    "objective": "find /data -regex '.*\\.bak[0-9]+'",
+    "hints": [
+      "Command: find /data -regex '.*\\.bak[0-9]+'"
+    ],
+    "solution": "find /data -regex '.*\\.bak[0-9]+'",
+    "accepted_regex": [
+      "find\\s+\\/data\\s+.*-regex\\s+['\\\"].*\\.bak\\[0-9\\]\\+['\\\"]"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-59",
+    "category": "Find & Permissions",
+    "title": "Execute Batch Command on Found Files with Plus Terminator",
+    "difficulty": "Intermediate",
+    "description": "Run chmod 644 on all found *.txt files under /docs using -exec ... + (batch invocation).",
+    "objective": "find /docs -type f -name '*.txt' -exec chmod 644 {} +",
+    "hints": [
+      "Command: find /docs -type f -name '*.txt' -exec chmod 644 {} +"
+    ],
+    "solution": "find /docs -type f -name '*.txt' -exec chmod 644 {} +",
+    "accepted_regex": [
+      "find\\s+\\/docs\\s+.*-exec\\s+chmod\\s+644\\s+\\{\\}\\s+\\+"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "find-60",
+    "category": "Find & Permissions",
+    "title": "Find and Delete Stale Session Files Interactively",
+    "difficulty": "Intermediate",
+    "description": "Locate files under /tmp with extension '.sess' older than 7 days and delete them with -delete.",
+    "objective": "find /tmp -type f -name '*.sess' -mtime +7 -delete",
+    "hints": [
+      "Command: find /tmp -type f -name '*.sess' -mtime +7 -delete"
+    ],
+    "solution": "find /tmp -type f -name '*.sess' -mtime +7 -delete",
+    "accepted_regex": [
+      "find\\s+\\/tmp\\s+.*-type\\s+f.*-name\\s+['\\\"]?\\*\\.sess['\\\"].*-mtime\\s+\\+7.*-delete"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]

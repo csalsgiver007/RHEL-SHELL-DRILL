@@ -1,0 +1,1406 @@
+[
+  {
+    "id": "grep-01",
+    "category": "Grep & Regex",
+    "title": "Filter HTTP 500 Server Errors with Line Numbers",
+    "difficulty": "Easy",
+    "description": "Extract lines containing status code 500 with line numbers from httpd_access.log.",
+    "objective": "grep -n \" 500 \" httpd_access.log",
+    "hints": [
+      "Command: grep -n \" 500 \" httpd_access.log"
+    ],
+    "solution": "grep -n \" 500 \" httpd_access.log",
+    "accepted_regex": [
+      "grep\\s+(-n\\s+[\"\\']?\\s*500\\s*[\"\\']?|[\"\\']?\\s*500\\s*[\"\\']?\\s+-n)\\s+httpd_access\\.log"
+    ],
+    "setup_files": {
+      "httpd_access.log": "10.0.0.1 - [date] \"GET / HTTP/1.1\" 200 120\n10.0.0.2 - [date] \"POST /api HTTP/1.1\" 500 512\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-02",
+    "category": "Grep & Regex",
+    "title": "Invert Match Comment & Empty Lines",
+    "difficulty": "Intermediate",
+    "description": "Filter out lines starting with '#' and empty lines from sshd_config.test.",
+    "objective": "grep -v -E '^(#|$)' sshd_config.test",
+    "hints": [
+      "Command: grep -v -E '^(#|$)' sshd_config.test"
+    ],
+    "solution": "grep -v -E '^(#|$)' sshd_config.test",
+    "accepted_regex": [
+      "grep\\s+(-vE|-Ev|-E\\s+-v|-v\\s+-E)\\s+['\\\"]?\\^(\\#|\\$)[|](\\#|\\$)['\\\"]?\\s+sshd_config\\.test"
+    ],
+    "setup_files": {
+      "sshd_config.test": "# comment\nPort 22\n\nPermitRootLogin no\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-03",
+    "category": "Grep & Regex",
+    "title": "Count Failed SSH Password Log Occurrences",
+    "difficulty": "Easy",
+    "description": "Count matching lines recording 'Failed password' in auth.log.",
+    "objective": "grep -c \"Failed password\" auth.log",
+    "hints": [
+      "Command: grep -c \"Failed password\" auth.log"
+    ],
+    "solution": "grep -c \"Failed password\" auth.log",
+    "accepted_regex": [
+      "grep\\s+-c\\s+[\"\\']Failed password[\"\\']\\s+auth\\.log"
+    ],
+    "setup_files": {
+      "auth.log": "Failed password for root\nAccepted publickey\nFailed password for admin\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-04",
+    "category": "Grep & Regex",
+    "title": "Match Exact Whole Word Using Boundary",
+    "difficulty": "Intermediate",
+    "description": "Search services.txt for exact word 'root' (not chroot or rootfs).",
+    "objective": "grep -w 'root' services.txt",
+    "hints": [
+      "Command: grep -w 'root' services.txt"
+    ],
+    "solution": "grep -w 'root' services.txt",
+    "accepted_regex": [
+      "grep\\s+-w\\s+['\\\"]?root['\\\"]?\\s+services\\.txt"
+    ],
+    "setup_files": {
+      "services.txt": "user root\nuser chroot\nuser rootfs\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-05",
+    "category": "Grep & Regex",
+    "title": "Display Lines with Context Surrounding Match",
+    "difficulty": "Intermediate",
+    "description": "Search app.log for 'FATAL' showing 2 lines before and after.",
+    "objective": "grep -C 2 'FATAL' app.log",
+    "hints": [
+      "Command: grep -C 2 'FATAL' app.log"
+    ],
+    "solution": "grep -C 2 'FATAL' app.log",
+    "accepted_regex": [
+      "grep\\s+(-C\\s*2|-B\\s*2\\s+-A\\s*2)\\s+['\\\"]?FATAL['\\\"]?\\s+app\\.log"
+    ],
+    "setup_files": {
+      "app.log": "line1\nline2\nFATAL: crash\nline4\nline5\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-06",
+    "category": "Grep & Regex",
+    "title": "List Only Filenames Containing Match",
+    "difficulty": "Easy",
+    "description": "Search *.conf for 'AllowOverride' printing only matching filenames.",
+    "objective": "grep -l 'AllowOverride' *.conf",
+    "hints": [
+      "Command: grep -l 'AllowOverride' *.conf"
+    ],
+    "solution": "grep -l 'AllowOverride' *.conf",
+    "accepted_regex": [
+      "grep\\s+-l\\s+['\\\"]?AllowOverride['\\\"]?\\s+\\*\\.conf"
+    ],
+    "setup_files": {
+      "a.conf": "AllowOverride All\n",
+      "b.conf": "None\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-07",
+    "category": "Grep & Regex",
+    "title": "Match Valid IPv4 Address Lines with ERE",
+    "difficulty": "Advanced",
+    "description": "Search nodes.txt for lines starting with an IPv4 address.",
+    "objective": "grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt",
+    "hints": [
+      "Command: grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt"
+    ],
+    "solution": "grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]\\^\\[0-9\\]\\{1,3\\}"
+    ],
+    "setup_files": {
+      "nodes.txt": "192.168.1.1 server\nhostname-only\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-08",
+    "category": "Grep & Regex",
+    "title": "Case-Insensitive Recursive Search Ignoring Binaries",
+    "difficulty": "Intermediate",
+    "description": "Search directory configs recursively (-r), ignoring binaries (-I), ignoring case (-i) for 'API_KEY'.",
+    "objective": "grep -rIi 'API_KEY' configs",
+    "hints": [
+      "Command: grep -rIi 'API_KEY' configs"
+    ],
+    "solution": "grep -rIi 'API_KEY' configs",
+    "accepted_regex": [
+      "grep\\s+(-rIi|-riI|-Iri|-Iir)\\s+['\\\"]?API_KEY['\\\"]?\\s+configs"
+    ],
+    "setup_files": {
+      "configs/settings.json": "{\"api_key\": \"123\"}\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-09",
+    "category": "Grep & Regex",
+    "title": "List Files NOT Matching Pattern with grep -L",
+    "difficulty": "Intermediate",
+    "description": "Print filenames of *.conf that do NOT contain 'PermitRootLogin'.",
+    "objective": "grep -L 'PermitRootLogin' *.conf",
+    "hints": [
+      "Command: grep -L 'PermitRootLogin' *.conf"
+    ],
+    "solution": "grep -L 'PermitRootLogin' *.conf",
+    "accepted_regex": [
+      "grep\\s+-L\\s+['\\\"]?PermitRootLogin['\\\"]?\\s+\\*\\.conf"
+    ],
+    "setup_files": {
+      "sec.conf": "PermitRootLogin no\n",
+      "insec.conf": "Port 22\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-10",
+    "category": "Grep & Regex",
+    "title": "Extract Only the Matching String with grep -o",
+    "difficulty": "Intermediate",
+    "description": "Extract only the IP address part from connection.log using grep -o.",
+    "objective": "grep -o -E '[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' connection.log",
+    "hints": [
+      "Command: grep -o -E '[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' connection.log"
+    ],
+    "solution": "grep -o -E '[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' connection.log",
+    "accepted_regex": [
+      "grep\\s+(-oE|-Eo|-o\\s+-E|-E\\s+-o)\\s+['\\\"][0-9]"
+    ],
+    "setup_files": {
+      "connection.log": "Connected from 10.0.0.5 port 22\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-11",
+    "category": "Grep & Regex",
+    "title": "Quiet Match for Script Exit Code Check",
+    "difficulty": "Easy",
+    "description": "Check if 'ansible' exists in /etc/passwd quietly without outputting text.",
+    "objective": "grep -q 'ansible' /etc/passwd",
+    "hints": [
+      "Command: grep -q 'ansible' /etc/passwd"
+    ],
+    "solution": "grep -q 'ansible' /etc/passwd",
+    "accepted_regex": [
+      "grep\\s+-q\\s+['\\\"]?ansible['\\\"]?\\s+\\/etc\\/passwd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-12",
+    "category": "Grep & Regex",
+    "title": "Match Lines Ending with Semicolon",
+    "difficulty": "Easy",
+    "description": "Search code.c for lines ending with a semicolon (;).",
+    "objective": "grep ';$' code.c",
+    "hints": [
+      "Command: grep ';$' code.c"
+    ],
+    "solution": "grep ';$' code.c",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?;\\$['\\\"]?\\s+code\\.c"
+    ],
+    "setup_files": {
+      "code.c": "int x = 10;\nif (x) {\n    return 0;\n}\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-13",
+    "category": "Grep & Regex",
+    "title": "Match Lines with Alternative Patterns using -e",
+    "difficulty": "Intermediate",
+    "description": "Search syslog for either 'WARNING' or 'CRITICAL' using multiple -e flags.",
+    "objective": "grep -e 'WARNING' -e 'CRITICAL' syslog",
+    "hints": [
+      "Command: grep -e 'WARNING' -e 'CRITICAL' syslog"
+    ],
+    "solution": "grep -e 'WARNING' -e 'CRITICAL' syslog",
+    "accepted_regex": [
+      "grep\\s+-e\\s+['\\\"]?WARNING['\\\"]?\\s+-e\\s+['\\\"]?CRITICAL['\\\"]?\\s+syslog",
+      "grep\\s+-E\\s+['\\\"](WARNING|CRITICAL)"
+    ],
+    "setup_files": {
+      "syslog": "INFO: ok\nWARNING: disk\nCRITICAL: cpu\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-14",
+    "category": "Grep & Regex",
+    "title": "Match Exact Entire Line with grep -x",
+    "difficulty": "Intermediate",
+    "description": "Find lines in state.txt that match exactly 'ENABLED' with nothing else on the line.",
+    "objective": "grep -x 'ENABLED' state.txt",
+    "hints": [
+      "Command: grep -x 'ENABLED' state.txt"
+    ],
+    "solution": "grep -x 'ENABLED' state.txt",
+    "accepted_regex": [
+      "grep\\s+-x\\s+['\\\"]?ENABLED['\\\"]?\\s+state\\.txt"
+    ],
+    "setup_files": {
+      "state.txt": "ENABLED\nENABLED_SOON\nPRE_ENABLED\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-15",
+    "category": "Grep & Regex",
+    "title": "Match Hexadecimal MAC Addresses",
+    "difficulty": "Advanced",
+    "description": "Search ens192.nmconnection for standard MAC addresses matching format XX:XX:XX:XX:XX:XX.",
+    "objective": "grep -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' ens192.nmconnection",
+    "hints": [
+      "Command: grep -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' ens192.nmconnection"
+    ],
+    "solution": "grep -E '([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}' ens192.nmconnection",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*\\[0-9A-Fa-f\\]\\{2\\}:.*ens192\\.nmconnection"
+    ],
+    "setup_files": {
+      "ens192.nmconnection": "[connection]\nid=ens192\ntype=ethernet\n\n[ethernet]\nmac-address=52:54:00:12:34:56\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-16",
+    "category": "Grep & Regex",
+    "title": "Invert Match Excluding Multiple Status Codes",
+    "difficulty": "Intermediate",
+    "description": "Read web.log. Exclude all lines containing status code 200 or 304.",
+    "objective": "grep -v -E ' (200|304) ' web.log",
+    "hints": [
+      "Command: grep -v -E ' (200|304) ' web.log"
+    ],
+    "solution": "grep -v -E ' (200|304) ' web.log",
+    "accepted_regex": [
+      "grep\\s+(-vE|-Ev|-E\\s+-v|-v\\s+-E)\\s+.*(200\\|304)"
+    ],
+    "setup_files": {
+      "web.log": "GET / 200 120\nGET /img 304 0\nPOST /err 500 40\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-17",
+    "category": "Grep & Regex",
+    "title": "Count Blank Lines in Script",
+    "difficulty": "Easy",
+    "description": "Count how many completely empty lines exist in script.sh.",
+    "objective": "grep -c '^$' script.sh",
+    "hints": [
+      "Command: grep -c '^$' script.sh"
+    ],
+    "solution": "grep -c '^$' script.sh",
+    "accepted_regex": [
+      "grep\\s+-c\\s+['\\\"]?\\^\\$['\\\"]?\\s+script\\.sh"
+    ],
+    "setup_files": {
+      "script.sh": "#!/bin/bash\n\necho 1\n\necho 2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-18",
+    "category": "Grep & Regex",
+    "title": "Match Standard UUID Format Lines",
+    "difficulty": "Advanced",
+    "description": "Find lines containing a standard 36-character UUID with 8-4-4-4-12 hex format.",
+    "objective": "grep -E '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' fstab.test",
+    "hints": [
+      "Command: grep -E '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' fstab.test"
+    ],
+    "solution": "grep -E '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' fstab.test",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*\\[0-9a-f\\]\\{8\\}-"
+    ],
+    "setup_files": {
+      "fstab.test": "UUID=c1b9d5a3-0000-4b21-8899-abcdef123456 / xfs defaults 0 0\n/dev/sda1 /boot ext4 defaults 0 0\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-19",
+    "category": "Grep & Regex",
+    "title": "Print 3 Lines After Each Matching Error",
+    "difficulty": "Easy",
+    "description": "Search trace.log for 'Exception' printing 3 lines after each match (-A 3).",
+    "objective": "grep -A 3 'Exception' trace.log",
+    "hints": [
+      "Command: grep -A 3 'Exception' trace.log"
+    ],
+    "solution": "grep -A 3 'Exception' trace.log",
+    "accepted_regex": [
+      "grep\\s+-A\\s*3\\s+['\\\"]?Exception['\\\"]?\\s+trace\\.log"
+    ],
+    "setup_files": {
+      "trace.log": "Exception in thread main\nat class.method\nat class.caller\nat main\ninfo\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-20",
+    "category": "Grep & Regex",
+    "title": "Print 4 Lines Before Each Matching Error",
+    "difficulty": "Easy",
+    "description": "Search trace.log for 'CRASH' printing 4 lines before each match (-B 4).",
+    "objective": "grep -B 4 'CRASH' trace.log",
+    "hints": [
+      "Command: grep -B 4 'CRASH' trace.log"
+    ],
+    "solution": "grep -B 4 'CRASH' trace.log",
+    "accepted_regex": [
+      "grep\\s+-B\\s*4\\s+['\\\"]?CRASH['\\\"]?\\s+trace\\.log"
+    ],
+    "setup_files": {
+      "trace.log": "step1\nstep2\nstep3\nstep4\nCRASH\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-21",
+    "category": "Grep & Regex",
+    "title": "Filter Directives in /etc/fstab Starting with UUID",
+    "difficulty": "Easy",
+    "description": "Search fstab for active lines beginning with 'UUID='.",
+    "objective": "grep '^UUID=' /etc/fstab",
+    "hints": [
+      "Command: grep '^UUID=' /etc/fstab"
+    ],
+    "solution": "grep '^UUID=' /etc/fstab",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?\\^UUID=['\\\"]?\\s+\\/etc\\/fstab"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-22",
+    "category": "Grep & Regex",
+    "title": "Match ISO-8601 Date Timestamps",
+    "difficulty": "Intermediate",
+    "description": "Search events.log for lines starting with dates formatted as YYYY-MM-DD.",
+    "objective": "grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log",
+    "hints": [
+      "Command: grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log"
+    ],
+    "solution": "grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]\\^\\[0-9\\]\\{4\\}-\\[0-9\\]\\{2\\}-\\[0-9\\]\\{2\\}['\\\"]"
+    ],
+    "setup_files": {
+      "events.log": "2026-10-09 12:00:00 Started\ninvalid timestamp\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-23",
+    "category": "Grep & Regex",
+    "title": "Match Port Digits in Config Lines",
+    "difficulty": "Intermediate",
+    "description": "Search ports.conf for lines containing 'Port' followed by 2 to 5 digits.",
+    "objective": "grep -E 'Port [0-9]{2,5}' ports.conf",
+    "hints": [
+      "Command: grep -E 'Port [0-9]{2,5}' ports.conf"
+    ],
+    "solution": "grep -E 'Port [0-9]{2,5}' ports.conf",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]Port\\s+\\[0-9\\]\\{2,5\\}['\\\"]"
+    ],
+    "setup_files": {
+      "ports.conf": "Port 22\nPort 8080\nPort abc\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-24",
+    "category": "Grep & Regex",
+    "title": "Extract Email Addresses Using Regex",
+    "difficulty": "Advanced",
+    "description": "Extract valid email addresses from contacts.txt using grep -o -E.",
+    "objective": "grep -o -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt",
+    "hints": [
+      "Command: grep -o -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt"
+    ],
+    "solution": "grep -o -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt",
+    "accepted_regex": [
+      "grep\\s+(-oE|-Eo|-o\\s+-E|-E\\s+-o)\\s+.*@.*contacts\\.txt"
+    ],
+    "setup_files": {
+      "contacts.txt": "Contact admin@example.com or support@redhat.com\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-25",
+    "category": "Grep & Regex",
+    "title": "Invert Matching Specific User Logins",
+    "difficulty": "Easy",
+    "description": "Filter out lines from users.log containing 'admin' or 'root'.",
+    "objective": "grep -v -E '(admin|root)' users.log",
+    "hints": [
+      "Command: grep -v -E '(admin|root)' users.log"
+    ],
+    "solution": "grep -v -E '(admin|root)' users.log",
+    "accepted_regex": [
+      "grep\\s+(-vE|-Ev|-E\\s+-v|-v\\s+-E)\\s+.*(admin\\|root)"
+    ],
+    "setup_files": {
+      "users.log": "user: admin\nuser: alice\nuser: root\nuser: bob\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-26",
+    "category": "Grep & Regex",
+    "title": "Display Matching Line Numbers for TODO Items",
+    "difficulty": "Easy",
+    "description": "Search code.py for 'TODO' displaying each match with its line number.",
+    "objective": "grep -n 'TODO' code.py",
+    "hints": [
+      "Command: grep -n 'TODO' code.py"
+    ],
+    "solution": "grep -n 'TODO' code.py",
+    "accepted_regex": [
+      "grep\\s+-n\\s+['\\\"]?TODO['\\\"]?\\s+code\\.py"
+    ],
+    "setup_files": {
+      "code.py": "# TODO: fix bug\ndef run():\n    pass\n# TODO: test\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-27",
+    "category": "Grep & Regex",
+    "title": "Search Only Compressed Gz Logs with zgrep",
+    "difficulty": "Intermediate",
+    "description": "Search compressed file access.log.gz directly for '404' using zgrep.",
+    "objective": "zgrep '404' access.log.gz",
+    "hints": [
+      "Command: zgrep '404' access.log.gz"
+    ],
+    "solution": "zgrep '404' access.log.gz",
+    "accepted_regex": [
+      "zgrep\\s+['\\\"]?404['\\\"]?\\s+access\\.log\\.gz"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-28",
+    "category": "Grep & Regex",
+    "title": "Match Digits Only Lines",
+    "difficulty": "Easy",
+    "description": "Search numbers.txt for lines composed exclusively of numeric digits.",
+    "objective": "grep -E '^[0-9]+$' numbers.txt",
+    "hints": [
+      "Command: grep -E '^[0-9]+$' numbers.txt"
+    ],
+    "solution": "grep -E '^[0-9]+$' numbers.txt",
+    "accepted_regex": [
+      "grep\\s+(-E\\s+)?['\\\"]\\^\\[0-9\\]\\+\\$['\\\"]\\s+numbers\\.txt"
+    ],
+    "setup_files": {
+      "numbers.txt": "12345\n12a34\n999\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-29",
+    "category": "Grep & Regex",
+    "title": "Search Case-Insensitively for Warning or Error",
+    "difficulty": "Easy",
+    "description": "Search app.log case-insensitively for 'error'.",
+    "objective": "grep -i 'error' app.log",
+    "hints": [
+      "Command: grep -i 'error' app.log"
+    ],
+    "solution": "grep -i 'error' app.log",
+    "accepted_regex": [
+      "grep\\s+-i\\s+['\\\"]?error['\\\"]?\\s+app\\.log"
+    ],
+    "setup_files": {
+      "app.log": "ERROR: fatal\nInfo: ok\nError: minor\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-30",
+    "category": "Grep & Regex",
+    "title": "Match Beginning and End of Word for Sysctl",
+    "difficulty": "Intermediate",
+    "description": "Search sysctl.conf for directives starting with 'net.ipv4.ip_forward'.",
+    "objective": "grep '^net\\.ipv4\\.ip_forward' sysctl.conf",
+    "hints": [
+      "Command: grep '^net\\.ipv4\\.ip_forward' sysctl.conf"
+    ],
+    "solution": "grep '^net\\.ipv4\\.ip_forward' sysctl.conf",
+    "accepted_regex": [
+      "grep\\s+['\\\"]\\^net\\\\\\.ipv4\\\\\\.ip_forward['\\\"]\\s+sysctl\\.conf"
+    ],
+    "setup_files": {
+      "sysctl.conf": "net.ipv4.ip_forward = 1\nnet.ipv6.conf.all.disable_ipv6 = 1\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-31",
+    "category": "Grep & Regex",
+    "title": "Match Lines Beginning with One or More Digits",
+    "difficulty": "Easy",
+    "description": "Search 'data.txt' for all lines starting with one or more numerical digits.",
+    "objective": "grep -E '^[0-9]+' data.txt",
+    "hints": [
+      "Use anchor ^ and [0-9]+ with -E",
+      "Command: grep -E '^[0-9]+' data.txt"
+    ],
+    "solution": "grep -E '^[0-9]+' data.txt",
+    "accepted_regex": [
+      "grep\\s+(-E|--extended-regexp)\\s+[\\'\\\"]?\\^[0-9]\\+[\\'\\\"]?\\s+data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "100 apples\nbanana\n200 oranges\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-32",
+    "category": "Grep & Regex",
+    "title": "Recursive Grep Ignoring Binary Files",
+    "difficulty": "Intermediate",
+    "description": "Recursively search /etc for 'DB_PASSWORD' while ignoring binary files using -r -I.",
+    "objective": "grep -rI 'DB_PASSWORD' /etc",
+    "hints": [
+      "Use -r (recursive) and -I (ignore binaries)",
+      "Command: grep -rI 'DB_PASSWORD' /etc"
+    ],
+    "solution": "grep -rI 'DB_PASSWORD' /etc",
+    "accepted_regex": [
+      "grep\\s+(-rI|-Ir|-r\\s+-I|-I\\s+-r)\\s+['\\\"]?DB_PASSWORD['\\\"]?\\s+\\/etc"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-33",
+    "category": "Grep & Regex",
+    "title": "Extract All IPv4 Addresses from Log",
+    "difficulty": "Intermediate",
+    "description": "Extract only valid IPv4 address strings from network.log using grep -oE.",
+    "objective": "grep -oE '([0-9]{1,3}\\.){3}[0-9]{1,3}' network.log",
+    "hints": [
+      "Use -o for only-matching and -E for regex",
+      "Command: grep -oE '([0-9]{1,3}\\.){3}[0-9]{1,3}' network.log"
+    ],
+    "solution": "grep -oE '([0-9]{1,3}\\.){3}[0-9]{1,3}' network.log",
+    "accepted_regex": [
+      "grep\\s+(-oE|-Eo)\\s+['\\\"].*([0-9].*){3}.*['\\\"]\\s+network\\.log"
+    ],
+    "setup_files": {
+      "network.log": "Connection from 192.168.1.50 port 22\nRefused 10.0.0.1 port 80\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-34",
+    "category": "Grep & Regex",
+    "title": "Count Exact Number of Matches Across Log",
+    "difficulty": "Easy",
+    "description": "Count the total number of lines in error.log containing 'FAIL' using grep -c.",
+    "objective": "grep -c 'FAIL' error.log",
+    "hints": [
+      "Use grep -c 'FAIL' error.log",
+      "Command: grep -c 'FAIL' error.log"
+    ],
+    "solution": "grep -c 'FAIL' error.log",
+    "accepted_regex": [
+      "grep\\s+-c\\s+['\\\"]?FAIL['\\\"]?\\s+error\\.log"
+    ],
+    "setup_files": {
+      "error.log": "FAIL: disk\nOK\nFAIL: memory\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-35",
+    "category": "Grep & Regex",
+    "title": "Invert Search to Strip Comments and Blank Lines",
+    "difficulty": "Intermediate",
+    "description": "Display /etc/chrony.conf excluding all comments (starting with #) and empty lines.",
+    "objective": "grep -vE '^#|^$' /etc/chrony.conf",
+    "hints": [
+      "Use -vE with pattern '^#|^$'",
+      "Command: grep -vE '^#|^$' /etc/chrony.conf"
+    ],
+    "solution": "grep -vE '^#|^$' /etc/chrony.conf",
+    "accepted_regex": [
+      "grep\\s+(-vE|-Ev)\\s+['\\\"]?\\^#\\|\\^\\$['\\\"]?\\s+\\/etc\\/chrony\\.conf"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-36",
+    "category": "Grep & Regex",
+    "title": "Match Only Digits of Specific Length",
+    "difficulty": "Intermediate",
+    "description": "Extract lines containing exactly 5 consecutive digits in codes.txt.",
+    "objective": "grep -E '[0-9]{5}' codes.txt",
+    "hints": [
+      "Command: grep -E '[0-9]{5}' codes.txt"
+    ],
+    "solution": "grep -E '[0-9]{5}' codes.txt",
+    "accepted_regex": [
+      "grep\\s+(-E\\s+['\\\"]?\\[0-9\\]\\{5\\}['\\\"]?|'\\[0-9\\]\\{5\\}')\\s+codes\\.txt"
+    ],
+    "setup_files": {
+      "codes.txt": "abc 12345 def\n1234\n999999\n54321\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-37",
+    "category": "Grep & Regex",
+    "title": "Extract Matching Substring Only with Flag -o",
+    "difficulty": "Intermediate",
+    "description": "Extract only the IPv4 addresses found inside system.log using grep -o -E.",
+    "objective": "grep -o -E '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' system.log",
+    "hints": [
+      "Command: grep -o -E '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' system.log"
+    ],
+    "solution": "grep -o -E '[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' system.log",
+    "accepted_regex": [
+      "grep\\s+(-oE|-Eo|-o\\s+-E|-E\\s+-o)\\s+.*system\\.log"
+    ],
+    "setup_files": {
+      "system.log": "Connection from 192.168.1.50 port 22\nAuth failed for 10.0.0.99\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-38",
+    "category": "Grep & Regex",
+    "title": "Match Hexadecimal Color Codes",
+    "difficulty": "Intermediate",
+    "description": "Search styles.css for lines with 6-character hex color codes (#AABBCC).",
+    "objective": "grep -E '#[0-9a-fA-F]{6}' styles.css",
+    "hints": [
+      "Command: grep -E '#[0-9a-fA-F]{6}' styles.css"
+    ],
+    "solution": "grep -E '#[0-9a-fA-F]{6}' styles.css",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]?#[0-9a-fA-F]\\{6\\}['\\\"]?\\s+styles\\.css"
+    ],
+    "setup_files": {
+      "styles.css": "color: #ff0033;\nbackground: #123;\nborder: #FFFFFF;\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-39",
+    "category": "Grep & Regex",
+    "title": "Filter Lines Ending with Specific Word",
+    "difficulty": "Easy",
+    "description": "Find lines in test.txt that end strictly with the word 'FAILED'.",
+    "objective": "grep 'FAILED$' test.txt",
+    "hints": [
+      "Command: grep 'FAILED$' test.txt"
+    ],
+    "solution": "grep 'FAILED$' test.txt",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?FAILED\\$['\\\"]?\\s+test\\.txt"
+    ],
+    "setup_files": {
+      "test.txt": "unit1 PASSED\nunit2 FAILED\nunit3 FAILED now\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-40",
+    "category": "Grep & Regex",
+    "title": "Find Lines Not Containing Any Numbers",
+    "difficulty": "Intermediate",
+    "description": "Display lines in roster.txt that contain zero digits.",
+    "objective": "grep -v '[0-9]' roster.txt",
+    "hints": [
+      "Command: grep -v '[0-9]' roster.txt"
+    ],
+    "solution": "grep -v '[0-9]' roster.txt",
+    "accepted_regex": [
+      "grep\\s+-v\\s+['\\\"]?(\\[0-9\\]|\\[\\[:digit:\\]\\])['\\\"]?\\s+roster\\.txt"
+    ],
+    "setup_files": {
+      "roster.txt": "Alice Smith\nBob 123\nCharlie Brown\nUser99\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-41",
+    "category": "Grep & Regex",
+    "title": "Match Repeated Characters Using Backreferences",
+    "difficulty": "Advanced",
+    "description": "Find words in dictionary.txt having doubled letters (like 'ee', 'oo', 'll') using backreferences.",
+    "objective": "grep -E '([a-z])\\1' dictionary.txt",
+    "hints": [
+      "Command: grep -E '([a-z])\\1' dictionary.txt"
+    ],
+    "solution": "grep -E '([a-z])\\1' dictionary.txt",
+    "accepted_regex": [
+      "grep\\s+(-E\\s+['\\\"]?\\(\\[a-z\\]\\)\\\\\\1['\\\"]?|'([a-z])\\1')\\s+dictionary\\.txt"
+    ],
+    "setup_files": {
+      "dictionary.txt": "book\ncat\napple\ndog\nfeed\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-42",
+    "category": "Grep & Regex",
+    "title": "Exclude Files Matching Pattern During Recursive Grep",
+    "difficulty": "Intermediate",
+    "description": "Search src/ recursively for 'main' excluding all *.log files.",
+    "objective": "grep -r --exclude='*.log' 'main' src",
+    "hints": [
+      "Command: grep -r --exclude='*.log' 'main' src"
+    ],
+    "solution": "grep -r --exclude='*.log' 'main' src",
+    "accepted_regex": [
+      "grep\\s+.*-r.*--exclude=['\\\"]?\\*\\.log['\\\"].*src"
+    ],
+    "setup_files": {
+      "src/app.py": "def main(): pass\n",
+      "src/run.log": "main called\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-43",
+    "category": "Grep & Regex",
+    "title": "Exclude Directories During Recursive Grep",
+    "difficulty": "Intermediate",
+    "description": "Search . recursively for 'config' excluding the '.git' directory.",
+    "objective": "grep -r --exclude-dir='.git' 'config' .",
+    "hints": [
+      "Command: grep -r --exclude-dir='.git' 'config' ."
+    ],
+    "solution": "grep -r --exclude-dir='.git' 'config' .",
+    "accepted_regex": [
+      "grep\\s+.*-r.*--exclude-dir=['\\\"]?\\.git['\\\"].*\\."
+    ],
+    "setup_files": {
+      ".git/HEAD": "config ref\n",
+      "app.conf": "config = 1\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-44",
+    "category": "Grep & Regex",
+    "title": "Search for Pattern From Pattern File (-f)",
+    "difficulty": "Intermediate",
+    "description": "Search target.txt for keywords listed line-by-line in patterns.txt using grep -f.",
+    "objective": "grep -f patterns.txt target.txt",
+    "hints": [
+      "Command: grep -f patterns.txt target.txt"
+    ],
+    "solution": "grep -f patterns.txt target.txt",
+    "accepted_regex": [
+      "grep\\s+-f\\s+patterns\\.txt\\s+target\\.txt"
+    ],
+    "setup_files": {
+      "patterns.txt": "error\nwarning\n",
+      "target.txt": "all ok\nfound error here\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-45",
+    "category": "Grep & Regex",
+    "title": "Suppress Normal Output with Quiet Mode Flag -q",
+    "difficulty": "Easy",
+    "description": "Test silently if 'prod_db' exists in hosts.txt without writing to stdout (grep -q).",
+    "objective": "grep -q 'prod_db' hosts.txt",
+    "hints": [
+      "Command: grep -q 'prod_db' hosts.txt"
+    ],
+    "solution": "grep -q 'prod_db' hosts.txt",
+    "accepted_regex": [
+      "grep\\s+-q\\s+['\\\"]?prod_db['\\\"]?\\s+hosts\\.txt"
+    ],
+    "setup_files": {
+      "hosts.txt": "10.0.0.1 prod_db\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-46",
+    "category": "Grep & Regex",
+    "title": "Search Multiple Files for Non-Matching Files (-L)",
+    "difficulty": "Intermediate",
+    "description": "List names of files among *.conf that do NOT contain the string 'ServerName'.",
+    "objective": "grep -L 'ServerName' *.conf",
+    "hints": [
+      "Command: grep -L 'ServerName' *.conf"
+    ],
+    "solution": "grep -L 'ServerName' *.conf",
+    "accepted_regex": [
+      "grep\\s+-L\\s+['\\\"]?ServerName['\\\"]?\\s+\\*\\.conf"
+    ],
+    "setup_files": {
+      "web1.conf": "ServerName site.com\n",
+      "web2.conf": "Listen 80\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-47",
+    "category": "Grep & Regex",
+    "title": "Match Blank or Whitespace-Only Lines",
+    "difficulty": "Easy",
+    "description": "Count the number of blank or spaces-only lines in document.txt.",
+    "objective": "grep -c '^[[:space:]]*$' document.txt",
+    "hints": [
+      "Command: grep -c '^[[:space:]]*$' document.txt"
+    ],
+    "solution": "grep -c '^[[:space:]]*$' document.txt",
+    "accepted_regex": [
+      "grep\\s+-c\\s+['\\\"]?\\^(\\[\\s\\]|\\[\\[:space:\\]\\]|\\s)\\*\\$['\\\"]?\\s+document\\.txt"
+    ],
+    "setup_files": {
+      "document.txt": "line 1\n   \n\nline 2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-48",
+    "category": "Grep & Regex",
+    "title": "Match Optional Suffix with Extended Regex",
+    "difficulty": "Easy",
+    "description": "Match lines containing 'http' or 'https' using optional 's?' in protocol.txt.",
+    "objective": "grep -E 'https?' protocol.txt",
+    "hints": [
+      "Command: grep -E 'https?' protocol.txt"
+    ],
+    "solution": "grep -E 'https?' protocol.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]?https\\?['\\\"]?\\s+protocol\\.txt"
+    ],
+    "setup_files": {
+      "protocol.txt": "visit http://example\nvisit https://secure\nftp://other\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-49",
+    "category": "Grep & Regex",
+    "title": "Match Email Address Pattern with Grep -E",
+    "difficulty": "Intermediate",
+    "description": "Extract lines containing valid email address formats from contacts.txt.",
+    "objective": "grep -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt",
+    "hints": [
+      "Command: grep -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt"
+    ],
+    "solution": "grep -E '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}' contacts.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*@.*contacts\\.txt"
+    ],
+    "setup_files": {
+      "contacts.txt": "admin@example.com\nphone 555-1234\nuser.name@sub.domain.org\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-50",
+    "category": "Grep & Regex",
+    "title": "Match Lines With at Least 3 Words",
+    "difficulty": "Intermediate",
+    "description": "Find lines in sentences.txt having 3 or more whitespace-separated words.",
+    "objective": "grep -E '^([^ ]+ +){2,}[^ ]+' sentences.txt",
+    "hints": [
+      "Command: grep -E '^([^ ]+ +){2,}[^ ]+' sentences.txt"
+    ],
+    "solution": "grep -E '^([^ ]+ +){2,}[^ ]+' sentences.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*sentences\\.txt"
+    ],
+    "setup_files": {
+      "sentences.txt": "one\ntwo words\nthree words here\nfour words in line\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-51",
+    "category": "Grep & Regex",
+    "title": "Find Trailing Whitespace in Code Files",
+    "difficulty": "Easy",
+    "description": "Search script.sh for lines ending with unwanted trailing spaces or tabs.",
+    "objective": "grep -n '[[:blank:]]$' script.sh",
+    "hints": [
+      "Command: grep -n '[[:blank:]]$' script.sh"
+    ],
+    "solution": "grep -n '[[:blank:]]$' script.sh",
+    "accepted_regex": [
+      "grep\\s+.*(\\[[:blank:]\\]|\\[ \\t\\]|\\\\s)\\$.*script\\.sh"
+    ],
+    "setup_files": {
+      "script.sh": "echo clean\necho trailing   \nexit 0\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-52",
+    "category": "Grep & Regex",
+    "title": "Match Lines Starting with Uppercase Letter",
+    "difficulty": "Easy",
+    "description": "Extract lines from text.txt that start with a capital letter [A-Z].",
+    "objective": "grep '^[A-Z]' text.txt",
+    "hints": [
+      "Command: grep '^[A-Z]' text.txt"
+    ],
+    "solution": "grep '^[A-Z]' text.txt",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?\\^\\[A-Z\\]['\\\"]?\\s+text\\.txt"
+    ],
+    "setup_files": {
+      "text.txt": "Apple is fruit\nbanana is yellow\nCarrot is root\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-53",
+    "category": "Grep & Regex",
+    "title": "Stop Reading File After N Matching Lines (-m)",
+    "difficulty": "Easy",
+    "description": "Search huge.log for 'CRITICAL' but stop searching after finding the first 3 matches.",
+    "objective": "grep -m 3 'CRITICAL' huge.log",
+    "hints": [
+      "Command: grep -m 3 'CRITICAL' huge.log"
+    ],
+    "solution": "grep -m 3 'CRITICAL' huge.log",
+    "accepted_regex": [
+      "grep\\s+-m\\s*3\\s+['\\\"]?CRITICAL['\\\"]?\\s+huge\\.log"
+    ],
+    "setup_files": {
+      "huge.log": "CRITICAL 1\nCRITICAL 2\nCRITICAL 3\nCRITICAL 4\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-54",
+    "category": "Grep & Regex",
+    "title": "Print Byte Offset of Matches with Flag -b",
+    "difficulty": "Intermediate",
+    "description": "Print the byte offset alongside matches for 'MAGIC' in binary.dat.",
+    "objective": "grep -b 'MAGIC' binary.dat",
+    "hints": [
+      "Command: grep -b 'MAGIC' binary.dat"
+    ],
+    "solution": "grep -b 'MAGIC' binary.dat",
+    "accepted_regex": [
+      "grep\\s+-b\\s+['\\\"]?MAGIC['\\\"]?\\s+binary\\.dat"
+    ],
+    "setup_files": {
+      "binary.dat": "header\nMAGIC_STRING\nfooter\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-55",
+    "category": "Grep & Regex",
+    "title": "Match MAC Hardware Addresses with ERE",
+    "difficulty": "Intermediate",
+    "description": "Find lines containing standard 6-byte colon-separated MAC addresses in arp.txt.",
+    "objective": "grep -E '([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}' arp.txt",
+    "hints": [
+      "Command: grep -E '([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}' arp.txt"
+    ],
+    "solution": "grep -E '([0-9a-fA-F]{2}:){5}[0-9a-fA-F]{2}' arp.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*arp\\.txt"
+    ],
+    "setup_files": {
+      "arp.txt": "host1 00:1A:2B:3C:4D:5E on ens192\nhost2 invalid:mac\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-56",
+    "category": "Grep & Regex",
+    "title": "Case-Insensitive Exact Word Match",
+    "difficulty": "Easy",
+    "description": "Find whole-word instances of 'admin' in any case (Admin, ADMIN) in users.txt.",
+    "objective": "grep -iw 'admin' users.txt",
+    "hints": [
+      "Command: grep -iw 'admin' users.txt"
+    ],
+    "solution": "grep -iw 'admin' users.txt",
+    "accepted_regex": [
+      "grep\\s+(-iw|-wi|-i\\s+-w|-w\\s+-i)\\s+['\\\"]?admin['\\\"]?\\s+users\\.txt"
+    ],
+    "setup_files": {
+      "users.txt": "Role: ADMIN\nadministrator\nRole: admin\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-57",
+    "category": "Grep & Regex",
+    "title": "Grep for Pattern Across Compressed Gz Logs with zgrep",
+    "difficulty": "Intermediate",
+    "description": "Search archived gzip log file /var/log/messages.1.gz for 'kernel panic' using zgrep.",
+    "objective": "zgrep 'kernel panic' messages.1.gz",
+    "hints": [
+      "Command: zgrep 'kernel panic' messages.1.gz"
+    ],
+    "solution": "zgrep 'kernel panic' messages.1.gz",
+    "accepted_regex": [
+      "zgrep\\s+['\\\"]?kernel panic['\\\"]?\\s+messages\\.1\\.gz"
+    ],
+    "setup_files": {
+      "messages.1.gz": "fake gz content with kernel panic\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-58",
+    "category": "Grep & Regex",
+    "title": "Match Lines Not Starting with Comment Character",
+    "difficulty": "Easy",
+    "description": "Print non-commented lines from /etc/fstab.test (lines that do not begin with '#').",
+    "objective": "grep '^[^#]' fstab.test",
+    "hints": [
+      "Command: grep '^[^#]' fstab.test"
+    ],
+    "solution": "grep '^[^#]' fstab.test",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?\\^\\[\\^#\\]['\\\"]?\\s+fstab\\.test"
+    ],
+    "setup_files": {
+      "fstab.test": "# /etc/fstab\n/dev/sda1 / ext4 defaults 1 1\n# swap\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-59",
+    "category": "Grep & Regex",
+    "title": "Search for Non-ASCII Characters in Text",
+    "difficulty": "Intermediate",
+    "description": "Find lines containing non-ASCII unicode characters (byte values above 127) in data.txt.",
+    "objective": "grep -P '[^\\x00-\\x7F]' data.txt",
+    "hints": [
+      "Command: grep -P '[^\\x00-\\x7F]' data.txt"
+    ],
+    "solution": "grep -P '[^\\x00-\\x7F]' data.txt",
+    "accepted_regex": [
+      "grep\\s+.*data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "plain ascii\naccent caf\u00e9\nmore plain\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-60",
+    "category": "Grep & Regex",
+    "title": "Match Port Numbers Between 1024 and 65535",
+    "difficulty": "Advanced",
+    "description": "Search ports.txt for lines containing high port numbers (1024-65535).",
+    "objective": "grep -E '\\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\\b' ports.txt",
+    "hints": [
+      "Command: grep -E '\\b(102[4-9]|...)\\b' ports.txt"
+    ],
+    "solution": "grep -E '\\b(102[4-9]|10[3-9][0-9]|1[1-9][0-9]{2}|[2-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])\\b' ports.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*ports\\.txt"
+    ],
+    "setup_files": {
+      "ports.txt": "port 80\nport 8080\nport 99999\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-61",
+    "category": "Grep & Regex",
+    "title": "Match Valid UUID Strings in Configs",
+    "difficulty": "Intermediate",
+    "description": "Search disk.conf for 8-4-4-4-12 standard UUID strings.",
+    "objective": "grep -E '[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}' disk.conf",
+    "hints": [
+      "Command: grep -E '[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}' disk.conf"
+    ],
+    "solution": "grep -E '[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}' disk.conf",
+    "accepted_regex": [
+      "grep\\s+-E\\s+.*disk\\.conf"
+    ],
+    "setup_files": {
+      "disk.conf": "UUID=c1b9d5a4-1234-5678-9abc-def012345678 /boot\nLABEL=root\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-62",
+    "category": "Grep & Regex",
+    "title": "Count Matches Per File Across Directory",
+    "difficulty": "Easy",
+    "description": "Count occurrences of 'error' in each individual *.log file.",
+    "objective": "grep -c 'error' *.log",
+    "hints": [
+      "Command: grep -c 'error' *.log"
+    ],
+    "solution": "grep -c 'error' *.log",
+    "accepted_regex": [
+      "grep\\s+-c\\s+['\\\"]?error['\\\"]?\\s+\\*\\.log"
+    ],
+    "setup_files": {
+      "a.log": "error\nerror\n",
+      "b.log": "ok\nerror\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-63",
+    "category": "Grep & Regex",
+    "title": "Highlight Colored Matches in Interactive Terminal",
+    "difficulty": "Easy",
+    "description": "Search log.txt for 'root' forcing color output with --color=always.",
+    "objective": "grep --color=always 'root' log.txt",
+    "hints": [
+      "Command: grep --color=always 'root' log.txt"
+    ],
+    "solution": "grep --color=always 'root' log.txt",
+    "accepted_regex": [
+      "grep\\s+--color(=always)?\\s+['\\\"]?root['\\\"]?\\s+log\\.txt"
+    ],
+    "setup_files": {
+      "log.txt": "user root logged in\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-64",
+    "category": "Grep & Regex",
+    "title": "Search Literal Strings with grep -F",
+    "difficulty": "Easy",
+    "description": "Search input.txt treating regex special characters ($*.) as raw literal characters (-F).",
+    "objective": "grep -F '$*.' input.txt",
+    "hints": [
+      "Command: grep -F '$*.' input.txt"
+    ],
+    "solution": "grep -F '$*.' input.txt",
+    "accepted_regex": [
+      "grep\\s+-F\\s+[\\'\\\"]?\\$\\\\*\\.[\\'\\\"]?\\s+input\\.txt",
+      "grep\\s+-F\\s+[\\'\\\"].*input\\.txt"
+    ],
+    "setup_files": {
+      "input.txt": "symbol: $*.\nother: 123\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-65",
+    "category": "Grep & Regex",
+    "title": "Match Lines With Exactly One Word",
+    "difficulty": "Intermediate",
+    "description": "Find lines in words.txt consisting of exactly one word with no spaces.",
+    "objective": "grep -E '^[a-zA-Z]+$' words.txt",
+    "hints": [
+      "Command: grep -E '^[a-zA-Z]+$' words.txt"
+    ],
+    "solution": "grep -E '^[a-zA-Z]+$' words.txt",
+    "accepted_regex": [
+      "grep\\s+(-E\\s+['\\\"]?\\^\\[a-zA-Z\\]\\+\\$['\\\"]?|'\\^[a-zA-Z]+\\$')\\s+words\\.txt"
+    ],
+    "setup_files": {
+      "words.txt": "single\ntwo words\nanotherSingle\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-66",
+    "category": "Grep & Regex",
+    "title": "Match ISO 8601 Timestamp Patterns",
+    "difficulty": "Intermediate",
+    "description": "Extract lines from events.log matching YYYY-MM-DD format timestamps.",
+    "objective": "grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log",
+    "hints": [
+      "Command: grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log"
+    ],
+    "solution": "grep -E '^[0-9]{4}-[0-9]{2}-[0-9]{2}' events.log",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]?\\^\\[0-9\\]\\{4\\}-\\[0-9\\]\\{2\\}-\\[0-9\\]\\{2\\}['\\\"]?\\s+events\\.log"
+    ],
+    "setup_files": {
+      "events.log": "2026-10-09 Event started\nInvalid date event\n2026-12-31 Event closed\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-67",
+    "category": "Grep & Regex",
+    "title": "Display Lines Before Match (-B) Only",
+    "difficulty": "Easy",
+    "description": "Show 3 lines of leading context before every occurrence of 'PANIC' in trace.txt.",
+    "objective": "grep -B 3 'PANIC' trace.txt",
+    "hints": [
+      "Command: grep -B 3 'PANIC' trace.txt"
+    ],
+    "solution": "grep -B 3 'PANIC' trace.txt",
+    "accepted_regex": [
+      "grep\\s+-B\\s*3\\s+['\\\"]?PANIC['\\\"]?\\s+trace\\.txt"
+    ],
+    "setup_files": {
+      "trace.txt": "step 1\nstep 2\nstep 3\nPANIC: error\nstep 4\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-68",
+    "category": "Grep & Regex",
+    "title": "Display Lines After Match (-A) Only",
+    "difficulty": "Easy",
+    "description": "Show 2 lines of trailing context following 'START' in job.log.",
+    "objective": "grep -A 2 'START' job.log",
+    "hints": [
+      "Command: grep -A 2 'START' job.log"
+    ],
+    "solution": "grep -A 2 'START' job.log",
+    "accepted_regex": [
+      "grep\\s+-A\\s*2\\s+['\\\"]?START['\\\"]?\\s+job\\.log"
+    ],
+    "setup_files": {
+      "job.log": "init\nSTART\nrun task 1\nrun task 2\nfinish\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-69",
+    "category": "Grep & Regex",
+    "title": "Match Lines With Only Digits and Commas",
+    "difficulty": "Intermediate",
+    "description": "Search csv.txt for lines containing exclusively numeric digits and commas.",
+    "objective": "grep -E '^[0-9,]+$' csv.txt",
+    "hints": [
+      "Command: grep -E '^[0-9,]+$' csv.txt"
+    ],
+    "solution": "grep -E '^[0-9,]+$' csv.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]?\\^\\[0-9,\\]\\+\\$['\\\"]?\\s+csv\\.txt"
+    ],
+    "setup_files": {
+      "csv.txt": "10,20,30\nabc,12,34\n100,200\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "grep-70",
+    "category": "Grep & Regex",
+    "title": "Search for Empty Strings in Quoted Attributes",
+    "difficulty": "Intermediate",
+    "description": "Find lines in settings.env having empty quoted variables like VAR=\"\".",
+    "objective": "grep '=\"\"' settings.env",
+    "hints": [
+      "Command: grep '=\"\"' settings.env"
+    ],
+    "solution": "grep '=\"\"' settings.env",
+    "accepted_regex": [
+      "grep\\s+['\\\"]?=\\\"\\\"['\\\"]?\\s+settings\\.env"
+    ],
+    "setup_files": {
+      "settings.env": "HOST=\"localhost\"\nTOKEN=\"\"\nPORT=\"3000\"\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]

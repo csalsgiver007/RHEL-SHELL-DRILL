@@ -1,0 +1,1454 @@
+[
+  {
+    "id": "net-01",
+    "category": "Firewall & Network",
+    "title": "Permanently Allow HTTPS Service in Public Zone",
+    "difficulty": "Easy",
+    "description": "Allow inbound HTTPS traffic in default public zone across reboots.",
+    "objective": "firewall-cmd --permanent --zone=public --add-service=https",
+    "hints": [
+      "Command: firewall-cmd --permanent --zone=public --add-service=https"
+    ],
+    "solution": "firewall-cmd --permanent --zone=public --add-service=https",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--zone=public.*--add-service=https",
+      "firewall-cmd\\s+.*--add-service=https.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-02",
+    "category": "Firewall & Network",
+    "title": "Reload Firewalld Without Dropping Connections",
+    "difficulty": "Easy",
+    "description": "Apply permanent firewall rules into live runtime without disconnects.",
+    "objective": "firewall-cmd --reload",
+    "hints": [
+      "Command: firewall-cmd --reload"
+    ],
+    "solution": "firewall-cmd --reload",
+    "accepted_regex": [
+      "firewall-cmd\\s+--reload"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-03",
+    "category": "Firewall & Network",
+    "title": "Audit Active Firewall Rules",
+    "difficulty": "Easy",
+    "description": "Inspect active firewall state for public default zone.",
+    "objective": "firewall-cmd --list-all",
+    "hints": [
+      "Command: firewall-cmd --list-all"
+    ],
+    "solution": "firewall-cmd --list-all",
+    "accepted_regex": [
+      "firewall-cmd\\s+--list-all(\\s+--zone=public)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-04",
+    "category": "Firewall & Network",
+    "title": "Open Custom TCP Port 8080 Permanently",
+    "difficulty": "Intermediate",
+    "description": "Allow inbound traffic on custom port 8080/tcp permanently.",
+    "objective": "firewall-cmd --permanent --add-port=8080/tcp",
+    "hints": [
+      "Command: firewall-cmd --permanent --add-port=8080/tcp"
+    ],
+    "solution": "firewall-cmd --permanent --add-port=8080/tcp",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-port=8080\\/tcp",
+      "firewall-cmd\\s+.*--add-port=8080\\/tcp.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-05",
+    "category": "Firewall & Network",
+    "title": "Remove Insecure Service Permanently from Firewall",
+    "difficulty": "Intermediate",
+    "description": "Remove 'cockpit' service from permanent firewall configuration.",
+    "objective": "firewall-cmd --permanent --zone=public --remove-service=cockpit",
+    "hints": [
+      "Command: firewall-cmd --permanent --zone=public --remove-service=cockpit"
+    ],
+    "solution": "firewall-cmd --permanent --zone=public --remove-service=cockpit",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--remove-service=cockpit",
+      "firewall-cmd\\s+.*--remove-service=cockpit.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-06",
+    "category": "Firewall & Network",
+    "title": "Enable IP Masquerading Permanently",
+    "difficulty": "Intermediate",
+    "description": "Enable IP masquerading (NAT) permanently in public zone.",
+    "objective": "firewall-cmd --permanent --zone=public --add-masquerade",
+    "hints": [
+      "Command: firewall-cmd --permanent --zone=public --add-masquerade"
+    ],
+    "solution": "firewall-cmd --permanent --zone=public --add-masquerade",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-masquerade",
+      "firewall-cmd\\s+.*--add-masquerade.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-07",
+    "category": "Firewall & Network",
+    "title": "Add Port Forwarding Rule in Firewalld",
+    "difficulty": "Advanced",
+    "description": "Permanently forward incoming port 80 traffic to internal port 8080.",
+    "objective": "firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8080",
+    "hints": [
+      "Command: firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8080"
+    ],
+    "solution": "firewall-cmd --permanent --add-forward-port=port=80:proto=tcp:toport=8080",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-forward-port=port=80:proto=tcp:toport=8080"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-08",
+    "category": "Firewall & Network",
+    "title": "Check Running Status of Firewalld",
+    "difficulty": "Easy",
+    "description": "Check whether firewalld is running using firewall-cmd --state.",
+    "objective": "firewall-cmd --state",
+    "hints": [
+      "Command: firewall-cmd --state"
+    ],
+    "solution": "firewall-cmd --state",
+    "accepted_regex": [
+      "firewall-cmd\\s+--state"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-09",
+    "category": "Firewall & Network",
+    "title": "Get Default Firewall Zone",
+    "difficulty": "Easy",
+    "description": "Print the name of default firewalld zone.",
+    "objective": "firewall-cmd --get-default-zone",
+    "hints": [
+      "Command: firewall-cmd --get-default-zone"
+    ],
+    "solution": "firewall-cmd --get-default-zone",
+    "accepted_regex": [
+      "firewall-cmd\\s+--get-default-zone"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-10",
+    "category": "Firewall & Network",
+    "title": "Set Default Firewall Zone to Internal",
+    "difficulty": "Intermediate",
+    "description": "Change the default zone to 'internal'.",
+    "objective": "firewall-cmd --set-default-zone=internal",
+    "hints": [
+      "Command: firewall-cmd --set-default-zone=internal"
+    ],
+    "solution": "firewall-cmd --set-default-zone=internal",
+    "accepted_regex": [
+      "firewall-cmd\\s+--set-default-zone=internal"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-11",
+    "category": "Firewall & Network",
+    "title": "List All Available Firewall Services",
+    "difficulty": "Easy",
+    "description": "List all predefined services supported by firewalld.",
+    "objective": "firewall-cmd --get-services",
+    "hints": [
+      "Command: firewall-cmd --get-services"
+    ],
+    "solution": "firewall-cmd --get-services",
+    "accepted_regex": [
+      "firewall-cmd\\s+--get-services"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-12",
+    "category": "Firewall & Network",
+    "title": "Permanently Restrict SSH to Source Subnet",
+    "difficulty": "Advanced",
+    "description": "Add permanent rich rule permitting SSH only from subnet 10.0.0.0/24.",
+    "objective": "firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"10.0.0.0/24\" service name=\"ssh\" accept'",
+    "hints": [
+      "Command: firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"10.0.0.0/24\" service name=\"ssh\" accept'"
+    ],
+    "solution": "firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"10.0.0.0/24\" service name=\"ssh\" accept'",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-rich-rule=.*10\\.0\\.0\\.0\\/24.*ssh.*accept"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-13",
+    "category": "Firewall & Network",
+    "title": "Remove Open Port from Permanent Firewall",
+    "difficulty": "Intermediate",
+    "description": "Remove port 8080/tcp from permanent public configuration.",
+    "objective": "firewall-cmd --permanent --remove-port=8080/tcp",
+    "hints": [
+      "Command: firewall-cmd --permanent --remove-port=8080/tcp"
+    ],
+    "solution": "firewall-cmd --permanent --remove-port=8080/tcp",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--remove-port=8080\\/tcp",
+      "firewall-cmd\\s+.*--remove-port=8080\\/tcp.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-14",
+    "category": "Firewall & Network",
+    "title": "Query If Service Is Permitted in Firewall",
+    "difficulty": "Easy",
+    "description": "Check if 'http' service is currently enabled in public zone (returns 0 or 1).",
+    "objective": "firewall-cmd --zone=public --query-service=http",
+    "hints": [
+      "Command: firewall-cmd --zone=public --query-service=http"
+    ],
+    "solution": "firewall-cmd --zone=public --query-service=http",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--query-service=http"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-15",
+    "category": "Firewall & Network",
+    "title": "Bind Network Interface to Trusted Zone Permanently",
+    "difficulty": "Intermediate",
+    "description": "Assign interface 'ens224' to 'trusted' zone permanently.",
+    "objective": "firewall-cmd --permanent --zone=trusted --add-interface=ens224",
+    "hints": [
+      "Command: firewall-cmd --permanent --zone=trusted --add-interface=ens224"
+    ],
+    "solution": "firewall-cmd --permanent --zone=trusted --add-interface=ens224",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--zone=trusted.*--add-interface=ens224",
+      "firewall-cmd\\s+.*--zone=trusted.*--add-interface=ens224.*--permanent"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-16",
+    "category": "Firewall & Network",
+    "title": "List Active Firewall Zones and Interfaces",
+    "difficulty": "Easy",
+    "description": "Print only active zones and their bound network interfaces.",
+    "objective": "firewall-cmd --get-active-zones",
+    "hints": [
+      "Command: firewall-cmd --get-active-zones"
+    ],
+    "solution": "firewall-cmd --get-active-zones",
+    "accepted_regex": [
+      "firewall-cmd\\s+--get-active-zones"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-17",
+    "category": "Firewall & Network",
+    "title": "Audit Rules Across All Zones",
+    "difficulty": "Intermediate",
+    "description": "Display rules and configurations for all existing zones.",
+    "objective": "firewall-cmd --list-all-zones",
+    "hints": [
+      "Command: firewall-cmd --list-all-zones"
+    ],
+    "solution": "firewall-cmd --list-all-zones",
+    "accepted_regex": [
+      "firewall-cmd\\s+--list-all-zones"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-18",
+    "category": "Firewall & Network",
+    "title": "Temporarily Add Service to Running State",
+    "difficulty": "Easy",
+    "description": "Add 'nfs' to public zone temporarily without --permanent flag.",
+    "objective": "firewall-cmd --zone=public --add-service=nfs",
+    "hints": [
+      "Command: firewall-cmd --zone=public --add-service=nfs"
+    ],
+    "solution": "firewall-cmd --zone=public --add-service=nfs",
+    "accepted_regex": [
+      "firewall-cmd\\s+(--zone=public\\s+)?--add-service=nfs$"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-19",
+    "category": "Firewall & Network",
+    "title": "Query Current SELinux Enforcement Mode",
+    "difficulty": "Easy",
+    "description": "Print current SELinux status using getenforce.",
+    "objective": "getenforce",
+    "hints": [
+      "Command: getenforce"
+    ],
+    "solution": "getenforce",
+    "accepted_regex": [
+      "^getenforce$"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-20",
+    "category": "Firewall & Network",
+    "title": "Switch SELinux Temporarily to Permissive",
+    "difficulty": "Easy",
+    "description": "Set SELinux runtime mode to Permissive (0) without rebooting.",
+    "objective": "setenforce 0",
+    "hints": [
+      "Command: setenforce 0"
+    ],
+    "solution": "setenforce 0",
+    "accepted_regex": [
+      "^setenforce\\s+(0|Permissive)$"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-21",
+    "category": "Firewall & Network",
+    "title": "Check Comprehensive SELinux Status",
+    "difficulty": "Easy",
+    "description": "Display detailed SELinux operational status with sestatus.",
+    "objective": "sestatus",
+    "hints": [
+      "Command: sestatus"
+    ],
+    "solution": "sestatus",
+    "accepted_regex": [
+      "^sestatus$"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-22",
+    "category": "Firewall & Network",
+    "title": "Restore Default SELinux File Context Recursively",
+    "difficulty": "Intermediate",
+    "description": "Restore default SELinux context on /var/www/html recursively with verbose output.",
+    "objective": "restorecon -Rv /var/www/html",
+    "hints": [
+      "Command: restorecon -Rv /var/www/html"
+    ],
+    "solution": "restorecon -Rv /var/www/html",
+    "accepted_regex": [
+      "restorecon\\s+(-Rv|-vR|-R\\s+-v|-v\\s+-R)\\s+\\/var\\/www\\/html"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-23",
+    "category": "Firewall & Network",
+    "title": "Set Persistent SELinux Boolean Value",
+    "difficulty": "Intermediate",
+    "description": "Enable boolean 'httpd_can_network_connect' persistently across reboots.",
+    "objective": "setsebool -P httpd_can_network_connect on",
+    "hints": [
+      "Use setsebool -P with on or 1",
+      "Command: setsebool -P httpd_can_network_connect on"
+    ],
+    "solution": "setsebool -P httpd_can_network_connect on",
+    "accepted_regex": [
+      "setsebool\\s+-P\\s+httpd_can_network_connect\\s+(on|1)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-24",
+    "category": "Firewall & Network",
+    "title": "Query State of Specific SELinux Boolean",
+    "difficulty": "Easy",
+    "description": "Check current and pending state of boolean 'httpd_enable_homedirs'.",
+    "objective": "getsebool httpd_enable_homedirs",
+    "hints": [
+      "Command: getsebool httpd_enable_homedirs"
+    ],
+    "solution": "getsebool httpd_enable_homedirs",
+    "accepted_regex": [
+      "getsebool\\s+httpd_enable_homedirs"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-25",
+    "category": "Firewall & Network",
+    "title": "Display Listening TCP Sockets with ss",
+    "difficulty": "Intermediate",
+    "description": "Display all listening (-l) TCP (-t) sockets with numeric ports (-n) and processes (-p).",
+    "objective": "ss -tlpn",
+    "hints": [
+      "Command: ss -tlpn"
+    ],
+    "solution": "ss -tlpn",
+    "accepted_regex": [
+      "ss\\s+-(tlpn|tulpn|tnlp|ltpn|lntp)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-26",
+    "category": "Firewall & Network",
+    "title": "Bring Up NetworkManager Connection",
+    "difficulty": "Easy",
+    "description": "Activate NetworkManager connection profile 'ens192'.",
+    "objective": "nmcli con up ens192",
+    "hints": [
+      "Command: nmcli con up ens192"
+    ],
+    "solution": "nmcli con up ens192",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+up\\s+([a-zA-Z0-9_-]+)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-27",
+    "category": "Firewall & Network",
+    "title": "List Active NetworkManager Connections",
+    "difficulty": "Easy",
+    "description": "Display only currently active NetworkManager connections.",
+    "objective": "nmcli con show --active",
+    "hints": [
+      "Command: nmcli con show --active"
+    ],
+    "solution": "nmcli con show --active",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+show\\s+--active"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-28",
+    "category": "Firewall & Network",
+    "title": "Display Network Device Status Overview",
+    "difficulty": "Easy",
+    "description": "Display status of all network hardware devices with nmcli.",
+    "objective": "nmcli dev status",
+    "hints": [
+      "Command: nmcli dev status"
+    ],
+    "solution": "nmcli dev status",
+    "accepted_regex": [
+      "nmcli\\s+(device|dev)\\s+status"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-29",
+    "category": "Firewall & Network",
+    "title": "Set Static DNS Servers on Connection",
+    "difficulty": "Intermediate",
+    "description": "Configure connection 'ens192' with DNS servers 8.8.8.8 and 1.1.1.1.",
+    "objective": "nmcli con mod ens192 ipv4.dns \"8.8.8.8 1.1.1.1\"",
+    "hints": [
+      "Command: nmcli con mod ens192 ipv4.dns \"8.8.8.8 1.1.1.1\""
+    ],
+    "solution": "nmcli con mod ens192 ipv4.dns \"8.8.8.8 1.1.1.1\"",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+mod(ify)?\\s+ens192\\s+ipv4\\.dns\\s+[\"\\']?8\\.8\\.8\\.8"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-30",
+    "category": "Firewall & Network",
+    "title": "Brief View of All Interface IP Addresses",
+    "difficulty": "Easy",
+    "description": "Display concise one-line overview of all network interfaces and IPs.",
+    "objective": "ip -br a",
+    "hints": [
+      "Command: ip -br a"
+    ],
+    "solution": "ip -br a",
+    "accepted_regex": [
+      "ip\\s+(-br|-brief)\\s+(a|addr|address)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-31",
+    "category": "Firewall & Network",
+    "title": "Inspect Default Kernel Gateway Route",
+    "difficulty": "Easy",
+    "description": "Display only the default route entry from routing table.",
+    "objective": "ip route show default",
+    "hints": [
+      "Command: ip route show default"
+    ],
+    "solution": "ip route show default",
+    "accepted_regex": [
+      "ip\\s+(route|r)\\s+(show\\s+)?default",
+      "ip\\s+(route|r)\\s*\\|\\s*grep\\s+default"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-32",
+    "category": "Firewall & Network",
+    "title": "Display Kernel ARP Neighbor Table",
+    "difficulty": "Easy",
+    "description": "Inspect Linux kernel neighbor/ARP table using iproute2.",
+    "objective": "ip neigh show",
+    "hints": [
+      "Command: ip neigh show"
+    ],
+    "solution": "ip neigh show",
+    "accepted_regex": [
+      "ip\\s+(neigh(bor)?\\s+(show)?|n)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-33",
+    "category": "Firewall & Network",
+    "title": "Display Socket Summary Statistics with ss",
+    "difficulty": "Easy",
+    "description": "Print summary statistics for total, TCP, UDP sockets.",
+    "objective": "ss -s",
+    "hints": [
+      "Command: ss -s"
+    ],
+    "solution": "ss -s",
+    "accepted_regex": [
+      "ss\\s+(-s|--summary)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-34",
+    "category": "Firewall & Network",
+    "title": "Ping Remote Host with 3 Count and 2s Timeout",
+    "difficulty": "Easy",
+    "description": "Send exactly 3 ICMP echo requests with 2-second timeout to 192.168.1.1.",
+    "objective": "ping -c 3 -W 2 192.168.1.1",
+    "hints": [
+      "Command: ping -c 3 -W 2 192.168.1.1"
+    ],
+    "solution": "ping -c 3 -W 2 192.168.1.1",
+    "accepted_regex": [
+      "ping\\s+.*-c\\s+3.*(-W\\s+2)?.*192\\.168\\.1\\.1"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-35",
+    "category": "Firewall & Network",
+    "title": "Check HTTP Response Headers with Curl",
+    "difficulty": "Easy",
+    "description": "Fetch only HTTP headers (HEAD request) from http://localhost.",
+    "objective": "curl -I http://localhost",
+    "hints": [
+      "Command: curl -I http://localhost"
+    ],
+    "solution": "curl -I http://localhost",
+    "accepted_regex": [
+      "curl\\s+(-I|--head)\\s+http:\\/\\/localhost"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-36",
+    "category": "Firewall & Network",
+    "title": "Configure Static IPv4 Address on Connection",
+    "difficulty": "Intermediate",
+    "description": "Set static IP 192.168.1.50/24 with manual method on 'ens192'.",
+    "objective": "nmcli con mod ens192 ipv4.addresses 192.168.1.50/24 ipv4.method manual",
+    "hints": [
+      "Command: nmcli con mod ens192 ipv4.addresses 192.168.1.50/24 ipv4.method manual"
+    ],
+    "solution": "nmcli con mod ens192 ipv4.addresses 192.168.1.50/24 ipv4.method manual",
+    "accepted_regex": [
+      "nmcli\\s+.*con\\s+mod.*ens192.*ipv4\\.addresses\\s+192\\.168\\.1\\.50\\/24.*ipv4\\.method\\s+manual"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-37",
+    "category": "Firewall & Network",
+    "title": "Add New Ethernet Connection Profile",
+    "difficulty": "Intermediate",
+    "description": "Create a new ethernet connection profile named 'con-ens224' for device ens224.",
+    "objective": "nmcli con add type ethernet con-name con-ens224 ifname ens224",
+    "hints": [
+      "Command: nmcli con add type ethernet con-name con-ens224 ifname ens224"
+    ],
+    "solution": "nmcli con add type ethernet con-name con-ens224 ifname ens224",
+    "accepted_regex": [
+      "nmcli\\s+con\\s+add\\s+type\\s+ethernet\\s+con-name\\s+con-ens224\\s+ifname\\s+ens224"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-38",
+    "category": "Firewall & Network",
+    "title": "Reload NetworkManager Connection Files from Disk",
+    "difficulty": "Easy",
+    "description": "Instruct NetworkManager to reload connection keyfiles from /etc/NetworkManager/system-connections/.",
+    "objective": "nmcli con reload",
+    "hints": [
+      "Command: nmcli con reload"
+    ],
+    "solution": "nmcli con reload",
+    "accepted_regex": [
+      "nmcli\\s+con\\s+reload"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-39",
+    "category": "Firewall & Network",
+    "title": "Check Socket Listening on Specific Port 3306",
+    "difficulty": "Intermediate",
+    "description": "Filter ss output to check if port 3306 is listening.",
+    "objective": "ss -tlpn sport = :3306",
+    "hints": [
+      "Command: ss -tlpn sport = :3306 or ss -tlpn | grep 3306"
+    ],
+    "solution": "ss -tlpn sport = :3306",
+    "accepted_regex": [
+      "ss\\s+.*3306",
+      "ss\\s+-tlpn\\s*\\|\\s*grep\\s+3306"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-40",
+    "category": "Firewall & Network",
+    "title": "Display Detailed Link Statistics with ip -s",
+    "difficulty": "Easy",
+    "description": "Display packet transfer and error statistics for interface ens192.",
+    "objective": "ip -s link show ens192",
+    "hints": [
+      "Command: ip -s link show ens192"
+    ],
+    "solution": "ip -s link show ens192",
+    "accepted_regex": [
+      "ip\\s+-s\\s+link\\s+show\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-41",
+    "category": "Firewall & Network",
+    "title": "Set Default Zone Gateway in NetworkManager",
+    "difficulty": "Intermediate",
+    "description": "Assign default IPv4 gateway 192.168.1.1 to connection profile 'ens192'.",
+    "objective": "nmcli con mod ens192 ipv4.gateway 192.168.1.1",
+    "hints": [
+      "Command: nmcli con mod ens192 ipv4.gateway 192.168.1.1"
+    ],
+    "solution": "nmcli con mod ens192 ipv4.gateway 192.168.1.1",
+    "accepted_regex": [
+      "nmcli\\s+con\\s+mod(ify)?\\s+ens192\\s+ipv4\\.gateway\\s+192\\.168\\.1\\.1"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-42",
+    "category": "Firewall & Network",
+    "title": "Delete NetworkManager Connection Profile",
+    "difficulty": "Easy",
+    "description": "Delete existing connection profile named 'old-backup-lan'.",
+    "objective": "nmcli con del old-backup-lan",
+    "hints": [
+      "Command: nmcli con del old-backup-lan"
+    ],
+    "solution": "nmcli con del old-backup-lan",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+(del|delete)\\s+old-backup-lan"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-43",
+    "category": "Firewall & Network",
+    "title": "Deactivate Network Connection Temporarily",
+    "difficulty": "Easy",
+    "description": "Take down network connection 'ens192' using nmcli.",
+    "objective": "nmcli con down ens192",
+    "hints": [
+      "Command: nmcli con down ens192"
+    ],
+    "solution": "nmcli con down ens192",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+down\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-44",
+    "category": "Firewall & Network",
+    "title": "Configure Connection Autoconnect Behavior",
+    "difficulty": "Easy",
+    "description": "Enable automatic connection on boot for profile 'ens192'.",
+    "objective": "nmcli con mod ens192 connection.autoconnect yes",
+    "hints": [
+      "Command: nmcli con mod ens192 connection.autoconnect yes"
+    ],
+    "solution": "nmcli con mod ens192 connection.autoconnect yes",
+    "accepted_regex": [
+      "nmcli\\s+con\\s+mod(ify)?\\s+ens192\\s+connection\\.autoconnect\\s+(yes|true)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-45",
+    "category": "Firewall & Network",
+    "title": "Inspect Detailed Connection Settings with nmcli",
+    "difficulty": "Intermediate",
+    "description": "Display all configured keys and values for connection profile 'ens192'.",
+    "objective": "nmcli con show ens192",
+    "hints": [
+      "Command: nmcli con show ens192"
+    ],
+    "solution": "nmcli con show ens192",
+    "accepted_regex": [
+      "nmcli\\s+(con|connection)\\s+show\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-46",
+    "category": "Firewall & Network",
+    "title": "Create Static Static Route with nmcli",
+    "difficulty": "Advanced",
+    "description": "Add static route for 10.50.0.0/16 via gateway 192.168.1.254 to profile 'ens192'.",
+    "objective": "nmcli con mod ens192 +ipv4.routes \"10.50.0.0/16 192.168.1.254\"",
+    "hints": [
+      "Command: nmcli con mod ens192 +ipv4.routes \"10.50.0.0/16 192.168.1.254\""
+    ],
+    "solution": "nmcli con mod ens192 +ipv4.routes \"10.50.0.0/16 192.168.1.254\"",
+    "accepted_regex": [
+      "nmcli\\s+con\\s+mod(ify)?\\s+ens192\\s+\\+?ipv4\\.routes\\s+[\\\"']10\\.50\\.0\\.0\\/16\\s+192\\.168\\.1\\.254[\\\"']"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-47",
+    "category": "Firewall & Network",
+    "title": "Create Network Bond Master Interface",
+    "difficulty": "Advanced",
+    "description": "Create an active-backup bond master connection named 'bond0' using nmcli (RHEL 9/10 standard replacing deprecated teamd).",
+    "objective": "nmcli con add type bond con-name bond0 ifname bond0 bond.options \"mode=active-backup\"",
+    "hints": [
+      "Use nmcli con add type bond (teamd is deprecated in RHEL 9 and removed in RHEL 10)",
+      "Command: nmcli con add type bond con-name bond0 ifname bond0 bond.options \"mode=active-backup\""
+    ],
+    "solution": "nmcli con add type bond con-name bond0 ifname bond0 bond.options \"mode=active-backup\"",
+    "accepted_regex": [
+      "nmcli\\s+con(nection)?\\s+add\\s+type\\s+bond\\s+con-name\\s+bond0\\s+ifname\\s+bond0(\\s+bond\\.options\\s+.*active-backup.*)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-48",
+    "category": "Firewall & Network",
+    "title": "Add Slave Port to Network Bond Profile",
+    "difficulty": "Advanced",
+    "description": "Add device ens224 as a bond-slave port to bond master 'bond0'.",
+    "objective": "nmcli con add type bond-slave con-name bond0-port1 ifname ens224 master bond0",
+    "hints": [
+      "Use type bond-slave (or type ethernet slave-type bond) targeting master bond0",
+      "Command: nmcli con add type bond-slave con-name bond0-port1 ifname ens224 master bond0"
+    ],
+    "solution": "nmcli con add type bond-slave con-name bond0-port1 ifname ens224 master bond0",
+    "accepted_regex": [
+      "nmcli\\s+con(nection)?\\s+add\\s+type\\s+(bond-slave|ethernet)\\s+con-name\\s+bond0-port1\\s+ifname\\s+ens224\\s+(slave-type\\s+bond\\s+)?master\\s+bond0"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-49",
+    "category": "Firewall & Network",
+    "title": "Permanently Block IP Subnet with Firewalld Rich Rule",
+    "difficulty": "Advanced",
+    "description": "Drop all incoming traffic from abusive subnet 198.51.100.0/24 in public zone permanently.",
+    "objective": "firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"198.51.100.0/24\" drop'",
+    "hints": [
+      "Command: firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"198.51.100.0/24\" drop'"
+    ],
+    "solution": "firewall-cmd --permanent --add-rich-rule='rule family=\"ipv4\" source address=\"198.51.100.0/24\" drop'",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-rich-rule=.*198\\.51\\.100\\.0\\/24.*drop"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-50",
+    "category": "Firewall & Network",
+    "title": "Rate Limit Logged SSH Connections with Rich Rule",
+    "difficulty": "Advanced",
+    "description": "Limit SSH connection rate to 3/minute with prefix logging using rich rule.",
+    "objective": "firewall-cmd --permanent --add-rich-rule='rule service name=\"ssh\" log prefix=\"ssh_flood: \" level=\"info\" limit value=\"3/m\" accept'",
+    "hints": [
+      "Command: firewall-cmd --permanent --add-rich-rule='rule service name=\"ssh\" log prefix=\"ssh_flood: \" level=\"info\" limit value=\"3/m\" accept'"
+    ],
+    "solution": "firewall-cmd --permanent --add-rich-rule='rule service name=\"ssh\" log prefix=\"ssh_flood: \" level=\"info\" limit value=\"3/m\" accept'",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--add-rich-rule=.*limit\\s+value=[\\\"']3\\/m[\\\"']"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-51",
+    "category": "Firewall & Network",
+    "title": "Create Custom Firewalld Service Definition",
+    "difficulty": "Intermediate",
+    "description": "Create a new permanent empty service named 'myapp' in firewalld.",
+    "objective": "firewall-cmd --permanent --new-service=myapp",
+    "hints": [
+      "Command: firewall-cmd --permanent --new-service=myapp"
+    ],
+    "solution": "firewall-cmd --permanent --new-service=myapp",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--new-service=myapp"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-52",
+    "category": "Firewall & Network",
+    "title": "Assign Port to Custom Firewalld Service",
+    "difficulty": "Intermediate",
+    "description": "Add TCP port 9000 to custom service 'myapp' permanently.",
+    "objective": "firewall-cmd --permanent --service=myapp --add-port=9000/tcp",
+    "hints": [
+      "Command: firewall-cmd --permanent --service=myapp --add-port=9000/tcp"
+    ],
+    "solution": "firewall-cmd --permanent --service=myapp --add-port=9000/tcp",
+    "accepted_regex": [
+      "firewall-cmd\\s+.*--permanent.*--service=myapp.*--add-port=9000\\/tcp"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-53",
+    "category": "Firewall & Network",
+    "title": "Enable Panic Mode to Drop All Network Traffic",
+    "difficulty": "Advanced",
+    "description": "Immediately cut all incoming and outgoing network traffic with emergency panic mode.",
+    "objective": "firewall-cmd --panic-on",
+    "hints": [
+      "Command: firewall-cmd --panic-on"
+    ],
+    "solution": "firewall-cmd --panic-on",
+    "accepted_regex": [
+      "firewall-cmd\\s+--panic-on"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-54",
+    "category": "Firewall & Network",
+    "title": "Disable Panic Mode to Restore Connectivity",
+    "difficulty": "Easy",
+    "description": "Disable emergency panic mode to restore normal network packet processing.",
+    "objective": "firewall-cmd --panic-off",
+    "hints": [
+      "Command: firewall-cmd --panic-off"
+    ],
+    "solution": "firewall-cmd --panic-off",
+    "accepted_regex": [
+      "firewall-cmd\\s+--panic-off"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-55",
+    "category": "Firewall & Network",
+    "title": "Inspect Persistent SELinux Port Labels",
+    "difficulty": "Intermediate",
+    "description": "List all network port definitions registered in SELinux policy using semanage.",
+    "objective": "semanage port -l",
+    "hints": [
+      "Command: semanage port -l"
+    ],
+    "solution": "semanage port -l",
+    "accepted_regex": [
+      "semanage\\s+port\\s+-l"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-56",
+    "category": "Firewall & Network",
+    "title": "Assign Custom TCP Port to HTTP SELinux Context",
+    "difficulty": "Advanced",
+    "description": "Add port 8088/tcp to http_port_t SELinux type policy permanently.",
+    "objective": "semanage port -a -t http_port_t -p tcp 8088",
+    "hints": [
+      "Command: semanage port -a -t http_port_t -p tcp 8088"
+    ],
+    "solution": "semanage port -a -t http_port_t -p tcp 8088",
+    "accepted_regex": [
+      "semanage\\s+port\\s+-a\\s+-t\\s+http_port_t\\s+-p\\s+tcp\\s+8088"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-57",
+    "category": "Firewall & Network",
+    "title": "Assign Custom Directory Context in SELinux Policy",
+    "difficulty": "Advanced",
+    "description": "Add permanent file context rule for '/custom_web(/.*)?' as httpd_sys_content_t.",
+    "objective": "semanage fcontext -a -t httpd_sys_content_t \"/custom_web(/.*)?\"",
+    "hints": [
+      "Command: semanage fcontext -a -t httpd_sys_content_t \"/custom_web(/.*)?\""
+    ],
+    "solution": "semanage fcontext -a -t httpd_sys_content_t \"/custom_web(/.*)?\"",
+    "accepted_regex": [
+      "semanage\\s+fcontext\\s+-a\\s+-t\\s+httpd_sys_content_t\\s+[\\\"']\\/custom_web\\(\\/\\.\\*\\)\\?[\\\"']"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-58",
+    "category": "Firewall & Network",
+    "title": "Search SELinux Audit Denials with ausearch",
+    "difficulty": "Intermediate",
+    "description": "Search audit.log for recent SELinux AVC denials in past 10 minutes with ausearch.",
+    "objective": "ausearch -m avc -ts recent",
+    "hints": [
+      "Command: ausearch -m avc -ts recent"
+    ],
+    "solution": "ausearch -m avc -ts recent",
+    "accepted_regex": [
+      "ausearch\\s+-m\\s+avc(\\s+-ts\\s+recent)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-59",
+    "category": "Firewall & Network",
+    "title": "Analyze SELinux Denials and Suggest Fixes",
+    "difficulty": "Intermediate",
+    "description": "Translate raw audit logs into human-readable suggestions using audit2why.",
+    "objective": "audit2why < /var/log/audit/audit.log",
+    "hints": [
+      "Command: audit2why < /var/log/audit/audit.log or ausearch -m avc | audit2why"
+    ],
+    "solution": "ausearch -m avc | audit2why",
+    "accepted_regex": [
+      "(ausearch\\s+-m\\s+avc\\s*\\|\\s*audit2why|audit2why\\s*<\\s*\\/var\\/log\\/audit\\/audit\\.log)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-60",
+    "category": "Firewall & Network",
+    "title": "Display All Listening UDP Sockets with ss",
+    "difficulty": "Easy",
+    "description": "Display all listening UDP sockets with numeric addresses and process details.",
+    "objective": "ss -ulpn",
+    "hints": [
+      "Command: ss -ulpn"
+    ],
+    "solution": "ss -ulpn",
+    "accepted_regex": [
+      "ss\\s+-(ulpn|unlp|lupn)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-61",
+    "category": "Firewall & Network",
+    "title": "Filter Established TCP Sockets to Specific Remote Host",
+    "difficulty": "Intermediate",
+    "description": "Display established TCP connections to destination 10.0.0.1 using ss filter syntax.",
+    "objective": "ss -t state established dst 10.0.0.1",
+    "hints": [
+      "Command: ss -t state established dst 10.0.0.1"
+    ],
+    "solution": "ss -t state established dst 10.0.0.1",
+    "accepted_regex": [
+      "ss\\s+.*state\\s+established.*dst\\s+10\\.0\\.0\\.1"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-62",
+    "category": "Firewall & Network",
+    "title": "Display Socket Memory Buffer Sizes",
+    "difficulty": "Intermediate",
+    "description": "Show socket memory consumption (-m) and internal TCP info (-i) with ss.",
+    "objective": "ss -tmi",
+    "hints": [
+      "Command: ss -tmi"
+    ],
+    "solution": "ss -tmi",
+    "accepted_regex": [
+      "ss\\s+-(tmi|tim)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-63",
+    "category": "Firewall & Network",
+    "title": "Add Temporary IP Address to Interface via iproute2",
+    "difficulty": "Easy",
+    "description": "Add secondary IP 10.0.0.99/24 to device ens192 using ip addr.",
+    "objective": "ip addr add 10.0.0.99/24 dev ens192",
+    "hints": [
+      "Command: ip addr add 10.0.0.99/24 dev ens192"
+    ],
+    "solution": "ip addr add 10.0.0.99/24 dev ens192",
+    "accepted_regex": [
+      "ip\\s+(addr|a)\\s+add\\s+10\\.0\\.0\\.99\\/24\\s+dev\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-64",
+    "category": "Firewall & Network",
+    "title": "Delete Temporary IP Address from Interface",
+    "difficulty": "Easy",
+    "description": "Remove IP address 10.0.0.99/24 from interface ens192 using ip addr.",
+    "objective": "ip addr del 10.0.0.99/24 dev ens192",
+    "hints": [
+      "Command: ip addr del 10.0.0.99/24 dev ens192"
+    ],
+    "solution": "ip addr del 10.0.0.99/24 dev ens192",
+    "accepted_regex": [
+      "ip\\s+(addr|a)\\s+del\\s+10\\.0\\.0\\.99\\/24\\s+dev\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-65",
+    "category": "Firewall & Network",
+    "title": "Set Interface Link State Up",
+    "difficulty": "Easy",
+    "description": "Bring network device ens224 link state UP using ip link.",
+    "objective": "ip link set ens224 up",
+    "hints": [
+      "Command: ip link set ens224 up"
+    ],
+    "solution": "ip link set ens224 up",
+    "accepted_regex": [
+      "ip\\s+link\\s+set\\s+ens224\\s+up"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-66",
+    "category": "Firewall & Network",
+    "title": "Set Interface Link State Down",
+    "difficulty": "Easy",
+    "description": "Bring network device ens224 link state DOWN using ip link.",
+    "objective": "ip link set ens224 down",
+    "hints": [
+      "Command: ip link set ens224 down"
+    ],
+    "solution": "ip link set ens224 down",
+    "accepted_regex": [
+      "ip\\s+link\\s+set\\s+ens224\\s+down"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-67",
+    "category": "Firewall & Network",
+    "title": "Flush ARP Neighbor Cache on Device",
+    "difficulty": "Intermediate",
+    "description": "Flush all ARP neighbor entries associated with device ens192.",
+    "objective": "ip neigh flush dev ens192",
+    "hints": [
+      "Command: ip neigh flush dev ens192"
+    ],
+    "solution": "ip neigh flush dev ens192",
+    "accepted_regex": [
+      "ip\\s+neigh\\s+flush\\s+dev\\s+ens192"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-68",
+    "category": "Firewall & Network",
+    "title": "Inspect Packet Routing Policy Rules",
+    "difficulty": "Intermediate",
+    "description": "Display kernel routing policy database (RPDB) rules with ip rule.",
+    "objective": "ip rule show",
+    "hints": [
+      "Command: ip rule show"
+    ],
+    "solution": "ip rule show",
+    "accepted_regex": [
+      "ip\\s+rule(\\s+show)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-69",
+    "category": "Firewall & Network",
+    "title": "Perform Forward DNS Lookup with Dig",
+    "difficulty": "Easy",
+    "description": "Query DNS A record for domain 'example.com' returning only concise answers (+short).",
+    "objective": "dig +short example.com",
+    "hints": [
+      "Command: dig +short example.com"
+    ],
+    "solution": "dig +short example.com",
+    "accepted_regex": [
+      "dig\\s+\\+short\\s+example\\.com",
+      "dig\\s+example\\.com\\s+\\+short"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-70",
+    "category": "Firewall & Network",
+    "title": "Perform Reverse DNS Pointer Lookup with Dig",
+    "difficulty": "Easy",
+    "description": "Perform reverse lookup for IP address 8.8.8.8 using dig -x.",
+    "objective": "dig -x 8.8.8.8 +short",
+    "hints": [
+      "Command: dig -x 8.8.8.8 +short"
+    ],
+    "solution": "dig -x 8.8.8.8 +short",
+    "accepted_regex": [
+      "dig\\s+-x\\s+8\\.8\\.8\\.8(\\s+\\+short)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-71",
+    "category": "Firewall & Network",
+    "title": "Trace Network Path with traceroute / tracepath",
+    "difficulty": "Easy",
+    "description": "Trace MTU and hops to destination host 1.1.1.1 using tracepath.",
+    "objective": "tracepath 1.1.1.1",
+    "hints": [
+      "Command: tracepath 1.1.1.1"
+    ],
+    "solution": "tracepath 1.1.1.1",
+    "accepted_regex": [
+      "(tracepath|traceroute)\\s+1\\.1\\.1\\.1"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-72",
+    "category": "Firewall & Network",
+    "title": "Download File with Curl Following HTTP Redirects",
+    "difficulty": "Easy",
+    "description": "Download remote URL http://example.com/file.tar.gz following 301/302 redirects (-L) saving as output (-O).",
+    "objective": "curl -LO http://example.com/file.tar.gz",
+    "hints": [
+      "Command: curl -LO http://example.com/file.tar.gz"
+    ],
+    "solution": "curl -LO http://example.com/file.tar.gz",
+    "accepted_regex": [
+      "curl\\s+(-LO|-OL|-L\\s+-O|-O\\s+-L)\\s+http:\\/\\/example\\.com\\/file\\.tar\\.gz"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-73",
+    "category": "Firewall & Network",
+    "title": "Send HTTP POST JSON Payload with Curl",
+    "difficulty": "Intermediate",
+    "description": "Send POST request to http://localhost/api with JSON payload '{\"status\":\"ready\"}'.",
+    "objective": "curl -X POST -H \"Content-Type: application/json\" -d '{\"status\":\"ready\"}' http://localhost/api",
+    "hints": [
+      "Command: curl -X POST -H \"Content-Type: application/json\" -d '{\"status\":\"ready\"}' http://localhost/api"
+    ],
+    "solution": "curl -X POST -H \"Content-Type: application/json\" -d '{\"status\":\"ready\"}' http://localhost/api",
+    "accepted_regex": [
+      "curl\\s+.*-X\\s+POST.*-H\\s+[\\\"']Content-Type:\\s+application\\/json[\\\"'].*http:\\/\\/localhost\\/api"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-74",
+    "category": "Firewall & Network",
+    "title": "Verify Chrony NTP Synchronization Sources",
+    "difficulty": "Easy",
+    "description": "Query chrony daemon for current time server sources and status.",
+    "objective": "chronyc sources -v",
+    "hints": [
+      "Command: chronyc sources -v"
+    ],
+    "solution": "chronyc sources -v",
+    "accepted_regex": [
+      "chronyc\\s+sources(\\s+-v)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-75",
+    "category": "Firewall & Network",
+    "title": "Display NTP Tracking Offset and Jitter",
+    "difficulty": "Easy",
+    "description": "Inspect system clock offset, frequency, and jitter via chronyc tracking.",
+    "objective": "chronyc tracking",
+    "hints": [
+      "Command: chronyc tracking"
+    ],
+    "solution": "chronyc tracking",
+    "accepted_regex": [
+      "chronyc\\s+tracking"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-76",
+    "category": "Firewall & Network",
+    "title": "Capture Network Packets on Interface with tcpdump",
+    "difficulty": "Intermediate",
+    "description": "Capture exactly 10 packets on interface ens192 without resolving DNS (-n).",
+    "objective": "tcpdump -i ens192 -c 10 -n",
+    "hints": [
+      "Command: tcpdump -i ens192 -c 10 -n"
+    ],
+    "solution": "tcpdump -i ens192 -c 10 -n",
+    "accepted_regex": [
+      "tcpdump\\s+.*-i\\s+ens192.*(-c\\s+10.*-n|-n.*-c\\s+10)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-77",
+    "category": "Firewall & Network",
+    "title": "Filter TCP Port 80 Packets in tcpdump",
+    "difficulty": "Intermediate",
+    "description": "Listen on ens192 for TCP traffic specifically targeting port 80.",
+    "objective": "tcpdump -i ens192 -n tcp port 80",
+    "hints": [
+      "Command: tcpdump -i ens192 -n tcp port 80"
+    ],
+    "solution": "tcpdump -i ens192 -n tcp port 80",
+    "accepted_regex": [
+      "tcpdump\\s+.*-i\\s+ens192.*tcp\\s+port\\s+80"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-78",
+    "category": "Firewall & Network",
+    "title": "Write Captured Packets to PCAP Capture File",
+    "difficulty": "Intermediate",
+    "description": "Capture 20 packets on ens192 and save to binary file /tmp/capture.pcap.",
+    "objective": "tcpdump -i ens192 -c 20 -w /tmp/capture.pcap",
+    "hints": [
+      "Command: tcpdump -i ens192 -c 20 -w /tmp/capture.pcap"
+    ],
+    "solution": "tcpdump -i ens192 -c 20 -w /tmp/capture.pcap",
+    "accepted_regex": [
+      "tcpdump\\s+.*-i\\s+ens192.*-w\\s+\\/tmp\\/capture\\.pcap"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-79",
+    "category": "Firewall & Network",
+    "title": "Test Remote TCP Port Connectivity with nc / ncat",
+    "difficulty": "Easy",
+    "description": "Test if remote host 192.168.1.1 is listening on port 22 with 2-second timeout without sending data (-z).",
+    "objective": "nc -zv -w 2 192.168.1.1 22",
+    "hints": [
+      "Command: nc -zv -w 2 192.168.1.1 22"
+    ],
+    "solution": "nc -zv -w 2 192.168.1.1 22",
+    "accepted_regex": [
+      "(nc|ncat)\\s+-(zv|vz)\\s+(-w\\s+2\\s+)?192\\.168\\.1\\.1\\s+22"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "net-80",
+    "category": "Firewall & Network",
+    "title": "Audit Network Interface MTU Size",
+    "difficulty": "Easy",
+    "description": "Change MTU size on device ens192 to jumbo frames 9000 using ip link.",
+    "objective": "ip link set ens192 mtu 9000",
+    "hints": [
+      "Command: ip link set ens192 mtu 9000"
+    ],
+    "solution": "ip link set ens192 mtu 9000",
+    "accepted_regex": [
+      "ip\\s+link\\s+set\\s+ens192\\s+mtu\\s+9000"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]

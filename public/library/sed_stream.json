@@ -1,0 +1,1206 @@
+[
+  {
+    "id": "sed-01",
+    "category": "Sed Stream Editing",
+    "title": "SELinux Enforce Substitution",
+    "difficulty": "Easy",
+    "description": "Substitute 'SELINUX=enforcing' with 'SELINUX=permissive' in selinux.conf.",
+    "objective": "sed 's/enforcing/permissive/' selinux.conf",
+    "hints": [
+      "Command: sed 's/enforcing/permissive/' selinux.conf"
+    ],
+    "solution": "sed 's/enforcing/permissive/' selinux.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/enforcing\\/permissive\\/['\\\"]\\s+selinux\\.conf"
+    ],
+    "setup_files": {
+      "selinux.conf": "SELINUX=enforcing\nSELINUXTYPE=targeted\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-02",
+    "category": "Sed Stream Editing",
+    "title": "Delete Comment Lines Using Pattern Addressing",
+    "difficulty": "Intermediate",
+    "description": "Delete all lines beginning with '#' from crontab.test.",
+    "objective": "sed '/^#/d' crontab.test",
+    "hints": [
+      "Command: sed '/^#/d' crontab.test"
+    ],
+    "solution": "sed '/^#/d' crontab.test",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/\\^\\#\\/d['\\\"]\\s+crontab\\.test"
+    ],
+    "setup_files": {
+      "crontab.test": "# backup\n0 2 * * * root /bin/backup\n# audit\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-03",
+    "category": "Sed Stream Editing",
+    "title": "Replace Directory Path with Custom Delimiter",
+    "difficulty": "Intermediate",
+    "description": "Replace '/var/www/html' with '/data/www/html' in vhost.conf using '#' delimiter.",
+    "objective": "sed 's#/var/www/html#/data/www/html#g' vhost.conf",
+    "hints": [
+      "Command: sed 's#/var/www/html#/data/www/html#g' vhost.conf"
+    ],
+    "solution": "sed 's#/var/www/html#/data/www/html#g' vhost.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s[#|@]\\/var\\/www\\/html[#|@]\\/data\\/www\\/html[#|@](g)?['\\\"]\\s+vhost\\.conf"
+    ],
+    "setup_files": {
+      "vhost.conf": "DocumentRoot \"/var/www/html\"\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-04",
+    "category": "Sed Stream Editing",
+    "title": "Print Specific Line Range with sed -n",
+    "difficulty": "Intermediate",
+    "description": "Print lines 3 through 5 (inclusive) from audit.log.",
+    "objective": "sed -n '3,5p' audit.log",
+    "hints": [
+      "Command: sed -n '3,5p' audit.log"
+    ],
+    "solution": "sed -n '3,5p' audit.log",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]3,5p['\\\"]\\s+audit\\.log"
+    ],
+    "setup_files": {
+      "audit.log": "1\n2\n3\n4\n5\n6\n7\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-05",
+    "category": "Sed Stream Editing",
+    "title": "Strip Leading Whitespace Indentation",
+    "difficulty": "Intermediate",
+    "description": "Remove leading spaces and tabs from code.txt.",
+    "objective": "sed 's/^[ \t]*//' code.txt",
+    "hints": [
+      "Command: sed 's/^[ \t]*//' code.txt"
+    ],
+    "solution": "sed 's/^[ \t]*//' code.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\^\\[\\s*\\\\t\\]\\*\\/.*['\\\"]\\s+code\\.txt"
+    ],
+    "setup_files": {
+      "code.txt": "    hello\n        world\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-06",
+    "category": "Sed Stream Editing",
+    "title": "Delete All Empty Blank Lines with sed",
+    "difficulty": "Easy",
+    "description": "Delete all empty lines (zero characters) from notes.txt.",
+    "objective": "sed '/^$/d' notes.txt",
+    "hints": [
+      "Command: sed '/^$/d' notes.txt"
+    ],
+    "solution": "sed '/^$/d' notes.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/\\^\\$\\/d['\\\"]\\s+notes\\.txt"
+    ],
+    "setup_files": {
+      "notes.txt": "a\n\nb\n\nc\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-07",
+    "category": "Sed Stream Editing",
+    "title": "Strip Windows Carriage Returns",
+    "difficulty": "Intermediate",
+    "description": "Remove trailing DOS/Windows \\r carriage returns from windows.txt.",
+    "objective": "sed 's/\\r$//' windows.txt",
+    "hints": [
+      "Command: sed 's/\\r$//' windows.txt"
+    ],
+    "solution": "sed 's/\\r$//' windows.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\\\r\\$\\/\\/['\\\"]\\s+windows\\.txt"
+    ],
+    "setup_files": {
+      "windows.txt": "line1\r\nline2\r\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-08",
+    "category": "Sed Stream Editing",
+    "title": "Global Replace All Occurrences on Lines",
+    "difficulty": "Easy",
+    "description": "Replace every occurrence of 'foo' with 'bar' globally across words.txt.",
+    "objective": "sed 's/foo/bar/g' words.txt",
+    "hints": [
+      "Command: sed 's/foo/bar/g' words.txt"
+    ],
+    "solution": "sed 's/foo/bar/g' words.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/foo\\/bar\\/g['\\\"]\\s+words\\.txt"
+    ],
+    "setup_files": {
+      "words.txt": "foo and foo are foos\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-09",
+    "category": "Sed Stream Editing",
+    "title": "Delete Specific First Line of File",
+    "difficulty": "Easy",
+    "description": "Delete the first header line (line 1) from data.csv.",
+    "objective": "sed '1d' data.csv",
+    "hints": [
+      "Command: sed '1d' data.csv"
+    ],
+    "solution": "sed '1d' data.csv",
+    "accepted_regex": [
+      "sed\\s+['\\\"]1d['\\\"]\\s+data\\.csv"
+    ],
+    "setup_files": {
+      "data.csv": "id,name\n1,alice\n2,bob\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-10",
+    "category": "Sed Stream Editing",
+    "title": "Delete the Last Line of File",
+    "difficulty": "Easy",
+    "description": "Delete the final line ($d) from records.txt.",
+    "objective": "sed '$d' records.txt",
+    "hints": [
+      "Command: sed '$d' records.txt"
+    ],
+    "solution": "sed '$d' records.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\$d['\\\"]\\s+records\\.txt"
+    ],
+    "setup_files": {
+      "records.txt": "first\nsecond\ntrailer\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-11",
+    "category": "Sed Stream Editing",
+    "title": "Replace Second Occurrence on Each Line",
+    "difficulty": "Intermediate",
+    "description": "Replace only the 2nd occurrence of 'test' on each line with 'pass'.",
+    "objective": "sed 's/test/pass/2' items.txt",
+    "hints": [
+      "Command: sed 's/test/pass/2' items.txt"
+    ],
+    "solution": "sed 's/test/pass/2' items.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/test\\/pass\\/2['\\\"]\\s+items\\.txt"
+    ],
+    "setup_files": {
+      "items.txt": "test one test two test three\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-12",
+    "category": "Sed Stream Editing",
+    "title": "Comment Out Matching Configuration Directives",
+    "difficulty": "Intermediate",
+    "description": "Prepend '#' to lines starting with 'Listen 80' in httpd.conf.",
+    "objective": "sed 's/^Listen 80/#Listen 80/' httpd.conf",
+    "hints": [
+      "Command: sed 's/^Listen 80/#Listen 80/' httpd.conf"
+    ],
+    "solution": "sed 's/^Listen 80/#Listen 80/' httpd.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\^Listen\\s+80\\/#Listen\\s+80\\/['\\\"]\\s+httpd\\.conf"
+    ],
+    "setup_files": {
+      "httpd.conf": "Listen 80\nServerName test\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-13",
+    "category": "Sed Stream Editing",
+    "title": "Extract Block Between Two Delimiter Tags",
+    "difficulty": "Advanced",
+    "description": "Print content exclusively between lines matching 'START' and 'END'.",
+    "objective": "sed -n '/START/,/END/p' block.txt",
+    "hints": [
+      "Command: sed -n '/START/,/END/p' block.txt"
+    ],
+    "solution": "sed -n '/START/,/END/p' block.txt",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]\\/START\\/,\\/END\\/p['\\\"]\\s+block\\.txt"
+    ],
+    "setup_files": {
+      "block.txt": "preface\nSTART\ninside1\ninside2\nEND\npost\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-14",
+    "category": "Sed Stream Editing",
+    "title": "Strip Trailing Whitespace at End of Lines",
+    "difficulty": "Intermediate",
+    "description": "Remove all spaces and tabs at line ends from code.py.",
+    "objective": "sed 's/[ \t]*$//' code.py",
+    "hints": [
+      "Command: sed 's/[ \t]*$//' code.py"
+    ],
+    "solution": "sed 's/[ \t]*$//' code.py",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\[\\s*\\\\t\\]\\*\\$\\/\\/['\\\"]\\s+code\\.py"
+    ],
+    "setup_files": {
+      "code.py": "def test():   \n    return 1 \n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-15",
+    "category": "Sed Stream Editing",
+    "title": "Replace Only on Lines Matching Condition",
+    "difficulty": "Intermediate",
+    "description": "On lines containing 'port', substitute '80' with '8080'.",
+    "objective": "sed '/port/s/80/8080/' app.conf",
+    "hints": [
+      "Command: sed '/port/s/80/8080/' app.conf"
+    ],
+    "solution": "sed '/port/s/80/8080/' app.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/port\\/s\\/80\\/8080\\/['\\\"]\\s+app\\.conf"
+    ],
+    "setup_files": {
+      "app.conf": "port = 80\nmax_clients = 80\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-16",
+    "category": "Sed Stream Editing",
+    "title": "In-Place File Edit with Backup Creation",
+    "difficulty": "Intermediate",
+    "description": "Edit config.env in-place creating config.env.bak, replacing 'DEV' with 'PROD'.",
+    "objective": "sed -i.bak 's/DEV/PROD/' config.env",
+    "hints": [
+      "Command: sed -i.bak 's/DEV/PROD/' config.env"
+    ],
+    "solution": "sed -i.bak 's/DEV/PROD/' config.env",
+    "accepted_regex": [
+      "sed\\s+-i\\.bak\\s+['\\\"]s\\/DEV\\/PROD\\/['\\\"]\\s+config\\.env"
+    ],
+    "setup_files": {
+      "config.env": "ENV=DEV\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-17",
+    "category": "Sed Stream Editing",
+    "title": "Delete Lines 2 Through 4",
+    "difficulty": "Easy",
+    "description": "Delete lines 2 through 4 from numbers.txt.",
+    "objective": "sed '2,4d' numbers.txt",
+    "hints": [
+      "Command: sed '2,4d' numbers.txt"
+    ],
+    "solution": "sed '2,4d' numbers.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]2,4d['\\\"]\\s+numbers\\.txt"
+    ],
+    "setup_files": {
+      "numbers.txt": "1\n2\n3\n4\n5\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-18",
+    "category": "Sed Stream Editing",
+    "title": "Transliterate Lowercase Vowels to Uppercase",
+    "difficulty": "Intermediate",
+    "description": "Translate characters 'aeiou' to 'AEIOU' in vowels.txt using sed y command.",
+    "objective": "sed 'y/aeiou/AEIOU/' vowels.txt",
+    "hints": [
+      "Command: sed 'y/aeiou/AEIOU/' vowels.txt"
+    ],
+    "solution": "sed 'y/aeiou/AEIOU/' vowels.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]y\\/aeiou\\/AEIOU\\/['\\\"]\\s+vowels\\.txt"
+    ],
+    "setup_files": {
+      "vowels.txt": "quick brown fox\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-19",
+    "category": "Sed Stream Editing",
+    "title": "Append Line After Match with 'a' Command",
+    "difficulty": "Intermediate",
+    "description": "Append a new line 'Include conf.d/*.conf' after line matching 'ServerRoot' in httpd.conf.",
+    "objective": "sed '/ServerRoot/a Include conf.d/*.conf' httpd.conf",
+    "hints": [
+      "Command: sed '/ServerRoot/a Include conf.d/*.conf' httpd.conf"
+    ],
+    "solution": "sed '/ServerRoot/a Include conf.d/*.conf' httpd.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/ServerRoot\\/a\\s+Include\\s+conf\\.d\\/\\*\\.conf['\\\"]\\s+httpd\\.conf"
+    ],
+    "setup_files": {
+      "httpd.conf": "ServerRoot /etc/httpd\nListen 80\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-20",
+    "category": "Sed Stream Editing",
+    "title": "Insert Line Before Match with 'i' Command",
+    "difficulty": "Intermediate",
+    "description": "Insert '# Managed by Ansible' before line 1 in hosts.txt.",
+    "objective": "sed '1i # Managed by Ansible' hosts.txt",
+    "hints": [
+      "Command: sed '1i # Managed by Ansible' hosts.txt"
+    ],
+    "solution": "sed '1i # Managed by Ansible' hosts.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]1i\\s+# Managed by Ansible['\\\"]\\s+hosts\\.txt"
+    ],
+    "setup_files": {
+      "hosts.txt": "127.0.0.1 localhost\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-21",
+    "category": "Sed Stream Editing",
+    "title": "Double Space Text by Appending Newlines",
+    "difficulty": "Intermediate",
+    "description": "Insert an empty line after every line using sed G command.",
+    "objective": "sed 'G' file.txt",
+    "hints": [
+      "Command: sed 'G' file.txt"
+    ],
+    "solution": "sed 'G' file.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]G['\\\"]\\s+file\\.txt"
+    ],
+    "setup_files": {
+      "file.txt": "line1\nline2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-22",
+    "category": "Sed Stream Editing",
+    "title": "Delete Lines NOT Matching Pattern",
+    "difficulty": "Intermediate",
+    "description": "Delete all lines except those matching 'KEEP' in keep.txt.",
+    "objective": "sed '/KEEP/!d' keep.txt",
+    "hints": [
+      "Command: sed '/KEEP/!d' keep.txt"
+    ],
+    "solution": "sed '/KEEP/!d' keep.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/KEEP\\/!d['\\\"]\\s+keep\\.txt"
+    ],
+    "setup_files": {
+      "keep.txt": "drop1\nKEEP this\ndrop2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-23",
+    "category": "Sed Stream Editing",
+    "title": "Replace HTML Tags with Nothing",
+    "difficulty": "Advanced",
+    "description": "Strip all basic HTML tags (<...>) from page.html.",
+    "objective": "sed 's/<[^>]*>//g' page.html",
+    "hints": [
+      "Command: sed 's/<[^>]*>//g' page.html"
+    ],
+    "solution": "sed 's/<[^>]*>//g' page.html",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/<\\[\\^>\\]\\*>\\/\\/g['\\\"]\\s+page\\.html"
+    ],
+    "setup_files": {
+      "page.html": "<h1>Title</h1><p>Text</p>\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-24",
+    "category": "Sed Stream Editing",
+    "title": "Print Only the First Line and Quit",
+    "difficulty": "Easy",
+    "description": "Print line 1 and immediately quit using sed '1q'.",
+    "objective": "sed '1q' big.log",
+    "hints": [
+      "Command: sed '1q' big.log"
+    ],
+    "solution": "sed '1q' big.log",
+    "accepted_regex": [
+      "sed\\s+['\\\"]1q['\\\"]\\s+big\\.log"
+    ],
+    "setup_files": {
+      "big.log": "first\nsecond\nthird\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-25",
+    "category": "Sed Stream Editing",
+    "title": "Substitute Port at the End of Line",
+    "difficulty": "Easy",
+    "description": "Change ':80' to ':443' at the end of the line in endpoint.txt.",
+    "objective": "sed 's/:80$/:443/' endpoint.txt",
+    "hints": [
+      "Command: sed 's/:80$/:443/' endpoint.txt"
+    ],
+    "solution": "sed 's/:80$/:443/' endpoint.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/:80\\$\\/:443\\/['\\\"]\\s+endpoint\\.txt"
+    ],
+    "setup_files": {
+      "endpoint.txt": "http://example.com:80\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-26",
+    "category": "Sed Stream Editing",
+    "title": "Replace Entire Line Matching Pattern with 'c\\'",
+    "difficulty": "Intermediate",
+    "description": "In /etc/selinux/config, replace the entire line containing 'SELINUX=' with 'SELINUX=enforcing' using sed change command.",
+    "objective": "sed -i '/^SELINUX=/c\\SELINUX=enforcing' /etc/selinux/config",
+    "hints": [
+      "Use /pattern/c\\replacement",
+      "Command: sed -i '/^SELINUX=/c\\SELINUX=enforcing' /etc/selinux/config"
+    ],
+    "solution": "sed -i '/^SELINUX=/c\\SELINUX=enforcing' /etc/selinux/config",
+    "accepted_regex": [
+      "sed\\s+.*-i.*\\/(\\^)?SELINUX=\\/c.*SELINUX=enforcing.*\\/etc\\/selinux\\/config"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-27",
+    "category": "Sed Stream Editing",
+    "title": "Print Content Between START and END Markers",
+    "difficulty": "Intermediate",
+    "description": "Print only the lines between /START/ and /END/ inclusive from build.log using sed -n.",
+    "objective": "sed -n '/START/,/END/p' build.log",
+    "hints": [
+      "Use range /START/,/END/p with -n",
+      "Command: sed -n '/START/,/END/p' build.log"
+    ],
+    "solution": "sed -n '/START/,/END/p' build.log",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]\\/START\\/,\\/END\\/p['\\\"]\\s+build\\.log"
+    ],
+    "setup_files": {
+      "build.log": "header\nSTART\nstep1\nstep2\nEND\nfooter\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-28",
+    "category": "Sed Stream Editing",
+    "title": "Delete Blank and Whitespace-Only Lines",
+    "difficulty": "Easy",
+    "description": "Remove all blank lines and lines containing only spaces or tabs from config.txt.",
+    "objective": "sed '/^[[:space:]]*$/d' config.txt",
+    "hints": [
+      "Use pattern /^[[:space:]]*$/d",
+      "Command: sed '/^[[:space:]]*$/d' config.txt"
+    ],
+    "solution": "sed '/^[[:space:]]*$/d' config.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/(\\^\\[\\[:space:\\]\\]\\*\\$|\\^\\s\\*\\$)\\/d['\\\"]\\s+config\\.txt"
+    ],
+    "setup_files": {
+      "config.txt": "item1\n   \nitem2\n\nitem3\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-29",
+    "category": "Sed Stream Editing",
+    "title": "Case-Insensitive Global Substitution",
+    "difficulty": "Easy",
+    "description": "Replace all occurrences of 'localhost' (any case: Localhost, LOCALHOST) with '127.0.0.1' using sed flag 'I'.",
+    "objective": "sed 's/localhost/127.0.0.1/gI' hosts.txt",
+    "hints": [
+      "Use s/localhost/127.0.0.1/gI",
+      "Command: sed 's/localhost/127.0.0.1/gI' hosts.txt"
+    ],
+    "solution": "sed 's/localhost/127.0.0.1/gI' hosts.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/localhost\\/127\\.0\\.0\\.1\\/(gI|Ig)['\\\"]\\s+hosts\\.txt"
+    ],
+    "setup_files": {
+      "hosts.txt": "LocalHost\nlocalhost\nLOCALHOST\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-30",
+    "category": "Sed Stream Editing",
+    "title": "Append Line After Pattern Match with 'a\\'",
+    "difficulty": "Intermediate",
+    "description": "Append a new line 'Include conf.modules.d/*.conf' after the line matching '# Load modules' in httpd.conf.",
+    "objective": "sed '/# Load modules/a\\Include conf.modules.d/*.conf' httpd.conf",
+    "hints": [
+      "Use /pattern/a\\text",
+      "Command: sed '/# Load modules/a\\Include conf.modules.d/*.conf' httpd.conf"
+    ],
+    "solution": "sed '/# Load modules/a\\Include conf.modules.d/*.conf' httpd.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/#\\s*Load modules\\/a.*Include.*conf['\\\"]\\s+httpd\\.conf"
+    ],
+    "setup_files": {
+      "httpd.conf": "# Load modules\nServerRoot /etc/httpd\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-31",
+    "category": "Sed Stream Editing",
+    "title": "Insert Text Before Matched Pattern",
+    "difficulty": "Intermediate",
+    "description": "Insert line '# Begin Config' immediately before the line matching 'ServerRoot' in httpd.conf.",
+    "objective": "sed '/ServerRoot/i # Begin Config' httpd.conf",
+    "hints": [
+      "Command: sed '/ServerRoot/i # Begin Config' httpd.conf"
+    ],
+    "solution": "sed '/ServerRoot/i # Begin Config' httpd.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/ServerRoot\\/i\\s+# Begin Config['\\\"]\\s+httpd\\.conf"
+    ],
+    "setup_files": {
+      "httpd.conf": "Listen 80\nServerRoot /etc/httpd\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-32",
+    "category": "Sed Stream Editing",
+    "title": "Replace Entire Line Containing Pattern (c Command)",
+    "difficulty": "Intermediate",
+    "description": "Change the line matching 'SELINUX=' to 'SELINUX=enforcing' using sed c command.",
+    "objective": "sed '/^SELINUX=/c SELINUX=enforcing' config",
+    "hints": [
+      "Command: sed '/^SELINUX=/c SELINUX=enforcing' config"
+    ],
+    "solution": "sed '/^SELINUX=/c SELINUX=enforcing' config",
+    "accepted_regex": [
+      "sed\\s+['\\\"](\\/\\^SELINUX=\\/c\\s+SELINUX=enforcing|\\/\\^SELINUX=\\/c\\\\SELINUX=enforcing)['\\\"]\\s+config"
+    ],
+    "setup_files": {
+      "config": "# selinux\nSELINUX=disabled\nSELINUXTYPE=targeted\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-33",
+    "category": "Sed Stream Editing",
+    "title": "Print Only Even Numbered Lines with Sed",
+    "difficulty": "Intermediate",
+    "description": "Print only the even-numbered lines (2, 4, 6, ...) of numbers.txt using sed address step notation.",
+    "objective": "sed -n '2~2p' numbers.txt",
+    "hints": [
+      "Command: sed -n '2~2p' numbers.txt"
+    ],
+    "solution": "sed -n '2~2p' numbers.txt",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]2~2p['\\\"]\\s+numbers\\.txt"
+    ],
+    "setup_files": {
+      "numbers.txt": "one\ntwo\nthree\nfour\nfive\nsix\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-34",
+    "category": "Sed Stream Editing",
+    "title": "Print Only Odd Numbered Lines with Sed",
+    "difficulty": "Intermediate",
+    "description": "Print only odd-numbered lines (1, 3, 5, ...) of numbers.txt with sed.",
+    "objective": "sed -n '1~2p' numbers.txt",
+    "hints": [
+      "Command: sed -n '1~2p' numbers.txt"
+    ],
+    "solution": "sed -n '1~2p' numbers.txt",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]1~2p['\\\"]\\s+numbers\\.txt"
+    ],
+    "setup_files": {
+      "numbers.txt": "one\ntwo\nthree\nfour\nfive\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-35",
+    "category": "Sed Stream Editing",
+    "title": "Remove Windows Carriage Return Line Endings",
+    "difficulty": "Easy",
+    "description": "Strip DOS/Windows carriage return (\\r) characters from dos.txt using sed.",
+    "objective": "sed 's/\\r$//' dos.txt",
+    "hints": [
+      "Command: sed 's/\\r$//' dos.txt"
+    ],
+    "solution": "sed 's/\\r$//' dos.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\\\r\\$?\\/\\/['\\\"]\\s+dos\\.txt"
+    ],
+    "setup_files": {
+      "dos.txt": "line1\r\nline2\r\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-36",
+    "category": "Sed Stream Editing",
+    "title": "Replace Only First Occurrence per Line",
+    "difficulty": "Easy",
+    "description": "Replace only the first instance of 'cat' with 'dog' per line in pets.txt (omit /g).",
+    "objective": "sed 's/cat/dog/' pets.txt",
+    "hints": [
+      "Command: sed 's/cat/dog/' pets.txt"
+    ],
+    "solution": "sed 's/cat/dog/' pets.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/cat\\/dog\\/['\\\"]\\s+pets\\.txt"
+    ],
+    "setup_files": {
+      "pets.txt": "cat and cat\nmy cat has a cat\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-37",
+    "category": "Sed Stream Editing",
+    "title": "Replace Only Second Occurrence on Each Line",
+    "difficulty": "Intermediate",
+    "description": "Replace specifically the 2nd instance of 'foo' with 'bar' on each line using flag '2'.",
+    "objective": "sed 's/foo/bar/2' text.txt",
+    "hints": [
+      "Command: sed 's/foo/bar/2' text.txt"
+    ],
+    "solution": "sed 's/foo/bar/2' text.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/foo\\/bar\\/2['\\\"]\\s+text\\.txt"
+    ],
+    "setup_files": {
+      "text.txt": "foo foo foo\nfoo foo\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-38",
+    "category": "Sed Stream Editing",
+    "title": "In-Place Backup Creation with sed -i.bak",
+    "difficulty": "Intermediate",
+    "description": "Perform in-place substitution changing 'v1' to 'v2' in app.conf creating backup file app.conf.bak.",
+    "objective": "sed -i.bak 's/v1/v2/g' app.conf",
+    "hints": [
+      "Command: sed -i.bak 's/v1/v2/g' app.conf"
+    ],
+    "solution": "sed -i.bak 's/v1/v2/g' app.conf",
+    "accepted_regex": [
+      "sed\\s+-i\\.bak\\s+['\\\"]s\\/v1\\/v2\\/g['\\\"]\\s+app\\.conf"
+    ],
+    "setup_files": {
+      "app.conf": "version = v1\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-39",
+    "category": "Sed Stream Editing",
+    "title": "Delete Trailing Spaces from End of Every Line",
+    "difficulty": "Easy",
+    "description": "Remove all whitespace characters from line ends in messy.txt.",
+    "objective": "sed 's/[[:blank:]]*$//' messy.txt",
+    "hints": [
+      "Command: sed 's/[[:blank:]]*$//' messy.txt"
+    ],
+    "solution": "sed 's/[[:blank:]]*$//' messy.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/(\\[[:blank:]\\]\\*|\\[ \\\\t\\]\\*|\\\\s\\*)\\$\\/\\/['\\\"]\\s+messy\\.txt"
+    ],
+    "setup_files": {
+      "messy.txt": "hello   \nworld\t\t\nclean\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-40",
+    "category": "Sed Stream Editing",
+    "title": "Double Space a File (Add Blank Line After Each Line)",
+    "difficulty": "Intermediate",
+    "description": "Add an empty blank line after each line in notes.txt using the 'G' command.",
+    "objective": "sed 'G' notes.txt",
+    "hints": [
+      "Command: sed 'G' notes.txt"
+    ],
+    "solution": "sed 'G' notes.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]G['\\\"]\\s+notes\\.txt"
+    ],
+    "setup_files": {
+      "notes.txt": "line1\nline2\nline3\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-41",
+    "category": "Sed Stream Editing",
+    "title": "Print Only Lines Matching Pattern (Mimic Grep)",
+    "difficulty": "Easy",
+    "description": "Use sed -n with the 'p' flag to print only lines containing 'CRITICAL' from err.log.",
+    "objective": "sed -n '/CRITICAL/p' err.log",
+    "hints": [
+      "Command: sed -n '/CRITICAL/p' err.log"
+    ],
+    "solution": "sed -n '/CRITICAL/p' err.log",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]\\/CRITICAL\\/p['\\\"]\\s+err\\.log"
+    ],
+    "setup_files": {
+      "err.log": "INFO: ok\nCRITICAL: crash\nDEBUG: trace\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-42",
+    "category": "Sed Stream Editing",
+    "title": "Quit Sed Processing Upon First Match (q Command)",
+    "difficulty": "Intermediate",
+    "description": "Print lines of stream.txt until reaching the line with 'STOP' and immediately exit.",
+    "objective": "sed '/STOP/q' stream.txt",
+    "hints": [
+      "Command: sed '/STOP/q' stream.txt"
+    ],
+    "solution": "sed '/STOP/q' stream.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/STOP\\/q['\\\"]\\s+stream\\.txt"
+    ],
+    "setup_files": {
+      "stream.txt": "part1\npart2\nSTOP\npart3\npart4\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-43",
+    "category": "Sed Stream Editing",
+    "title": "Uppercase Matched Words Using \\U Substitution",
+    "difficulty": "Advanced",
+    "description": "Convert all instances of 'warning' to uppercase 'WARNING' using \\U in sed.",
+    "objective": "sed 's/warning/\\U&/g' log.txt",
+    "hints": [
+      "Command: sed 's/warning/\\U&/g' log.txt"
+    ],
+    "solution": "sed 's/warning/\\U&/g' log.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/warning\\/\\\\U&\\/g['\\\"]\\s+log\\.txt"
+    ],
+    "setup_files": {
+      "log.txt": "this is a warning: check disk warning\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-44",
+    "category": "Sed Stream Editing",
+    "title": "Lowercase Matched Words Using \\L Substitution",
+    "difficulty": "Advanced",
+    "description": "Convert uppercase 'ALERT' to lowercase 'alert' using \\L in sed.",
+    "objective": "sed 's/ALERT/\\L&/g' log.txt",
+    "hints": [
+      "Command: sed 's/ALERT/\\L&/g' log.txt"
+    ],
+    "solution": "sed 's/ALERT/\\L&/g' log.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/ALERT\\/\\\\L&\\/g['\\\"]\\s+log\\.txt"
+    ],
+    "setup_files": {
+      "log.txt": "SECURITY ALERT DETECTED\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-45",
+    "category": "Sed Stream Editing",
+    "title": "Replace Pattern Only Within Line Number Range",
+    "difficulty": "Intermediate",
+    "description": "Replace 'temp' with 'perm' only between lines 10 and 20 in data.txt.",
+    "objective": "sed '10,20s/temp/perm/g' data.txt",
+    "hints": [
+      "Command: sed '10,20s/temp/perm/g' data.txt"
+    ],
+    "solution": "sed '10,20s/temp/perm/g' data.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]10,20s\\/temp\\/perm\\/g['\\\"]\\s+data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "line 1 temp\nline 2 temp\nline 3 temp\nline 4 temp\nline 5 temp\nline 6 temp\nline 7 temp\nline 8 temp\nline 9 temp\nline 10 temp\nline 11 temp\nline 12 temp\nline 13 temp\nline 14 temp\nline 15 temp\nline 16 temp\nline 17 temp\nline 18 temp\nline 19 temp\nline 20 temp\nline 21 temp\nline 22 temp\nline 23 temp\nline 24 temp\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-46",
+    "category": "Sed Stream Editing",
+    "title": "Read External File Contents into Stream (r Command)",
+    "difficulty": "Intermediate",
+    "description": "Insert the content of header.txt right after the line matching '<body>' in page.html.",
+    "objective": "sed '/<body>/r header.txt' page.html",
+    "hints": [
+      "Command: sed '/<body>/r header.txt' page.html"
+    ],
+    "solution": "sed '/<body>/r header.txt' page.html",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/<body>\\/r\\s+header\\.txt['\\\"]\\s+page\\.html"
+    ],
+    "setup_files": {
+      "page.html": "<html>\n<body>\n<p>content</p>\n</body>\n</html>\n",
+      "header.txt": "<h1>Header</h1>\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-47",
+    "category": "Sed Stream Editing",
+    "title": "Write Matched Lines to Separate File (w Command)",
+    "difficulty": "Intermediate",
+    "description": "Write all lines containing 'ERROR' to new file errors.log using sed w command.",
+    "objective": "sed -n '/ERROR/w errors.log' app.log",
+    "hints": [
+      "Command: sed -n '/ERROR/w errors.log' app.log"
+    ],
+    "solution": "sed -n '/ERROR/w errors.log' app.log",
+    "accepted_regex": [
+      "sed\\s+(-n\\s+)?['\\\"]\\/ERROR\\/w\\s+errors\\.log['\\\"]\\s+app\\.log"
+    ],
+    "setup_files": {
+      "app.log": "INFO: ok\nERROR: crash\nWARN: low\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-48",
+    "category": "Sed Stream Editing",
+    "title": "Swap Two Adjacent Words on Each Line",
+    "difficulty": "Advanced",
+    "description": "Swap the first two words on each line in pairs.txt using capture groups (\\1 and \\2).",
+    "objective": "sed -E 's/^([a-zA-Z]+) ([a-zA-Z]+)/\\2 \\1/' pairs.txt",
+    "hints": [
+      "Command: sed -E 's/^([a-zA-Z]+) ([a-zA-Z]+)/\\2 \\1/' pairs.txt"
+    ],
+    "solution": "sed -E 's/^([a-zA-Z]+) ([a-zA-Z]+)/\\2 \\1/' pairs.txt",
+    "accepted_regex": [
+      "sed\\s+-E\\s+['\\\"]s\\/\\^\\(\\[a-zA-Z\\]\\+\\)\\s+\\(\\[a-zA-Z\\]\\+\\)\\/\\\\2\\s+\\\\1\\/['\\\"]\\s+pairs\\.txt"
+    ],
+    "setup_files": {
+      "pairs.txt": "first second\nhello world\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-49",
+    "category": "Sed Stream Editing",
+    "title": "Strip HTML Tags from Document",
+    "difficulty": "Intermediate",
+    "description": "Remove all <...> tags from markup.html using sed substitution.",
+    "objective": "sed 's/<[^>]*>//g' markup.html",
+    "hints": [
+      "Command: sed 's/<[^>]*>//g' markup.html"
+    ],
+    "solution": "sed 's/<[^>]*>//g' markup.html",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/<\\[\\^>\\]\\*>\\/\\/g['\\\"]\\s+markup\\.html"
+    ],
+    "setup_files": {
+      "markup.html": "<h1>Title</h1>\n<p>This is <b>bold</b> text.</p>\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-50",
+    "category": "Sed Stream Editing",
+    "title": "Print Total Line Count with Sed = Command",
+    "difficulty": "Intermediate",
+    "description": "Print the total line count of book.txt by executing the '=' command on the last line ($).",
+    "objective": "sed -n '$=' book.txt",
+    "hints": [
+      "Command: sed -n '$=' book.txt"
+    ],
+    "solution": "sed -n '$=' book.txt",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]\\\\?\\$=['\\\"]\\s+book\\.txt"
+    ],
+    "setup_files": {
+      "book.txt": "chapter 1\nchapter 2\nchapter 3\nchapter 4\nchapter 5\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-51",
+    "category": "Sed Stream Editing",
+    "title": "Indent Every Line by 4 Spaces",
+    "difficulty": "Easy",
+    "description": "Prepend 4 space characters to the start of each line in code.txt.",
+    "objective": "sed 's/^/    /' code.txt",
+    "hints": [
+      "Command: sed 's/^/    /' code.txt"
+    ],
+    "solution": "sed 's/^/    /' code.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\^\\/    \\/['\\\"]\\s+code\\.txt"
+    ],
+    "setup_files": {
+      "code.txt": "def run():\nreturn True\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-52",
+    "category": "Sed Stream Editing",
+    "title": "Remove Consecutive Blank Lines",
+    "difficulty": "Advanced",
+    "description": "Compress multiple consecutive blank lines into a single blank line in spaces.txt.",
+    "objective": "sed '/^$/N;/\\n$/D' spaces.txt",
+    "hints": [
+      "Command: sed '/^$/N;/\\n$/D' spaces.txt"
+    ],
+    "solution": "sed '/^$/N;/\\n$/D' spaces.txt",
+    "accepted_regex": [
+      "sed\\s+.*spaces\\.txt"
+    ],
+    "setup_files": {
+      "spaces.txt": "a\n\n\n\nb\n\nc\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-53",
+    "category": "Sed Stream Editing",
+    "title": "Mask Sensitive Credit Card Numbers",
+    "difficulty": "Advanced",
+    "description": "Mask 16-digit credit card numbers in cards.txt to 'XXXX-XXXX-XXXX-1234'.",
+    "objective": "sed -E 's/[0-9]{4}-[0-9]{4}-[0-9]{4}-([0-9]{4})/XXXX-XXXX-XXXX-\\1/g' cards.txt",
+    "hints": [
+      "Command: sed -E 's/[0-9]{4}-[0-9]{4}-[0-9]{4}-([0-9]{4})/XXXX-XXXX-XXXX-\\1/g' cards.txt"
+    ],
+    "solution": "sed -E 's/[0-9]{4}-[0-9]{4}-[0-9]{4}-([0-9]{4})/XXXX-XXXX-XXXX-\\1/g' cards.txt",
+    "accepted_regex": [
+      "sed\\s+-E\\s+.*cards\\.txt"
+    ],
+    "setup_files": {
+      "cards.txt": "user paid with 1234-5678-9012-3456\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-54",
+    "category": "Sed Stream Editing",
+    "title": "Print Line Number Along with Matched Line",
+    "difficulty": "Intermediate",
+    "description": "Print the line number before any line matching 'FATAL' in system.log using {=; p}.",
+    "objective": "sed -n '/FATAL/{=; p}' system.log",
+    "hints": [
+      "Command: sed -n '/FATAL/{=; p}' system.log"
+    ],
+    "solution": "sed -n '/FATAL/{=; p}' system.log",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]\\/FATAL\\/\\{=\\s*;\\s*p\\}['\\\"]\\s+system\\.log"
+    ],
+    "setup_files": {
+      "system.log": "ok\nok\nFATAL: error\nok\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-55",
+    "category": "Sed Stream Editing",
+    "title": "Delete All Lines After Pattern Until End of File",
+    "difficulty": "Intermediate",
+    "description": "Delete from the line containing '---END---' all the way through the end of file ($) in message.txt.",
+    "objective": "sed '/---END---/,$d' message.txt",
+    "hints": [
+      "Command: sed '/---END---/,$d' message.txt"
+    ],
+    "solution": "sed '/---END---/,$d' message.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/---END---\\/,\\$d['\\\"]\\s+message\\.txt"
+    ],
+    "setup_files": {
+      "message.txt": "header\nbody\n---END---\nfooter\nextra\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-56",
+    "category": "Sed Stream Editing",
+    "title": "Remove Semicolon Comments from INI File",
+    "difficulty": "Easy",
+    "description": "Delete lines starting with a semicolon ';' comment from php.ini.",
+    "objective": "sed '/^[[:blank:]]*;/d' php.ini",
+    "hints": [
+      "Command: sed '/^[[:blank:]]*;/d' php.ini"
+    ],
+    "solution": "sed '/^[[:blank:]]*;/d' php.ini",
+    "accepted_regex": [
+      "sed\\s+['\\\"](\\/\\^\\[\\[:blank:\\]\\]\\*;\\/d|\\/\\^;\\/d)['\\\"]\\s+php\\.ini"
+    ],
+    "setup_files": {
+      "php.ini": "; php settings\nmemory_limit = 128M\n; max time\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-57",
+    "category": "Sed Stream Editing",
+    "title": "Join Lines Ending with Backslash",
+    "difficulty": "Advanced",
+    "description": "Join lines ending with a trailing backslash continuation character in script.sh.",
+    "objective": "sed -e :a -e '/\\\\$/N; s/\\\\\\n//; ta' script.sh",
+    "hints": [
+      "Command: sed -e :a -e '/\\\\$/N; s/\\\\\\n//; ta' script.sh"
+    ],
+    "solution": "sed -e :a -e '/\\\\$/N; s/\\\\\\n//; ta' script.sh",
+    "accepted_regex": [
+      "sed\\s+.*script\\.sh"
+    ],
+    "setup_files": {
+      "script.sh": "echo hello \\\nworld\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-58",
+    "category": "Sed Stream Editing",
+    "title": "Extract Text Contained Inside Parentheses",
+    "difficulty": "Intermediate",
+    "description": "Extract only the contents inside parentheses '(foo)' on each line of data.txt.",
+    "objective": "sed -n 's/.*(\\([^)]*\\)).*/\\1/p' data.txt",
+    "hints": [
+      "Command: sed -n 's/.*(\\([^)]*\\)).*/\\1/p' data.txt"
+    ],
+    "solution": "sed -n 's/.*(\\([^)]*\\)).*/\\1/p' data.txt",
+    "accepted_regex": [
+      "sed\\s+-n\\s+.*data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "name (John Doe) age\nserver (prod-01) online\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-59",
+    "category": "Sed Stream Editing",
+    "title": "Change Slashes in URL Without Escaping Using Hash Delimiter",
+    "difficulty": "Easy",
+    "description": "Replace 'http://old.com/api' with 'https://new.com/v2' using '#' delimiter in sed.",
+    "objective": "sed 's#http://old.com/api#https://new.com/v2#g' urls.txt",
+    "hints": [
+      "Command: sed 's#http://old.com/api#https://new.com/v2#g' urls.txt"
+    ],
+    "solution": "sed 's#http://old.com/api#https://new.com/v2#g' urls.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s#http:\\/\\/old\\.com\\/api#https:\\/\\/new\\.com\\/v2#g['\\\"]\\s+urls\\.txt"
+    ],
+    "setup_files": {
+      "urls.txt": "endpoint = http://old.com/api/users\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sed-60",
+    "category": "Sed Stream Editing",
+    "title": "Delete Everything Before First Occurrence of Delimiter",
+    "difficulty": "Intermediate",
+    "description": "Strip everything up to and including the first colon ':' on each line of /etc/passwd sample.",
+    "objective": "sed 's/^[^:]*://' passwd.sample",
+    "hints": [
+      "Command: sed 's/^[^:]*://' passwd.sample"
+    ],
+    "solution": "sed 's/^[^:]*://' passwd.sample",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\^\\[\\^:\\]\\*:\\/\\/['\\\"]\\s+passwd\\.sample"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]

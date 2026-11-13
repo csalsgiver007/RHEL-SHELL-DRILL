@@ -1,0 +1,1458 @@
+[
+  {
+    "id": "sys-01",
+    "category": "Service Management",
+    "title": "Enable and Start Service Immediately",
+    "difficulty": "Easy",
+    "description": "On RHEL 9/10, configure 'sshd' to start at boot and immediately start it now in one command.",
+    "objective": "systemctl enable --now sshd",
+    "hints": [
+      "Use systemctl enable with --now",
+      "Command: systemctl enable --now sshd"
+    ],
+    "solution": "systemctl enable --now sshd",
+    "accepted_regex": [
+      "systemctl\\s+enable\\s+--now\\s+sshd(\\.service)?",
+      "systemctl\\s+--now\\s+enable\\s+sshd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": "systemctl is-enabled sshd 2>/dev/null || systemctl is-active sshd"
+  },
+  {
+    "id": "sys-02",
+    "category": "Service Management",
+    "title": "Reload systemd Daemon After Unit Edits",
+    "difficulty": "Easy",
+    "description": "Notify systemd to scan the disk for new or changed unit files without rebooting.",
+    "objective": "systemctl daemon-reload",
+    "hints": [
+      "Use systemctl daemon-reload",
+      "Command: systemctl daemon-reload"
+    ],
+    "solution": "systemctl daemon-reload",
+    "accepted_regex": [
+      "systemctl\\s+daemon-reload"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-03",
+    "category": "Service Management",
+    "title": "Query Journald for Priority Errors in Past Hour",
+    "difficulty": "Intermediate",
+    "description": "Query systemd-journald for 'sshd' logs filtering for priority 'err' from the last 1 hour.",
+    "objective": "journalctl -u sshd -p err --since \"1 hour ago\"",
+    "hints": [
+      "Flags: -u sshd, -p err, --since '1 hour ago'",
+      "Command: journalctl -u sshd -p err --since \"1 hour ago\""
+    ],
+    "solution": "journalctl -u sshd -p err --since \"1 hour ago\"",
+    "accepted_regex": [
+      "journalctl\\s+.*-u\\s+sshd.*-p\\s+err.*--since\\s+[\"\\']?(-1h|1\\s+hour\\s+ago)[\"\\']?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-04",
+    "category": "Service Management",
+    "title": "Mask Service to Prevent Accidental Activation",
+    "difficulty": "Intermediate",
+    "description": "Completely prevent the 'cups' service from being started manually or as a dependency.",
+    "objective": "systemctl mask cups",
+    "hints": [
+      "Use systemctl mask",
+      "Command: systemctl mask cups"
+    ],
+    "solution": "systemctl mask cups",
+    "accepted_regex": [
+      "systemctl\\s+mask\\s+cups(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-05",
+    "category": "Service Management",
+    "title": "List All Failed System Units",
+    "difficulty": "Easy",
+    "description": "List all systemd units currently in a failed or degraded state.",
+    "objective": "systemctl --failed",
+    "hints": [
+      "Command: systemctl --failed"
+    ],
+    "solution": "systemctl --failed",
+    "accepted_regex": [
+      "systemctl\\s+--failed",
+      "systemctl\\s+list-units\\s+--state=failed"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-06",
+    "category": "Service Management",
+    "title": "Check If Service Is Actively Running",
+    "difficulty": "Easy",
+    "description": "Check whether 'sshd' is currently running without verbose output.",
+    "objective": "systemctl is-active sshd",
+    "hints": [
+      "Use is-active verb",
+      "Command: systemctl is-active sshd"
+    ],
+    "solution": "systemctl is-active sshd",
+    "accepted_regex": [
+      "systemctl\\s+is-active\\s+sshd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-07",
+    "category": "Service Management",
+    "title": "View Kernel Ring Buffer Logs via Journalctl",
+    "difficulty": "Intermediate",
+    "description": "View only kernel messages from the current boot using journalctl.",
+    "objective": "journalctl -k",
+    "hints": [
+      "Use -k or --dmesg",
+      "Command: journalctl -k"
+    ],
+    "solution": "journalctl -k",
+    "accepted_regex": [
+      "journalctl\\s+(-k|--dmesg)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-08",
+    "category": "Service Management",
+    "title": "Tail Live Service Logs in Follow Mode",
+    "difficulty": "Intermediate",
+    "description": "Stream live logs for 'sshd', showing last 20 lines and following new output.",
+    "objective": "journalctl -u sshd -f -n 20",
+    "hints": [
+      "Flags: -u sshd, -f, -n 20",
+      "Command: journalctl -u sshd -f -n 20"
+    ],
+    "solution": "journalctl -u sshd -f -n 20",
+    "accepted_regex": [
+      "journalctl\\s+.*-u\\s+sshd.*(-f\\s+-n\\s+20|-n\\s+20\\s+-f|-fn\\s*20)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-09",
+    "category": "Service Management",
+    "title": "Set Default Boot Target to Multi-User",
+    "difficulty": "Intermediate",
+    "description": "Configure default system boot target to multi-user (console mode).",
+    "objective": "systemctl set-default multi-user.target",
+    "hints": [
+      "Command: systemctl set-default multi-user.target"
+    ],
+    "solution": "systemctl set-default multi-user.target",
+    "accepted_regex": [
+      "systemctl\\s+set-default\\s+multi-user\\.target"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-10",
+    "category": "Service Management",
+    "title": "List Active Systemd Timers",
+    "difficulty": "Easy",
+    "description": "List all systemd timer units on the machine.",
+    "objective": "systemctl list-timers",
+    "hints": [
+      "Command: systemctl list-timers"
+    ],
+    "solution": "systemctl list-timers",
+    "accepted_regex": [
+      "systemctl\\s+list-timers(\\s+--all)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-11",
+    "category": "Service Management",
+    "title": "Inspect Unit Configuration with systemctl cat",
+    "difficulty": "Easy",
+    "description": "Display configuration file contents and drop-ins for 'sshd.service'.",
+    "objective": "systemctl cat sshd",
+    "hints": [
+      "Command: systemctl cat sshd"
+    ],
+    "solution": "systemctl cat sshd",
+    "accepted_regex": [
+      "systemctl\\s+cat\\s+sshd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-12",
+    "category": "Service Management",
+    "title": "Vacuum Journal Logs to Free Disk Space",
+    "difficulty": "Intermediate",
+    "description": "Clean up systemd journal logs to retain at most 100 Megabytes.",
+    "objective": "journalctl --vacuum-size=100M",
+    "hints": [
+      "Command: journalctl --vacuum-size=100M"
+    ],
+    "solution": "journalctl --vacuum-size=100M",
+    "accepted_regex": [
+      "journalctl\\s+--vacuum-size=100M"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-13",
+    "category": "Service Management",
+    "title": "Reset Failed State on Cleaned Service",
+    "difficulty": "Intermediate",
+    "description": "Clear the failed status memory for unit 'httpd'.",
+    "objective": "systemctl reset-failed httpd",
+    "hints": [
+      "Command: systemctl reset-failed httpd"
+    ],
+    "solution": "systemctl reset-failed httpd",
+    "accepted_regex": [
+      "systemctl\\s+reset-failed\\s+httpd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-14",
+    "category": "Service Management",
+    "title": "Query Service SubState Property with systemctl show",
+    "difficulty": "Intermediate",
+    "description": "Query the 'SubState' property value for unit 'sshd'.",
+    "objective": "systemctl show -p SubState sshd",
+    "hints": [
+      "Command: systemctl show -p SubState sshd"
+    ],
+    "solution": "systemctl show -p SubState sshd",
+    "accepted_regex": [
+      "systemctl\\s+show\\s+(-p\\s+SubState|--property=SubState)\\s+sshd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-15",
+    "category": "Service Management",
+    "title": "Reload or Restart Service Conditionally",
+    "difficulty": "Easy",
+    "description": "Reload configuration if supported; otherwise restart 'sshd'.",
+    "objective": "systemctl reload-or-restart sshd",
+    "hints": [
+      "Command: systemctl reload-or-restart sshd"
+    ],
+    "solution": "systemctl reload-or-restart sshd",
+    "accepted_regex": [
+      "systemctl\\s+reload-or-restart\\s+sshd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-16",
+    "category": "Service Management",
+    "title": "List Unit Dependency Tree",
+    "difficulty": "Easy",
+    "description": "Display the visual dependency tree for unit 'sshd.service'.",
+    "objective": "systemctl list-dependencies sshd",
+    "hints": [
+      "Command: systemctl list-dependencies sshd"
+    ],
+    "solution": "systemctl list-dependencies sshd",
+    "accepted_regex": [
+      "systemctl\\s+list-dependencies\\s+sshd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-17",
+    "category": "Service Management",
+    "title": "Filter Journal Logs by Root User UID",
+    "difficulty": "Intermediate",
+    "description": "Query journald for messages initiated by root (UID 0), showing last 25 lines.",
+    "objective": "journalctl _UID=0 -n 25",
+    "hints": [
+      "Command: journalctl _UID=0 -n 25"
+    ],
+    "solution": "journalctl _UID=0 -n 25",
+    "accepted_regex": [
+      "journalctl\\s+.*_UID=0.*-n\\s+25",
+      "journalctl\\s+.*-n\\s+25.*_UID=0"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-18",
+    "category": "Service Management",
+    "title": "View Logs from Previous System Boot",
+    "difficulty": "Intermediate",
+    "description": "Query journalctl for logs from the prior boot session (offset -1).",
+    "objective": "journalctl -b -1",
+    "hints": [
+      "Command: journalctl -b -1"
+    ],
+    "solution": "journalctl -b -1",
+    "accepted_regex": [
+      "journalctl\\s+(-b\\s+-1|--boot=-1)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-19",
+    "category": "Service Management",
+    "title": "Check If Service Is Enabled for Boot",
+    "difficulty": "Easy",
+    "description": "Check if 'crond' is set to enable at system boot.",
+    "objective": "systemctl is-enabled crond",
+    "hints": [
+      "Command: systemctl is-enabled crond"
+    ],
+    "solution": "systemctl is-enabled crond",
+    "accepted_regex": [
+      "systemctl\\s+is-enabled\\s+crond(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-20",
+    "category": "Service Management",
+    "title": "Unmask a Masked Service",
+    "difficulty": "Intermediate",
+    "description": "Restore the 'cups' service from masked state so it can be used again.",
+    "objective": "systemctl unmask cups",
+    "hints": [
+      "Command: systemctl unmask cups"
+    ],
+    "solution": "systemctl unmask cups",
+    "accepted_regex": [
+      "systemctl\\s+unmask\\s+cups(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-21",
+    "category": "Service Management",
+    "title": "Disable Service and Stop It Immediately",
+    "difficulty": "Easy",
+    "description": "Disable 'postfix' from starting at boot and stop it right now in one command.",
+    "objective": "systemctl disable --now postfix",
+    "hints": [
+      "Command: systemctl disable --now postfix"
+    ],
+    "solution": "systemctl disable --now postfix",
+    "accepted_regex": [
+      "systemctl\\s+(disable\\s+--now|--now\\s+disable)\\s+postfix(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-22",
+    "category": "Service Management",
+    "title": "Isolate Graphical Target On Demand",
+    "difficulty": "Intermediate",
+    "description": "Switch active operating state to graphical.target immediately.",
+    "objective": "systemctl isolate graphical.target",
+    "hints": [
+      "Command: systemctl isolate graphical.target"
+    ],
+    "solution": "systemctl isolate graphical.target",
+    "accepted_regex": [
+      "systemctl\\s+isolate\\s+graphical\\.target"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-23",
+    "category": "Service Management",
+    "title": "List All Installed Service Unit Files",
+    "difficulty": "Easy",
+    "description": "Display state of all unit files (enabled, disabled, static, masked).",
+    "objective": "systemctl list-unit-files --type=service",
+    "hints": [
+      "Command: systemctl list-unit-files --type=service"
+    ],
+    "solution": "systemctl list-unit-files --type=service",
+    "accepted_regex": [
+      "systemctl\\s+list-unit-files\\s+--type=service"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-24",
+    "category": "Service Management",
+    "title": "Vacuum Journal Logs by Retention Time",
+    "difficulty": "Intermediate",
+    "description": "Purge journal archives older than 2 days.",
+    "objective": "journalctl --vacuum-time=2d",
+    "hints": [
+      "Command: journalctl --vacuum-time=2d"
+    ],
+    "solution": "journalctl --vacuum-time=2d",
+    "accepted_regex": [
+      "journalctl\\s+--vacuum-time=2d"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-25",
+    "category": "Service Management",
+    "title": "Display Current Disk Usage of Journal Logs",
+    "difficulty": "Easy",
+    "description": "Check how much storage space is currently consumed by systemd-journald.",
+    "objective": "journalctl --disk-usage",
+    "hints": [
+      "Command: journalctl --disk-usage"
+    ],
+    "solution": "journalctl --disk-usage",
+    "accepted_regex": [
+      "journalctl\\s+--disk-usage"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-26",
+    "category": "Service Management",
+    "title": "Filter Journal by Specific Process ID",
+    "difficulty": "Intermediate",
+    "description": "Query logs generated specifically by PID 1234.",
+    "objective": "journalctl _PID=1234",
+    "hints": [
+      "Command: journalctl _PID=1234"
+    ],
+    "solution": "journalctl _PID=1234",
+    "accepted_regex": [
+      "journalctl\\s+_PID=1234"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-27",
+    "category": "Service Management",
+    "title": "Output Journal Entries in Pretty JSON",
+    "difficulty": "Intermediate",
+    "description": "Query last 5 logs for 'sshd' formatted in structured json-pretty.",
+    "objective": "journalctl -u sshd -n 5 -o json-pretty",
+    "hints": [
+      "Command: journalctl -u sshd -n 5 -o json-pretty"
+    ],
+    "solution": "journalctl -u sshd -n 5 -o json-pretty",
+    "accepted_regex": [
+      "journalctl\\s+.*-u\\s+sshd.*(-o\\s+json-pretty|--output=json-pretty)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-28",
+    "category": "Service Management",
+    "title": "Check Current Default Boot Target",
+    "difficulty": "Easy",
+    "description": "Print the currently configured default target without modifying it.",
+    "objective": "systemctl get-default",
+    "hints": [
+      "Command: systemctl get-default"
+    ],
+    "solution": "systemctl get-default",
+    "accepted_regex": [
+      "systemctl\\s+get-default"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-29",
+    "category": "Service Management",
+    "title": "Kill Specific Service with SIGTERM",
+    "difficulty": "Intermediate",
+    "description": "Send SIGTERM kill signal to all processes under unit 'httpd'.",
+    "objective": "systemctl kill httpd",
+    "hints": [
+      "Command: systemctl kill httpd"
+    ],
+    "solution": "systemctl kill httpd",
+    "accepted_regex": [
+      "systemctl\\s+kill\\s+httpd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-30",
+    "category": "Service Management",
+    "title": "List All Active Socket Units",
+    "difficulty": "Easy",
+    "description": "List all systemd socket units and their listening endpoints.",
+    "objective": "systemctl list-sockets",
+    "hints": [
+      "Command: systemctl list-sockets"
+    ],
+    "solution": "systemctl list-sockets",
+    "accepted_regex": [
+      "systemctl\\s+list-sockets"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-31",
+    "category": "Service Management",
+    "title": "Query Journal Logs for System Boot Events",
+    "difficulty": "Easy",
+    "description": "Show all log events recorded during the current boot from start to finish.",
+    "objective": "journalctl -b",
+    "hints": [
+      "Command: journalctl -b"
+    ],
+    "solution": "journalctl -b",
+    "accepted_regex": [
+      "journalctl\\s+(-b|--boot)(\\s+0)?$"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-32",
+    "category": "Service Management",
+    "title": "Show Only Service Description and Path",
+    "difficulty": "Intermediate",
+    "description": "Display the Description and FragmentPath properties of unit 'sshd'.",
+    "objective": "systemctl show -p Description,FragmentPath sshd",
+    "hints": [
+      "Command: systemctl show -p Description,FragmentPath sshd"
+    ],
+    "solution": "systemctl show -p Description,FragmentPath sshd",
+    "accepted_regex": [
+      "systemctl\\s+show\\s+(-p|--property=).*sshd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-33",
+    "category": "Service Management",
+    "title": "Restart Failed NetworkManager Service",
+    "difficulty": "Easy",
+    "description": "Restart the NetworkManager service daemon.",
+    "objective": "systemctl restart NetworkManager",
+    "hints": [
+      "Command: systemctl restart NetworkManager"
+    ],
+    "solution": "systemctl restart NetworkManager",
+    "accepted_regex": [
+      "systemctl\\s+restart\\s+NetworkManager(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-34",
+    "category": "Service Management",
+    "title": "Inspect Journal Logs Between Exact Time Window",
+    "difficulty": "Intermediate",
+    "description": "Query logs recorded between '2026-10-01 00:00:00' and '2026-10-01 12:00:00'.",
+    "objective": "journalctl --since \"2026-10-01 00:00:00\" --until \"2026-10-01 12:00:00\"",
+    "hints": [
+      "Command: journalctl --since \"2026-10-01 00:00:00\" --until \"2026-10-01 12:00:00\""
+    ],
+    "solution": "journalctl --since \"2026-10-01 00:00:00\" --until \"2026-10-01 12:00:00\"",
+    "accepted_regex": [
+      "journalctl\\s+.*--since\\s+[\"\\']2026-10-01.*--until\\s+[\"\\']2026-10-01"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-35",
+    "category": "Service Management",
+    "title": "Audit Failed Status of Specific Service",
+    "difficulty": "Easy",
+    "description": "Test if 'mariadb' is in a failed state using is-failed.",
+    "objective": "systemctl is-failed mariadb",
+    "hints": [
+      "Command: systemctl is-failed mariadb"
+    ],
+    "solution": "systemctl is-failed mariadb",
+    "accepted_regex": [
+      "systemctl\\s+is-failed\\s+mariadb(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-36",
+    "category": "Service Management",
+    "title": "View Explanation Help with journalctl -xe",
+    "difficulty": "Intermediate",
+    "description": "View recent errors with catalog explanations jump to end.",
+    "objective": "journalctl -xe",
+    "hints": [
+      "Command: journalctl -xe"
+    ],
+    "solution": "journalctl -xe",
+    "accepted_regex": [
+      "journalctl\\s+(-xe|-ex)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-37",
+    "category": "Service Management",
+    "title": "Show Inactive Services on Host",
+    "difficulty": "Intermediate",
+    "description": "List service units that are currently in inactive state.",
+    "objective": "systemctl list-units --type=service --state=inactive",
+    "hints": [
+      "Command: systemctl list-units --type=service --state=inactive"
+    ],
+    "solution": "systemctl list-units --type=service --state=inactive",
+    "accepted_regex": [
+      "systemctl\\s+list-units\\s+--type=service\\s+--state=inactive"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-38",
+    "category": "Service Management",
+    "title": "Verify Journalctl Log Priority Warning and Above",
+    "difficulty": "Intermediate",
+    "description": "Query logs with priority warning (level 4) or higher.",
+    "objective": "journalctl -p warning",
+    "hints": [
+      "Command: journalctl -p warning"
+    ],
+    "solution": "journalctl -p warning",
+    "accepted_regex": [
+      "journalctl\\s+.*-p\\s+(warning|4)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-39",
+    "category": "Service Management",
+    "title": "Check systemd System State Overall",
+    "difficulty": "Easy",
+    "description": "Check if overall system manager status is running, degraded, or maintenance.",
+    "objective": "systemctl is-system-running",
+    "hints": [
+      "Command: systemctl is-system-running"
+    ],
+    "solution": "systemctl is-system-running",
+    "accepted_regex": [
+      "systemctl\\s+is-system-running"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-40",
+    "category": "Service Management",
+    "title": "Query Unit Journal Logs Without Pagination",
+    "difficulty": "Easy",
+    "description": "Print logs for 'firewalld' to terminal without piping into less/pager.",
+    "objective": "journalctl -u firewalld --no-pager",
+    "hints": [
+      "Command: journalctl -u firewalld --no-pager"
+    ],
+    "solution": "journalctl -u firewalld --no-pager",
+    "accepted_regex": [
+      "journalctl\\s+.*-u\\s+firewalld.*--no-pager",
+      "journalctl\\s+.*--no-pager.*-u\\s+firewalld"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-41",
+    "category": "Service Management",
+    "title": "Analyze System Bootup Performance Times",
+    "difficulty": "Easy",
+    "description": "Analyze system boot time performance breakdown using systemd-analyze.",
+    "objective": "systemd-analyze",
+    "hints": [
+      "Command: systemd-analyze"
+    ],
+    "solution": "systemd-analyze",
+    "accepted_regex": [
+      "systemd-analyze(\\s+time)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-42",
+    "category": "Service Management",
+    "title": "List Slowest Units During Boot Sequence",
+    "difficulty": "Intermediate",
+    "description": "Print the top slowest systemd services during the boot initialization.",
+    "objective": "systemd-analyze blame",
+    "hints": [
+      "Command: systemd-analyze blame"
+    ],
+    "solution": "systemd-analyze blame",
+    "accepted_regex": [
+      "systemd-analyze\\s+blame"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-43",
+    "category": "Service Management",
+    "title": "Inspect Critical Chain in System Startup",
+    "difficulty": "Intermediate",
+    "description": "Display the time-critical chain of systemd dependencies that determine boot duration.",
+    "objective": "systemd-analyze critical-chain",
+    "hints": [
+      "Command: systemd-analyze critical-chain"
+    ],
+    "solution": "systemd-analyze critical-chain",
+    "accepted_regex": [
+      "systemd-analyze\\s+critical-chain"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-44",
+    "category": "Service Management",
+    "title": "Create Drop-In Configuration Override with Edit",
+    "difficulty": "Intermediate",
+    "description": "Open an editor to create a drop-in override configuration directory and file for httpd.",
+    "objective": "systemctl edit httpd",
+    "hints": [
+      "Command: systemctl edit httpd"
+    ],
+    "solution": "systemctl edit httpd",
+    "accepted_regex": [
+      "systemctl\\s+edit\\s+httpd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-45",
+    "category": "Service Management",
+    "title": "Full Replacement Override via systemctl edit --full",
+    "difficulty": "Advanced",
+    "description": "Create a full copy replacement unit file in /etc/systemd/system for editing crond.",
+    "objective": "systemctl edit --full crond",
+    "hints": [
+      "Command: systemctl edit --full crond"
+    ],
+    "solution": "systemctl edit --full crond",
+    "accepted_regex": [
+      "systemctl\\s+edit\\s+--full\\s+crond(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-46",
+    "category": "Service Management",
+    "title": "Revert Overridden Unit to Vendor Defaults",
+    "difficulty": "Intermediate",
+    "description": "Revert all drop-ins and overrides for unit 'httpd' back to vendor settings.",
+    "objective": "systemctl revert httpd",
+    "hints": [
+      "Command: systemctl revert httpd"
+    ],
+    "solution": "systemctl revert httpd",
+    "accepted_regex": [
+      "systemctl\\s+revert\\s+httpd(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-47",
+    "category": "Service Management",
+    "title": "List All Active Mount Units",
+    "difficulty": "Easy",
+    "description": "List all active filesystem mount units managed by systemd.",
+    "objective": "systemctl list-units --type=mount",
+    "hints": [
+      "Command: systemctl list-units --type=mount"
+    ],
+    "solution": "systemctl list-units --type=mount",
+    "accepted_regex": [
+      "systemctl\\s+list-units\\s+--type=mount"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-48",
+    "category": "Service Management",
+    "title": "List All Active Path Monitoring Units",
+    "difficulty": "Easy",
+    "description": "Display active .path units that monitor files and directories for changes.",
+    "objective": "systemctl list-units --type=path",
+    "hints": [
+      "Command: systemctl list-units --type=path"
+    ],
+    "solution": "systemctl list-units --type=path",
+    "accepted_regex": [
+      "systemctl\\s+list-units\\s+--type=path"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-49",
+    "category": "Service Management",
+    "title": "Display Main PID of Running Service",
+    "difficulty": "Intermediate",
+    "description": "Query only the numeric MainPID attribute of service sshd.",
+    "objective": "systemctl show -p MainPID --value sshd",
+    "hints": [
+      "Command: systemctl show -p MainPID --value sshd"
+    ],
+    "solution": "systemctl show -p MainPID --value sshd",
+    "accepted_regex": [
+      "systemctl\\s+show\\s+(-p\\s+MainPID\\s+--value|--value\\s+-p\\s+MainPID)\\s+sshd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-50",
+    "category": "Service Management",
+    "title": "Display Active State Property Only",
+    "difficulty": "Intermediate",
+    "description": "Query only the active state value (active/inactive/failed) of chronyd with --value.",
+    "objective": "systemctl show -p ActiveState --value chronyd",
+    "hints": [
+      "Command: systemctl show -p ActiveState --value chronyd"
+    ],
+    "solution": "systemctl show -p ActiveState --value chronyd",
+    "accepted_regex": [
+      "systemctl\\s+show\\s+(-p\\s+ActiveState\\s+--value|--value\\s+-p\\s+ActiveState)\\s+chronyd"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-51",
+    "category": "Service Management",
+    "title": "Start Ephemeral Transient Unit with systemd-run",
+    "difficulty": "Advanced",
+    "description": "Run a transient service executing '/bin/sleep 60' in the background.",
+    "objective": "systemd-run /bin/sleep 60",
+    "hints": [
+      "Command: systemd-run /bin/sleep 60"
+    ],
+    "solution": "systemd-run /bin/sleep 60",
+    "accepted_regex": [
+      "systemd-run\\s+(\\/bin\\/sleep|sleep)\\s+60"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-52",
+    "category": "Service Management",
+    "title": "Run Transient Unit with Memory Limit",
+    "difficulty": "Advanced",
+    "description": "Execute '/usr/bin/python3 script.py' with systemd-run enforcing a 256MB memory cap.",
+    "objective": "systemd-run -p MemoryMax=256M python3 script.py",
+    "hints": [
+      "Command: systemd-run -p MemoryMax=256M python3 script.py"
+    ],
+    "solution": "systemd-run -p MemoryMax=256M python3 script.py",
+    "accepted_regex": [
+      "systemd-run\\s+(-p|--property=)MemoryMax=256M\\s+python3\\s+script\\.py"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-53",
+    "category": "Service Management",
+    "title": "Inspect Control Group Hierarchy with systemd-cgls",
+    "difficulty": "Easy",
+    "description": "View the recursively structured control group hierarchy tree.",
+    "objective": "systemd-cgls",
+    "hints": [
+      "Command: systemd-cgls"
+    ],
+    "solution": "systemd-cgls",
+    "accepted_regex": [
+      "systemd-cgls"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-54",
+    "category": "Service Management",
+    "title": "Monitor Real-Time Cgroup Resource Usage with systemd-cgtop",
+    "difficulty": "Easy",
+    "description": "Launch top-like real-time resource monitor for control group slices and services in batch/one iteration.",
+    "objective": "systemd-cgtop -n 1",
+    "hints": [
+      "Command: systemd-cgtop -n 1"
+    ],
+    "solution": "systemd-cgtop -n 1",
+    "accepted_regex": [
+      "systemd-cgtop(\\s+-n\\s+1)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-55",
+    "category": "Service Management",
+    "title": "Filter Journal by Syslog Identifier Tag",
+    "difficulty": "Intermediate",
+    "description": "Query journal logs matching SYSLOG_IDENTIFIER='kernel' or 'sudo'.",
+    "objective": "journalctl -t sudo -n 20",
+    "hints": [
+      "Command: journalctl -t sudo -n 20"
+    ],
+    "solution": "journalctl -t sudo -n 20",
+    "accepted_regex": [
+      "journalctl\\s+.*-t\\s+sudo.*-n\\s+20",
+      "journalctl\\s+.*-n\\s+20.*-t\\s+sudo"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-56",
+    "category": "Service Management",
+    "title": "Verify Journal Catalog Entry Explanations",
+    "difficulty": "Intermediate",
+    "description": "Display journal entries with metadata explanations attached using catalog mode (-x).",
+    "objective": "journalctl -u sshd -x -n 10",
+    "hints": [
+      "Command: journalctl -u sshd -x -n 10"
+    ],
+    "solution": "journalctl -u sshd -x -n 10",
+    "accepted_regex": [
+      "journalctl\\s+.*-u\\s+sshd.*-x.*-n\\s+10",
+      "journalctl\\s+.*-x.*-u\\s+sshd.*-n\\s+10"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-57",
+    "category": "Service Management",
+    "title": "Sync and Flush Journal from Memory to Persistent Disk",
+    "difficulty": "Intermediate",
+    "description": "Instruct journald to write and flush all volatile in-memory log data to disk.",
+    "objective": "journalctl --flush",
+    "hints": [
+      "Command: journalctl --flush"
+    ],
+    "solution": "journalctl --flush",
+    "accepted_regex": [
+      "journalctl\\s+--flush"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-58",
+    "category": "Service Management",
+    "title": "Rotate Systemd Journal Files Immediately",
+    "difficulty": "Intermediate",
+    "description": "Force journald to immediately rotate active journal log files.",
+    "objective": "journalctl --rotate",
+    "hints": [
+      "Command: journalctl --rotate"
+    ],
+    "solution": "journalctl --rotate",
+    "accepted_regex": [
+      "journalctl\\s+--rotate"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-59",
+    "category": "Service Management",
+    "title": "Verify Journal File Integrity",
+    "difficulty": "Intermediate",
+    "description": "Audit the internal cryptographic and structural integrity of journal files.",
+    "objective": "journalctl --verify",
+    "hints": [
+      "Command: journalctl --verify"
+    ],
+    "solution": "journalctl --verify",
+    "accepted_regex": [
+      "journalctl\\s+--verify"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-60",
+    "category": "Service Management",
+    "title": "List All Recorded System Boot Identifiers",
+    "difficulty": "Easy",
+    "description": "List all boots tracked by journalctl with their index numbers and boot IDs.",
+    "objective": "journalctl --list-boots",
+    "hints": [
+      "Command: journalctl --list-boots"
+    ],
+    "solution": "journalctl --list-boots",
+    "accepted_regex": [
+      "journalctl\\s+--list-boots"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-61",
+    "category": "Service Management",
+    "title": "Filter Journal Logs by Transport Mechanism",
+    "difficulty": "Intermediate",
+    "description": "Filter journalctl to only show messages coming via the stdout transport.",
+    "objective": "journalctl _TRANSPORT=stdout -n 30",
+    "hints": [
+      "Command: journalctl _TRANSPORT=stdout -n 30"
+    ],
+    "solution": "journalctl _TRANSPORT=stdout -n 30",
+    "accepted_regex": [
+      "journalctl\\s+.*_TRANSPORT=stdout.*-n\\s+30"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-62",
+    "category": "Service Management",
+    "title": "Check Status of Target Unit",
+    "difficulty": "Easy",
+    "description": "Check current state of 'multi-user.target' using systemctl status.",
+    "objective": "systemctl status multi-user.target",
+    "hints": [
+      "Command: systemctl status multi-user.target"
+    ],
+    "solution": "systemctl status multi-user.target",
+    "accepted_regex": [
+      "systemctl\\s+status\\s+multi-user\\.target"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-63",
+    "category": "Service Management",
+    "title": "List Active Target Units",
+    "difficulty": "Easy",
+    "description": "Display all systemd target units currently active on the host.",
+    "objective": "systemctl list-units --type=target",
+    "hints": [
+      "Command: systemctl list-units --type=target"
+    ],
+    "solution": "systemctl list-units --type=target",
+    "accepted_regex": [
+      "systemctl\\s+list-units\\s+--type=target"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-64",
+    "category": "Service Management",
+    "title": "Set Runtime Cgroup Memory Limit on Live Service",
+    "difficulty": "Advanced",
+    "description": "Set MemoryMax property on running unit httpd to 500M dynamically.",
+    "objective": "systemctl set-property httpd MemoryMax=500M",
+    "hints": [
+      "Command: systemctl set-property httpd MemoryMax=500M"
+    ],
+    "solution": "systemctl set-property httpd MemoryMax=500M",
+    "accepted_regex": [
+      "systemctl\\s+set-property\\s+httpd(\\.service)?\\s+MemoryMax=500M"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-65",
+    "category": "Service Management",
+    "title": "Set Runtime CPUQuota on Live Service",
+    "difficulty": "Advanced",
+    "description": "Throttle service nginx to use at most 50% CPU allocation via CPUQuota.",
+    "objective": "systemctl set-property nginx CPUQuota=50%",
+    "hints": [
+      "Command: systemctl set-property nginx CPUQuota=50%"
+    ],
+    "solution": "systemctl set-property nginx CPUQuota=50%",
+    "accepted_regex": [
+      "systemctl\\s+set-property\\s+nginx(\\.service)?\\s+CPUQuota=50%"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-66",
+    "category": "Service Management",
+    "title": "Display Current System Date, Time, and NTP Synchronization",
+    "difficulty": "Easy",
+    "description": "Display system date, timezone, and network time synchronization state with timedatectl.",
+    "objective": "timedatectl status",
+    "hints": [
+      "Command: timedatectl status"
+    ],
+    "solution": "timedatectl status",
+    "accepted_regex": [
+      "timedatectl(\\s+status)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-67",
+    "category": "Service Management",
+    "title": "Set System Timezone to America/New_York",
+    "difficulty": "Intermediate",
+    "description": "Configure the local system timezone to 'America/New_York' with timedatectl.",
+    "objective": "timedatectl set-timezone America/New_York",
+    "hints": [
+      "Command: timedatectl set-timezone America/New_York"
+    ],
+    "solution": "timedatectl set-timezone America/New_York",
+    "accepted_regex": [
+      "timedatectl\\s+set-timezone\\s+America\\/New_York"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-68",
+    "category": "Service Management",
+    "title": "Enable NTP Time Synchronization",
+    "difficulty": "Easy",
+    "description": "Enable automatic network time synchronization (chrony/systemd-timesyncd) with timedatectl.",
+    "objective": "timedatectl set-ntp true",
+    "hints": [
+      "Command: timedatectl set-ntp true"
+    ],
+    "solution": "timedatectl set-ntp true",
+    "accepted_regex": [
+      "timedatectl\\s+set-ntp\\s+(true|1|on)"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-69",
+    "category": "Service Management",
+    "title": "Inspect Hostname and OS Architecture Details",
+    "difficulty": "Easy",
+    "description": "View static/pretty hostname, kernel version, and architecture using hostnamectl.",
+    "objective": "hostnamectl status",
+    "hints": [
+      "Command: hostnamectl status"
+    ],
+    "solution": "hostnamectl status",
+    "accepted_regex": [
+      "hostnamectl(\\s+status)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-70",
+    "category": "Service Management",
+    "title": "Set Static System FQDN Hostname",
+    "difficulty": "Intermediate",
+    "description": "Configure system static hostname to 'server1.example.com' with hostnamectl.",
+    "objective": "hostnamectl set-hostname server1.example.com",
+    "hints": [
+      "Command: hostnamectl set-hostname server1.example.com"
+    ],
+    "solution": "hostnamectl set-hostname server1.example.com",
+    "accepted_regex": [
+      "hostnamectl\\s+set-hostname\\s+server1\\.example\\.com"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-71",
+    "category": "Service Management",
+    "title": "Audit Active User Logins and Sessions with loginctl",
+    "difficulty": "Easy",
+    "description": "List all active user sessions and logged-in accounts with loginctl.",
+    "objective": "loginctl list-sessions",
+    "hints": [
+      "Command: loginctl list-sessions"
+    ],
+    "solution": "loginctl list-sessions",
+    "accepted_regex": [
+      "loginctl\\s+list-sessions"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-72",
+    "category": "Service Management",
+    "title": "Inspect Specific User Session Properties",
+    "difficulty": "Intermediate",
+    "description": "Inspect details of session '2' including state and idle status using loginctl session-status.",
+    "objective": "loginctl session-status 2",
+    "hints": [
+      "Command: loginctl session-status 2"
+    ],
+    "solution": "loginctl session-status 2",
+    "accepted_regex": [
+      "loginctl\\s+session-status\\s+2"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-73",
+    "category": "Service Management",
+    "title": "Enable User Lingering for Background Processes",
+    "difficulty": "Intermediate",
+    "description": "Allow non-root user 'ansible' to keep systemd user services running when logged out.",
+    "objective": "loginctl enable-linger ansible",
+    "hints": [
+      "Command: loginctl enable-linger ansible"
+    ],
+    "solution": "loginctl enable-linger ansible",
+    "accepted_regex": [
+      "loginctl\\s+enable-linger\\s+ansible"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-74",
+    "category": "Service Management",
+    "title": "Trigger Systemd Timer Execution Manually",
+    "difficulty": "Intermediate",
+    "description": "Trigger the target service 'dnf-makecache.service' of a timer immediately without waiting for schedule.",
+    "objective": "systemctl start dnf-makecache.service",
+    "hints": [
+      "Command: systemctl start dnf-makecache.service"
+    ],
+    "solution": "systemctl start dnf-makecache.service",
+    "accepted_regex": [
+      "systemctl\\s+start\\s+dnf-makecache(\\.service)?"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-75",
+    "category": "Service Management",
+    "title": "Display systemd Environment Variables",
+    "difficulty": "Easy",
+    "description": "Print the environment block configured for the systemd PID 1 manager.",
+    "objective": "systemctl show-environment",
+    "hints": [
+      "Command: systemctl show-environment"
+    ],
+    "solution": "systemctl show-environment",
+    "accepted_regex": [
+      "systemctl\\s+show-environment"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-76",
+    "category": "Service Management",
+    "title": "Set Global Environment Variable for systemd Services",
+    "difficulty": "Intermediate",
+    "description": "Import environment variable 'PROXY_URL=http://proxy:8080' into the systemd manager.",
+    "objective": "systemctl set-environment PROXY_URL=http://proxy:8080",
+    "hints": [
+      "Command: systemctl set-environment PROXY_URL=http://proxy:8080"
+    ],
+    "solution": "systemctl set-environment PROXY_URL=http://proxy:8080",
+    "accepted_regex": [
+      "systemctl\\s+set-environment\\s+PROXY_URL=http:\\/\\/proxy:8080"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-77",
+    "category": "Service Management",
+    "title": "Re-execute Systemd Daemon Process",
+    "difficulty": "Advanced",
+    "description": "Re-execute the systemd system manager process (re-executes PID 1) without rebooting.",
+    "objective": "systemctl daemon-reexec",
+    "hints": [
+      "Command: systemctl daemon-reexec"
+    ],
+    "solution": "systemctl daemon-reexec",
+    "accepted_regex": [
+      "systemctl\\s+daemon-reexec"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-78",
+    "category": "Service Management",
+    "title": "Emergency Reboot Using systemctl",
+    "difficulty": "Intermediate",
+    "description": "Force immediate emergency reboot without unmounting filesystems or contacting init.",
+    "objective": "systemctl reboot --force --force",
+    "hints": [
+      "Command: systemctl reboot --force --force"
+    ],
+    "solution": "systemctl reboot --force --force",
+    "accepted_regex": [
+      "systemctl\\s+reboot\\s+--force\\s+--force",
+      "systemctl\\s+-ff\\s+reboot"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-79",
+    "category": "Service Management",
+    "title": "Switch System into Rescue Target Mode",
+    "difficulty": "Intermediate",
+    "description": "Isolate single-user maintenance mode (rescue.target) for emergency repair.",
+    "objective": "systemctl isolate rescue.target",
+    "hints": [
+      "Command: systemctl isolate rescue.target"
+    ],
+    "solution": "systemctl isolate rescue.target",
+    "accepted_regex": [
+      "systemctl\\s+isolate\\s+rescue\\.target",
+      "systemctl\\s+rescue"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "sys-80",
+    "category": "Service Management",
+    "title": "Switch System into Emergency Minimal Shell",
+    "difficulty": "Intermediate",
+    "description": "Isolate the barest minimal emergency mode (emergency.target).",
+    "objective": "systemctl isolate emergency.target",
+    "hints": [
+      "Command: systemctl isolate emergency.target"
+    ],
+    "solution": "systemctl isolate emergency.target",
+    "accepted_regex": [
+      "systemctl\\s+isolate\\s+emergency\\.target",
+      "systemctl\\s+emergency"
+    ],
+    "setup_files": {},
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]

@@ -1,0 +1,417 @@
+[
+  {
+    "id": "grep-01",
+    "category": "Grep & Regex",
+    "title": "Filter HTTP 500 Server Errors with Line Numbers",
+    "difficulty": "Easy",
+    "description": "Examine 'httpd_access.log' in the scratch directory. Extract only the lines containing HTTP status code 500 (Internal Server Error) along with their line numbers.",
+    "objective": "Output matching lines with line numbers from httpd_access.log",
+    "hints": [
+      "Use grep -n to show line numbers.",
+      "Pattern: ' 500 '",
+      "Command: grep -n \" 500 \" httpd_access.log"
+    ],
+    "solution": "grep -n \" 500 \" httpd_access.log",
+    "accepted_regex": [
+      "grep\\s+(-n\\s+[\"\\']?\\s*500\\s*[\"\\']?|[\"\\']?\\s*500\\s*[\"\\']?\\s+-n)\\s+httpd_access\\.log",
+      "grep\\s+-n\\s+[\"\\']500[\"\\']\\s+httpd_access\\.log",
+      "grep\\s+-n\\s+500\\s+httpd_access\\.log"
+    ],
+    "setup_files": {
+      "httpd_access.log": "192.168.1.10 - - [10/Oct/2026:13:55:36] \"GET /index.html HTTP/1.1\" 200 2326\n192.168.1.15 - - [10/Oct/2026:13:55:37] \"POST /api/login HTTP/1.1\" 500 524\n192.168.1.22 - - [10/Oct/2026:13:55:38] \"GET /static/app.js HTTP/1.1\" 200 45120\n192.168.1.15 - - [10/Oct/2026:13:55:40] \"GET /dashboard HTTP/1.1\" 500 524\n10.0.0.45 - - [10/Oct/2026:13:55:41] \"GET /healthz HTTP/1.1\" 200 12\n"
+    }
+  },
+  {
+    "id": "grep-02",
+    "category": "Grep & Regex",
+    "title": "Invert Match Comment & Empty Lines",
+    "difficulty": "Intermediate",
+    "description": "Read 'sshd_config.test'. Filter out all comment lines (starting with '#') and all blank/empty lines to display active configuration directives.",
+    "objective": "Display only active directives without comments or empty lines.",
+    "hints": [
+      "Use grep -v with extended regex -E",
+      "Anchor comments with ^# and empty lines with ^$",
+      "Command: grep -v -E '^(#|$)' sshd_config.test"
+    ],
+    "solution": "grep -v -E '^(#|$)' sshd_config.test",
+    "accepted_regex": [
+      "grep\\s+(-vE|-Ev|-E\\s+-v|-v\\s+-E)\\s+['\\\"]?\\^(\\#|\\$)[|](\\#|\\$)['\\\"]?\\s+sshd_config\\.test",
+      "grep\\s+-v\\s+['\\\"]?\\^#['\\\"]\\s+sshd_config\\.test\\s*\\|\\s*grep\\s+-v\\s+['\\\"]?\\^$['\\\"]",
+      "grep\\s+-v\\s+-e\\s+['\\\"]?\\^#['\\\"]\\s+-e\\s+['\\\"]?\\^$['\\\"]\\s+sshd_config\\.test"
+    ],
+    "setup_files": {
+      "sshd_config.test": "# OpenSSH daemon configuration file\n# Port 22\nPort 2222\n\n# Authentication:\nPermitRootLogin no\n# PermitEmptyPasswords no\nPasswordAuthentication no\n\nX11Forwarding no\n"
+    }
+  },
+  {
+    "id": "grep-03",
+    "category": "Grep & Regex",
+    "title": "Count Failed SSH Password Log Occurrences",
+    "difficulty": "Easy",
+    "description": "Scan 'auth.log' and count the exact number of lines recording failed password login events.",
+    "objective": "Run grep -c \"Failed password\" auth.log",
+    "hints": [
+      "Use -c flag to count matching lines.",
+      "Command: grep -c \"Failed password\" auth.log"
+    ],
+    "solution": "grep -c \"Failed password\" auth.log",
+    "accepted_regex": [
+      "grep\\s+-c\\s+[\"\\']Failed password[\"\\']\\s+auth\\.log",
+      "grep\\s+[\"\\']Failed password[\"\\']\\s+auth\\.log\\s*\\|\\s*wc\\s+-l"
+    ],
+    "setup_files": {
+      "auth.log": "Oct 07 10:14:02 rhel-node1 sshd[4912]: Accepted publickey for ansible from 10.0.0.5 port 51220 ssh2\nOct 07 10:15:18 rhel-node1 sshd[4980]: Failed password for root from 198.51.100.44 port 43120 ssh2\nOct 07 10:15:20 rhel-node1 sshd[4982]: Failed password for invalid user admin from 198.51.100.44 port 43122 ssh2\nOct 07 10:16:01 rhel-node1 systemd[1]: Started Session 48 of user root.\nOct 07 10:17:44 rhel-node1 sshd[5011]: Failed password for dbuser from 203.0.113.88 port 39810 ssh2\n"
+    }
+  },
+  {
+    "id": "grep-04",
+    "category": "Grep & Regex",
+    "title": "Match Exact Whole Word Using Boundary",
+    "difficulty": "Intermediate",
+    "description": "Search 'services.txt' for lines containing the exact word 'root' (and NOT 'chroot' or 'rootfs').",
+    "objective": "grep -w 'root' services.txt",
+    "hints": [
+      "Use -w flag for exact word boundary.",
+      "Command: grep -w 'root' services.txt"
+    ],
+    "solution": "grep -w 'root' services.txt",
+    "accepted_regex": [
+      "grep\\s+-w\\s+['\\\"]?root['\\\"]?\\s+services\\.txt",
+      "grep\\s+['\\\"]\\\\broot\\\\b['\\\"]\\s+services\\.txt"
+    ],
+    "setup_files": {
+      "services.txt": "user: root process: bash\nuser: chroot_jail process: sftp\nuser: rootfs_audit process: daemon\nuser: root process: sshd\n"
+    }
+  },
+  {
+    "id": "grep-05",
+    "category": "Grep & Regex",
+    "title": "Display Lines with Context Surrounding Match",
+    "difficulty": "Intermediate",
+    "description": "Search 'app.log' for lines containing 'FATAL' and display 2 lines before (-B 2) and 2 lines after (-A 2) each match.",
+    "objective": "grep -C 2 'FATAL' app.log or grep -B 2 -A 2 'FATAL' app.log",
+    "hints": [
+      "Use -C 2 (context) or -B 2 -A 2",
+      "Command: grep -C 2 'FATAL' app.log"
+    ],
+    "solution": "grep -C 2 'FATAL' app.log",
+    "accepted_regex": [
+      "grep\\s+(-C\\s*2|-B\\s*2\\s+-A\\s*2|-A\\s*2\\s+-B\\s*2)\\s+['\\\"]?FATAL['\\\"]?\\s+app\\.log"
+    ],
+    "setup_files": {
+      "app.log": "INFO: Initializing database connection\nDEBUG: Checking credentials\nFATAL: Database connection pool exhausted\nERROR: Shutting down worker thread\nINFO: Cleanup complete\n"
+    }
+  },
+  {
+    "id": "grep-06",
+    "category": "Grep & Regex",
+    "title": "List Only Filenames Containing Match",
+    "difficulty": "Easy",
+    "description": "Search all '.conf' files in current directory for 'AllowOverride' and output only the filenames of matching files.",
+    "objective": "grep -l 'AllowOverride' *.conf",
+    "hints": [
+      "Use -l flag to list files with matches",
+      "Command: grep -l 'AllowOverride' *.conf"
+    ],
+    "solution": "grep -l 'AllowOverride' *.conf",
+    "accepted_regex": [
+      "grep\\s+-l\\s+['\\\"]?AllowOverride['\\\"]?\\s+\\*\\.conf"
+    ],
+    "setup_files": {
+      "web.conf": "AllowOverride All\n",
+      "api.conf": "Require all granted\n",
+      "ssl.conf": "AllowOverride None\n"
+    }
+  },
+  {
+    "id": "grep-07",
+    "category": "Grep & Regex",
+    "title": "Match Valid IPv4 Address Lines with ERE",
+    "difficulty": "Advanced",
+    "description": "Search 'nodes.txt' for lines starting with an IPv4 address formatted as 4 numeric octets separated by dots.",
+    "objective": "grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt",
+    "hints": [
+      "Use -E with character class [0-9]{1,3}",
+      "Command: grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt"
+    ],
+    "solution": "grep -E '^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}' nodes.txt",
+    "accepted_regex": [
+      "grep\\s+-E\\s+['\\\"]\\^\\[0-9\\]\\{1,3\\}"
+    ],
+    "setup_files": {
+      "nodes.txt": "192.168.1.10 node1.local\nhostname-only-node\n10.0.0.5 worker-a\ninvalid.ip.address.test\n"
+    }
+  },
+  {
+    "id": "sed-01",
+    "category": "Sed Stream Editing",
+    "title": "SELinux Enforce Substitution",
+    "difficulty": "Easy",
+    "description": "Modify 'selinux.conf' so that 'SELINUX=enforcing' is replaced with 'SELINUX=permissive'. Print modified output to stdout.",
+    "objective": "sed 's/enforcing/permissive/' selinux.conf",
+    "hints": [
+      "Command: sed 's/enforcing/permissive/' selinux.conf"
+    ],
+    "solution": "sed 's/enforcing/permissive/' selinux.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/SELINUX=enforcing\\/SELINUX=permissive\\/['\\\"]\\s+selinux\\.conf",
+      "sed\\s+['\\\"]s\\/enforcing\\/permissive\\/['\\\"]\\s+selinux\\.conf",
+      "sed\\s+['\\\"]s\\/enforcing\\/permissive\\/g['\\\"]\\s+selinux\\.conf"
+    ],
+    "setup_files": {
+      "selinux.conf": "# This file controls the state of SELinux on the system.\nSELINUX=enforcing\nSELINUXTYPE=targeted\n"
+    }
+  },
+  {
+    "id": "sed-02",
+    "category": "Sed Stream Editing",
+    "title": "Delete Comment Lines Using Pattern Addressing",
+    "difficulty": "Intermediate",
+    "description": "Using sed, delete all lines beginning with '#' from 'crontab.test' and print the resulting scheduled tasks.",
+    "objective": "sed '/^#/d' crontab.test",
+    "hints": [
+      "Use pattern address delete: sed '/^#/d' crontab.test"
+    ],
+    "solution": "sed '/^#/d' crontab.test",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/\\\\^#\\/d['\\\"]\\s+crontab\\.test",
+      "sed\\s+['\\\"]\\/\\^#\\/d['\\\"]\\s+crontab\\.test"
+    ],
+    "setup_files": {
+      "crontab.test": "# Daily backup crontab\n# m h dom mon dow user command\n0 2 * * * root /usr/local/bin/backup-db.sh\n# Weekly audit\n0 4 * * 0 root /usr/local/bin/security-audit.sh\n# End of file\n"
+    }
+  },
+  {
+    "id": "sed-03",
+    "category": "Sed Stream Editing",
+    "title": "Replace Directory Path with Custom Delimiter",
+    "difficulty": "Intermediate",
+    "description": "Replace '/var/www/html' with '/data/www/html' in 'vhost.conf' using custom delimiter '#' in sed.",
+    "objective": "sed 's#/var/www/html#/data/www/html#g' vhost.conf",
+    "hints": [
+      "Use sed 's#find#replace#g' to avoid escaping slashes.",
+      "Command: sed 's#/var/www/html#/data/www/html#g' vhost.conf"
+    ],
+    "solution": "sed 's#/var/www/html#/data/www/html#g' vhost.conf",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s[#|@]\\/var\\/www\\/html[#|@]\\/data\\/www\\/html[#|@](g)?['\\\"]\\s+vhost\\.conf"
+    ],
+    "setup_files": {
+      "vhost.conf": "DocumentRoot \"/var/www/html\"\n<Directory \"/var/www/html\">\n    Require all granted\n</Directory>\n"
+    }
+  },
+  {
+    "id": "sed-04",
+    "category": "Sed Stream Editing",
+    "title": "Print Specific Line Range with sed -n",
+    "difficulty": "Intermediate",
+    "description": "Print lines 3 through 5 (inclusive) from 'audit.log' using sed quiet mode (-n) and the 'p' print command.",
+    "objective": "sed -n '3,5p' audit.log",
+    "hints": [
+      "Use line address range: 3,5p",
+      "Command: sed -n '3,5p' audit.log"
+    ],
+    "solution": "sed -n '3,5p' audit.log",
+    "accepted_regex": [
+      "sed\\s+-n\\s+['\\\"]3,5p['\\\"]\\s+audit\\.log"
+    ],
+    "setup_files": {
+      "audit.log": "line1\nline2\nline3\nline4\nline5\nline6\nline7\n"
+    }
+  },
+  {
+    "id": "sed-05",
+    "category": "Sed Stream Editing",
+    "title": "Strip Leading Whitespace Indentation",
+    "difficulty": "Intermediate",
+    "description": "Using sed, remove all leading spaces and tabs from each line in 'code.txt' and output the clean text.",
+    "objective": "sed 's/^[ \t]*//' code.txt",
+    "hints": [
+      "Match ^[ \t]* and replace with empty",
+      "Command: sed 's/^[ \t]*//' code.txt"
+    ],
+    "solution": "sed 's/^[ \t]*//' code.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\^\\[\\s*\\\\t\\]\\*\\/.*['\\\"]\\s+code\\.txt"
+    ],
+    "setup_files": {
+      "code.txt": "    def main():\n        print('hello')\n"
+    }
+  },
+  {
+    "id": "awk-01",
+    "category": "Awk Processing",
+    "title": "Extract System Users with Bash Shell",
+    "difficulty": "Intermediate",
+    "description": "Examine 'passwd.sample'. Using awk with delimiter ':', print username ($1) and UID ($3) formatted as 'user:UID' for any account whose login shell ($7) is '/bin/bash'.",
+    "objective": "awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample",
+    "hints": [
+      "Use delimiter -F':'",
+      "Condition: $7 == \"/bin/bash\"",
+      "Command: awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample"
+    ],
+    "solution": "awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample",
+    "accepted_regex": [
+      "awk\\s+-F['\\\"]?:['\\\"]?\\s+['\\\"]\\s*\\$7\\s*==\\s*[\\\"']/bin/bash[\\\"']\\s*\\{\\s*print\\s+\\$1\\s*\\\"?:\\\"?\\s*\\$3\\s*\\}\\s*['\\\"]\\s+passwd\\.sample",
+      "awk\\s+-F:\\s+['\\\"].*bash.*print\\s+\\$1.*\\$3.*['\\\"]\\s+passwd\\.sample"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\ndaemon:x:2:2:daemon:/sbin:/sbin/nologin\nansible:x:1001:1001:Ansible Automation:/home/ansible:/bin/bash\ndbadmin:x:1002:1002:Database Admin:/home/dbadmin:/bin/bash\napache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin\n"
+    }
+  },
+  {
+    "id": "awk-02",
+    "category": "Awk Processing",
+    "title": "Sum Column Values of Log Transfer Bytes",
+    "difficulty": "Intermediate",
+    "description": "Read 'transfers.tsv'. Using awk, calculate and print the total sum of the transferred byte sizes located in column 2.",
+    "objective": "awk '{sum += $2} END {print sum}' transfers.tsv",
+    "hints": [
+      "Accumulate $2: {sum += $2}",
+      "Output in the END block: END {print sum}",
+      "Command: awk '{sum += $2} END {print sum}' transfers.tsv"
+    ],
+    "solution": "awk '{sum += $2} END {print sum}' transfers.tsv",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{sum\\s*\\+=\\s*\\$2\\}\\s*END\\s*\\{\\s*print\\s+sum\\s*\\}['\\\"]\\s+transfers\\.tsv",
+      "awk\\s+['\\\"]\\{\\s*s\\+=\\$2\\s*\\}\\s*END\\s*\\{\\s*print\\s+s\\s*\\}['\\\"]\\s+transfers\\.tsv"
+    ],
+    "setup_files": {
+      "transfers.tsv": "backup_rhel10.tar.gz\t5000\tOK\nkernel_rpm.rpm\t1200\tOK\nlogs_archive.zip\t3800\tOK\ndatabase_dump.sql\t10000\tOK\n"
+    }
+  },
+  {
+    "id": "awk-03",
+    "category": "Awk Processing",
+    "title": "Print Last Field of Variable Length Log Lines",
+    "difficulty": "Intermediate",
+    "description": "Read 'commands.log'. Extract and print only the final word/argument of each line using the built-in $NF variable.",
+    "objective": "awk '{print $NF}' commands.log",
+    "hints": [
+      "Use built-in $NF (Number of Fields)",
+      "Command: awk '{print $NF}' commands.log"
+    ],
+    "solution": "awk '{print $NF}' commands.log",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+\\$NF\\}['\\\"]\\s+commands\\.log"
+    ],
+    "setup_files": {
+      "commands.log": "user run command restart\nadmin exec script --force deploy\nsystem alert warning critical\n"
+    }
+  },
+  {
+    "id": "awk-04",
+    "category": "Awk Processing",
+    "title": "Filter Human Interactive Users with UID >= 1000",
+    "difficulty": "Intermediate",
+    "description": "Examine 'passwd.sample'. Using awk with delimiter ':', print the username of any account with UID ($3) greater than or equal to 1000 and less than 65534.",
+    "objective": "awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample",
+    "hints": [
+      "Condition: $3 >= 1000 && $3 < 65534",
+      "Command: awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample"
+    ],
+    "solution": "awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample",
+    "accepted_regex": [
+      "awk\\s+-F['\\\"]?:['\\\"]?\\s+['\\\"]\\s*\\$3\\s*>=\\s*1000"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\nansible:x:1001:1001:Ansible:/home/ansible:/bin/bash\ndbadmin:x:1002:1002:DBA:/home/dbadmin:/bin/bash\nnobody:x:65534:65534:Nobody:/:/sbin/nologin\n"
+    }
+  },
+  {
+    "id": "grep-08",
+    "category": "Grep & Regex",
+    "title": "Case-Insensitive Recursive Search Ignoring Binaries",
+    "difficulty": "Intermediate",
+    "description": "Search directory './configs' recursively (-r), case-insensitively (-i), ignoring binary files (-I), for the string 'API_KEY'.",
+    "objective": "grep -rIi 'API_KEY' configs",
+    "hints": [
+      "Combine flags: -r -I -i (or -rIi)",
+      "Command: grep -rIi 'API_KEY' configs"
+    ],
+    "solution": "grep -rIi 'API_KEY' configs",
+    "accepted_regex": [
+      "grep\\s+(-rIi|-riI|-Iri|-Iir|-iri|-iIr|-[rIi]{3})\\s+['\\\"]?API_KEY['\\\"]?\\s+configs"
+    ],
+    "setup_files": {
+      "configs/app.json": "{\"API_KEY\": \"secret99\"}\n"
+    }
+  },
+  {
+    "id": "grep-09",
+    "category": "Grep & Regex",
+    "title": "List Files NOT Matching Pattern with grep -L",
+    "difficulty": "Intermediate",
+    "description": "Search all '.conf' files in current directory and print only the names of files that do NOT contain the directive 'PermitRootLogin'.",
+    "objective": "grep -L 'PermitRootLogin' *.conf",
+    "hints": [
+      "Use -L flag (files without match)",
+      "Command: grep -L 'PermitRootLogin' *.conf"
+    ],
+    "solution": "grep -L 'PermitRootLogin' *.conf",
+    "accepted_regex": [
+      "grep\\s+-L\\s+['\\\"]?PermitRootLogin['\\\"]?\\s+\\*\\.conf"
+    ],
+    "setup_files": {
+      "secure.conf": "PermitRootLogin no\n",
+      "insecure.conf": "Port 22\n"
+    }
+  },
+  {
+    "id": "sed-06",
+    "category": "Sed Stream Editing",
+    "title": "Delete All Empty Blank Lines with sed",
+    "difficulty": "Easy",
+    "description": "Read 'notes.txt'. Delete all blank lines (lines with zero characters) using sed pattern addressing.",
+    "objective": "sed '/^$/d' notes.txt",
+    "hints": [
+      "Use /^$/d",
+      "Command: sed '/^$/d' notes.txt"
+    ],
+    "solution": "sed '/^$/d' notes.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]\\/\\^\\$\\/d['\\\"]\\s+notes\\.txt"
+    ],
+    "setup_files": {
+      "notes.txt": "first\n\nsecond\n\n\nthird\n"
+    }
+  },
+  {
+    "id": "sed-07",
+    "category": "Sed Stream Editing",
+    "title": "Strip Windows Carriage Returns",
+    "difficulty": "Intermediate",
+    "description": "Remove trailing Windows/DOS carriage return characters (\\r) from each line in 'windows.txt'.",
+    "objective": "sed 's/\\r$//' windows.txt",
+    "hints": [
+      "Replace \\r$ with empty",
+      "Command: sed 's/\\r$//' windows.txt"
+    ],
+    "solution": "sed 's/\\r$//' windows.txt",
+    "accepted_regex": [
+      "sed\\s+['\\\"]s\\/\\\\r\\$\\/\\/['\\\"]\\s+windows\\.txt"
+    ],
+    "setup_files": {
+      "windows.txt": "line1\r\nline2\r\n"
+    }
+  },
+  {
+    "id": "awk-05",
+    "category": "Awk Processing",
+    "title": "Custom Output Field Separator with OFS",
+    "difficulty": "Intermediate",
+    "description": "Read 'users.tsv' (tab-separated). Print column 1 and column 2 formatted with custom output field separator ' -> ' using awk.",
+    "objective": "awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv",
+    "hints": [
+      "Set OFS in BEGIN block: BEGIN {OFS=\" -> \"}",
+      "Command: awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv"
+    ],
+    "solution": "awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv",
+    "accepted_regex": [
+      "awk\\s+.*BEGIN\\s*\\{\\s*OFS\\s*=\\s*[\"\\']\\s*->\\s*[\"\\']\\s*\\}.*users\\.tsv"
+    ],
+    "setup_files": {
+      "users.tsv": "alice\tadmin\nbob\tuser\n"
+    }
+  }
+]

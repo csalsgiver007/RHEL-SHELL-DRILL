@@ -1,0 +1,1208 @@
+[
+  {
+    "id": "awk-01",
+    "category": "Awk Processing",
+    "title": "Extract System Users with Bash Shell",
+    "difficulty": "Intermediate",
+    "description": "Using delimiter ':', print $1 and $3 as 'user:UID' for accounts with shell '/bin/bash'.",
+    "objective": "awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample",
+    "hints": [
+      "Command: awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample"
+    ],
+    "solution": "awk -F':' '$7 == \"/bin/bash\" {print $1\":\"$3}' passwd.sample",
+    "accepted_regex": [
+      "awk\\s+-F['\\\"]?:['\\\"]?\\s+['\\\"]\\s*\\$7\\s*==\\s*[\\\"']/bin/bash[\\\"'].*passwd\\.sample"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\nansible:x:1001:1001::/home/ansible:/bin/bash\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-02",
+    "category": "Awk Processing",
+    "title": "Sum Column Values of Log Transfer Bytes",
+    "difficulty": "Intermediate",
+    "description": "Calculate and print total sum of transferred byte sizes in column 2 of transfers.tsv.",
+    "objective": "awk '{sum += $2} END {print sum}' transfers.tsv",
+    "hints": [
+      "Command: awk '{sum += $2} END {print sum}' transfers.tsv"
+    ],
+    "solution": "awk '{sum += $2} END {print sum}' transfers.tsv",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{sum\\s*\\+=\\s*\\$2\\}\\s*END\\s*\\{\\s*print\\s+sum\\s*\\}['\\\"]\\s+transfers\\.tsv"
+    ],
+    "setup_files": {
+      "transfers.tsv": "fileA 100\nfileB 250\nfileC 50\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-03",
+    "category": "Awk Processing",
+    "title": "Print Last Field of Variable Length Log Lines",
+    "difficulty": "Intermediate",
+    "description": "Print only the final field ($NF) of each line in commands.log.",
+    "objective": "awk '{print $NF}' commands.log",
+    "hints": [
+      "Command: awk '{print $NF}' commands.log"
+    ],
+    "solution": "awk '{print $NF}' commands.log",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+\\$NF\\}['\\\"]\\s+commands\\.log"
+    ],
+    "setup_files": {
+      "commands.log": "cmd1 arg1\ncmd2 arg1 arg2 end\ncmd3 done\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-04",
+    "category": "Awk Processing",
+    "title": "Filter Human Interactive Users with UID >= 1000",
+    "difficulty": "Intermediate",
+    "description": "Print username from passwd.sample for users with UID >= 1000 and < 65534.",
+    "objective": "awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample",
+    "hints": [
+      "Command: awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample"
+    ],
+    "solution": "awk -F':' '$3 >= 1000 && $3 < 65534 {print $1}' passwd.sample",
+    "accepted_regex": [
+      "awk\\s+-F['\\\"]?:['\\\"]?\\s+['\\\"]\\s*\\$3\\s*>=\\s*1000"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:::/bin/bash\nuser1:x:1001:1001:::/bin/bash\nnobody:x:65534:65534:::/sbin/nologin\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-05",
+    "category": "Awk Processing",
+    "title": "Custom Output Field Separator with OFS",
+    "difficulty": "Intermediate",
+    "description": "Print col 1 and 2 separated by ' -> ' from tab-delimited users.tsv.",
+    "objective": "awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv",
+    "hints": [
+      "Command: awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv"
+    ],
+    "solution": "awk -F'\\t' 'BEGIN {OFS=\" -> \"} {print $1, $2}' users.tsv",
+    "accepted_regex": [
+      "awk\\s+.*BEGIN\\s*\\{\\s*OFS\\s*=\\s*[\"\\']\\s*->\\s*[\"\\']\\s*\\}.*users\\.tsv"
+    ],
+    "setup_files": {
+      "users.tsv": "alice\tadmin\nbob\tuser\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-06",
+    "category": "Awk Processing",
+    "title": "Print Total Number of Records in File",
+    "difficulty": "Easy",
+    "description": "Use awk's built-in NR variable in END block to print total record count of items.txt.",
+    "objective": "awk 'END {print NR}' items.txt",
+    "hints": [
+      "Command: awk 'END {print NR}' items.txt"
+    ],
+    "solution": "awk 'END {print NR}' items.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]END\\s*\\{\\s*print\\s+NR\\s*\\}['\\\"]\\s+items\\.txt"
+    ],
+    "setup_files": {
+      "items.txt": "a\nb\nc\nd\ne\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-07",
+    "category": "Awk Processing",
+    "title": "Compute Average Value of Column 2",
+    "difficulty": "Intermediate",
+    "description": "Calculate and print average of values in column 2 of scores.txt.",
+    "objective": "awk '{sum += $2} END {print sum/NR}' scores.txt",
+    "hints": [
+      "Command: awk '{sum += $2} END {print sum/NR}' scores.txt"
+    ],
+    "solution": "awk '{sum += $2} END {print sum/NR}' scores.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*sum\\s*\\+=\\s*\\$2.*print\\s+sum\\/NR.*scores\\.txt"
+    ],
+    "setup_files": {
+      "scores.txt": "test1 80\ntest2 100\ntest3 90\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-08",
+    "category": "Awk Processing",
+    "title": "Filter Lines Having More Than 4 Fields",
+    "difficulty": "Easy",
+    "description": "Print lines from table.txt where Number of Fields (NF) is greater than 4.",
+    "objective": "awk 'NF > 4' table.txt",
+    "hints": [
+      "Command: awk 'NF > 4' table.txt"
+    ],
+    "solution": "awk 'NF > 4' table.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]NF\\s*>\\s*4['\\\"]\\s+table\\.txt"
+    ],
+    "setup_files": {
+      "table.txt": "a b c\na b c d e\na b\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-09",
+    "category": "Awk Processing",
+    "title": "Count Frequency of IP Addresses with Array",
+    "difficulty": "Advanced",
+    "description": "Count and print frequency of IPs in column 1 of access.log using associative arrays.",
+    "objective": "awk '{ips[$1]++} END {for (ip in ips) print ips[ip], ip}' access.log",
+    "hints": [
+      "Command: awk '{ips[$1]++} END {for (ip in ips) print ips[ip], ip}' access.log"
+    ],
+    "solution": "awk '{ips[$1]++} END {for (ip in ips) print ips[ip], ip}' access.log",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*ips\\[\\$1\\]\\+\\+.*for\\s*\\(.*access\\.log"
+    ],
+    "setup_files": {
+      "access.log": "10.0.0.1 - /index\n10.0.0.2 - /login\n10.0.0.1 - /img\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-10",
+    "category": "Awk Processing",
+    "title": "Filter Rows Where Column 3 Matches Regex",
+    "difficulty": "Intermediate",
+    "description": "Print rows in services.txt where column 3 starts with 'HTTP'.",
+    "objective": "awk '$3 ~ /^HTTP/' services.txt",
+    "hints": [
+      "Command: awk '$3 ~ /^HTTP/' services.txt"
+    ],
+    "solution": "awk '$3 ~ /^HTTP/' services.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\s*\\$3\\s*~\\s*\\/(\\^)?HTTP\\/['\\\"]\\s+services\\.txt"
+    ],
+    "setup_files": {
+      "services.txt": "1 web HTTPS\n2 mail SMTP\n3 web HTTP/1.1\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-11",
+    "category": "Awk Processing",
+    "title": "Format Output with printf Columns",
+    "difficulty": "Intermediate",
+    "description": "Print formatted columns '%-10s %5d\\n' for $1 and $2 from inventory.txt.",
+    "objective": "awk '{printf \"%-10s %5d\\n\", $1, $2}' inventory.txt",
+    "hints": [
+      "Command: awk '{printf \"%-10s %5d\\n\", $1, $2}' inventory.txt"
+    ],
+    "solution": "awk '{printf \"%-10s %5d\\n\", $1, $2}' inventory.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*printf.*%-10s.*inventory\\.txt"
+    ],
+    "setup_files": {
+      "inventory.txt": "apples 50\noranges 120\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-12",
+    "category": "Awk Processing",
+    "title": "Print Line Number Alongside Each Record",
+    "difficulty": "Easy",
+    "description": "Print record number NR followed by the full line $0 from sample.txt.",
+    "objective": "awk '{print NR, $0}' sample.txt",
+    "hints": [
+      "Command: awk '{print NR, $0}' sample.txt"
+    ],
+    "solution": "awk '{print NR, $0}' sample.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+NR,\\s*\\$0\\}['\\\"]\\s+sample\\.txt"
+    ],
+    "setup_files": {
+      "sample.txt": "first\nsecond\nthird\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-13",
+    "category": "Awk Processing",
+    "title": "Print Lines Exceeding 80 Characters in Length",
+    "difficulty": "Intermediate",
+    "description": "Find and print lines in code.py whose length exceeds 80 characters.",
+    "objective": "awk 'length($0) > 80' code.py",
+    "hints": [
+      "Command: awk 'length($0) > 80' code.py"
+    ],
+    "solution": "awk 'length($0) > 80' code.py",
+    "accepted_regex": [
+      "awk\\s+['\\\"]length\\((\\$0)?\\)\\s*>\\s*80['\\\"]\\s+code\\.py"
+    ],
+    "setup_files": {
+      "code.py": "short line\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-14",
+    "category": "Awk Processing",
+    "title": "Preserve Header Line While Filtering Rows",
+    "difficulty": "Intermediate",
+    "description": "In metrics.csv (comma delimited), print line 1 (header), and for subsequent lines print only where $2 > 50.",
+    "objective": "awk -F',' 'NR==1 || $2 > 50' metrics.csv",
+    "hints": [
+      "Command: awk -F',' 'NR==1 || $2 > 50' metrics.csv"
+    ],
+    "solution": "awk -F',' 'NR==1 || $2 > 50' metrics.csv",
+    "accepted_regex": [
+      "awk\\s+-F['\\\"]?,['\\\"]?\\s+['\\\"]NR\\s*==\\s*1\\s*\\|\\|\\s*\\$2\\s*>\\s*50['\\\"]\\s+metrics\\.csv"
+    ],
+    "setup_files": {
+      "metrics.csv": "server,load\nsrv1,20\nsrv2,85\nsrv3,90\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-15",
+    "category": "Awk Processing",
+    "title": "Calculate Column Value Differences",
+    "difficulty": "Intermediate",
+    "description": "Print $1 and the difference ($3 - $2) from numbers.tsv.",
+    "objective": "awk '{print $1, $3 - $2}' numbers.tsv",
+    "hints": [
+      "Command: awk '{print $1, $3 - $2}' numbers.tsv"
+    ],
+    "solution": "awk '{print $1, $3 - $2}' numbers.tsv",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+\\$1,\\s*\\$3\\s*-\\s*\\$2\\}['\\\"]\\s+numbers\\.tsv"
+    ],
+    "setup_files": {
+      "numbers.tsv": "row1 10 30\nrow2 20 50\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-16",
+    "category": "Awk Processing",
+    "title": "Find Maximum Value in Column 2",
+    "difficulty": "Intermediate",
+    "description": "Find and print the highest number in column 2 of stats.txt.",
+    "objective": "awk '$2 > max {max = $2} END {print max}' stats.txt",
+    "hints": [
+      "Command: awk '$2 > max {max = $2} END {print max}' stats.txt"
+    ],
+    "solution": "awk '$2 > max {max = $2} END {print max}' stats.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*\\$2\\s*>\\s*max.*print\\s+max.*stats\\.txt"
+    ],
+    "setup_files": {
+      "stats.txt": "a 15\nb 95\nc 40\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-17",
+    "category": "Awk Processing",
+    "title": "Substr Function to Extract Date Substring",
+    "difficulty": "Advanced",
+    "description": "Extract first 10 characters (YYYY-MM-DD) from timestamp column 1 using substr($1, 1, 10).",
+    "objective": "awk '{print substr($1, 1, 10)}' logs.txt",
+    "hints": [
+      "Command: awk '{print substr($1, 1, 10)}' logs.txt"
+    ],
+    "solution": "awk '{print substr($1, 1, 10)}' logs.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+substr\\(\\$1,\\s*1,\\s*10\\)\\}['\\\"]\\s+logs\\.txt"
+    ],
+    "setup_files": {
+      "logs.txt": "2026-10-09T12:34:56Z event1\n2026-10-09T13:00:00Z event2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-18",
+    "category": "Awk Processing",
+    "title": "Count Occurrences Where Field Equals Target",
+    "difficulty": "Easy",
+    "description": "Count how many rows have column 2 equal to 'SUCCESS' in status.txt.",
+    "objective": "awk '$2 == \"SUCCESS\" {count++} END {print count}' status.txt",
+    "hints": [
+      "Command: awk '$2 == \"SUCCESS\" {count++} END {print count}' status.txt"
+    ],
+    "solution": "awk '$2 == \"SUCCESS\" {count++} END {print count}' status.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*\\$2\\s*==\\s*[\\\"']SUCCESS[\\\"'].*count.*status\\.txt"
+    ],
+    "setup_files": {
+      "status.txt": "job1 SUCCESS\njob2 FAILED\njob3 SUCCESS\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-19",
+    "category": "Awk Processing",
+    "title": "Print Range of Records from NR 5 to 8",
+    "difficulty": "Easy",
+    "description": "Print records where NR is between 5 and 8 (inclusive).",
+    "objective": "awk 'NR >= 5 && NR <= 8' records.txt",
+    "hints": [
+      "Command: awk 'NR >= 5 && NR <= 8' records.txt"
+    ],
+    "solution": "awk 'NR >= 5 && NR <= 8' records.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]NR\\s*>=\\s*5\\s*&&\\s*NR\\s*<=\\s*8['\\\"]\\s+records\\.txt"
+    ],
+    "setup_files": {
+      "records.txt": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-20",
+    "category": "Awk Processing",
+    "title": "Replace Field 2 Value Before Printing",
+    "difficulty": "Intermediate",
+    "description": "In data.txt, change $2 to 'REDACTED' and print the modified full line.",
+    "objective": "awk '{$2 = \"REDACTED\"; print}' data.txt",
+    "hints": [
+      "Command: awk '{$2 = \"REDACTED\"; print}' data.txt"
+    ],
+    "solution": "awk '{$2 = \"REDACTED\"; print}' data.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{\\s*\\$2\\s*=\\s*[\\\"']REDACTED[\\\"'];?\\s*print\\}['\\\"]\\s+data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "user secret pass\nadmin secret pass\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-21",
+    "category": "Awk Processing",
+    "title": "Print Second to Last Field $(NF-1)",
+    "difficulty": "Intermediate",
+    "description": "Extract the second-to-last field $(NF-1) from variable length rows in items.txt.",
+    "objective": "awk '{print $(NF-1)}' items.txt",
+    "hints": [
+      "Command: awk '{print $(NF-1)}' items.txt"
+    ],
+    "solution": "awk '{print $(NF-1)}' items.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{print\\s+\\$\\(NF-1\\)\\}['\\\"]\\s+items\\.txt"
+    ],
+    "setup_files": {
+      "items.txt": "a b c d\nx y z\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-22",
+    "category": "Awk Processing",
+    "title": "Case-Insensitive Match in Awk using tolower",
+    "difficulty": "Intermediate",
+    "description": "Print rows in auth.log where tolower($0) matches 'error'.",
+    "objective": "awk 'tolower($0) ~ /error/' auth.log",
+    "hints": [
+      "Command: awk 'tolower($0) ~ /error/' auth.log"
+    ],
+    "solution": "awk 'tolower($0) ~ /error/' auth.log",
+    "accepted_regex": [
+      "awk\\s+['\\\"]tolower\\(\\$0\\)\\s*~\\s*\\/error\\/['\\\"]\\s+auth\\.log"
+    ],
+    "setup_files": {
+      "auth.log": "ERROR: fail\nInfo: ok\nError: minor\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-23",
+    "category": "Awk Processing",
+    "title": "Multiply Two Columns and Sum Total",
+    "difficulty": "Intermediate",
+    "description": "Calculate total revenue by summing ($2 * $3) (quantity * price) in orders.tsv.",
+    "objective": "awk '{total += $2 * $3} END {print total}' orders.tsv",
+    "hints": [
+      "Command: awk '{total += $2 * $3} END {print total}' orders.tsv"
+    ],
+    "solution": "awk '{total += $2 * $3} END {print total}' orders.tsv",
+    "accepted_regex": [
+      "awk\\s+['\\\"].*total\\s*\\+=\\s*\\$2\\s*\\*\\s*\\$3.*print\\s+total.*orders\\.tsv"
+    ],
+    "setup_files": {
+      "orders.tsv": "item1 2 10\nitem2 5 20\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-24",
+    "category": "Awk Processing",
+    "title": "Print Unique Entries in Column 1 Without External Sort",
+    "difficulty": "Advanced",
+    "description": "Print unique entries from column 1 of dups.txt preserving first appearance.",
+    "objective": "awk '!seen[$1]++' dups.txt",
+    "hints": [
+      "Command: awk '!seen[$1]++' dups.txt"
+    ],
+    "solution": "awk '!seen[$1]++' dups.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]!seen\\[\\$1\\]\\+\\+['\\\"]\\s+dups\\.txt"
+    ],
+    "setup_files": {
+      "dups.txt": "a 1\nb 2\na 3\nc 4\nb 5\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-25",
+    "category": "Awk Processing",
+    "title": "Sum Columns from df -h Output in Megabytes",
+    "difficulty": "Intermediate",
+    "description": "Sum column 4 (available blocks) in df.txt skipping the first header line.",
+    "objective": "awk 'NR > 1 {sum += $4} END {print sum}' df.txt",
+    "hints": [
+      "Command: awk 'NR > 1 {sum += $4} END {print sum}' df.txt"
+    ],
+    "solution": "awk 'NR > 1 {sum += $4} END {print sum}' df.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]NR\\s*>\\s*1\\s*\\{\\s*sum\\s*\\+=\\s*\\$4.*print\\s+sum.*df\\.txt"
+    ],
+    "setup_files": {
+      "df.txt": "Filesystem 1K-blocks Used Available Use% Mounted\n/dev/sda1 1000 200 800 20% /\n/dev/sda2 2000 500 1500 25% /home\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-26",
+    "category": "Awk Processing",
+    "title": "Print Lines Where Field Count NF Greater Than 3",
+    "difficulty": "Easy",
+    "description": "Print only lines from inventory.txt that have more than 3 whitespace-separated columns.",
+    "objective": "awk 'NF > 3' inventory.txt",
+    "hints": [
+      "Condition: NF > 3",
+      "Command: awk 'NF > 3' inventory.txt"
+    ],
+    "solution": "awk 'NF > 3' inventory.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]NF\\s*>\\s*3['\\\"]\\s+inventory\\.txt"
+    ],
+    "setup_files": {
+      "inventory.txt": "a b c\na b c d\na b\na b c d e\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-27",
+    "category": "Awk Processing",
+    "title": "Prefix Every Line with Line Number (NR)",
+    "difficulty": "Easy",
+    "description": "Print line numbers alongside each line from data.txt using awk '{print NR, $0}'.",
+    "objective": "awk '{print NR, $0}' data.txt",
+    "hints": [
+      "Use NR and $0",
+      "Command: awk '{print NR, $0}' data.txt"
+    ],
+    "solution": "awk '{print NR, $0}' data.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{\\s*print\\s+NR\\s*,\\s*\\$0\\s*\\}['\\\"]\\s+data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "first\nsecond\nthird\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-28",
+    "category": "Awk Processing",
+    "title": "Calculate Column Average in END Block",
+    "difficulty": "Intermediate",
+    "description": "Calculate the arithmetic average of numeric column 2 in scores.txt and print the result.",
+    "objective": "awk '{sum += $2} END {print sum/NR}' scores.txt",
+    "hints": [
+      "Accumulate sum += $2 and in END print sum/NR",
+      "Command: awk '{sum += $2} END {print sum/NR}' scores.txt"
+    ],
+    "solution": "awk '{sum += $2} END {print sum/NR}' scores.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{\\s*sum\\s*\\+=\\s*\\$2\\s*\\}\\s*END\\s*\\{\\s*print\\s+sum\\s*\\/\\s*NR\\s*\\}['\\\"]\\s+scores\\.txt"
+    ],
+    "setup_files": {
+      "scores.txt": "Alice 90\nBob 80\nCharlie 100\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-29",
+    "category": "Awk Processing",
+    "title": "Filter Lines Exceeding 80 Characters",
+    "difficulty": "Easy",
+    "description": "Find and display all lines in source.c longer than 80 characters using awk 'length($0) > 80'.",
+    "objective": "awk 'length($0) > 80' source.c",
+    "hints": [
+      "Use length($0) > 80",
+      "Command: awk 'length($0) > 80' source.c"
+    ],
+    "solution": "awk 'length($0) > 80' source.c",
+    "accepted_regex": [
+      "awk\\s+['\\\"]length(\\(\\$0\\))?\\s*>\\s*80['\\\"]\\s+source\\.c"
+    ],
+    "setup_files": {
+      "source.c": "int main() { return 0; }\n/* aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa */\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-30",
+    "category": "Awk Processing",
+    "title": "Extract the Last Column Dynamically with $NF",
+    "difficulty": "Easy",
+    "description": "Extract and print the final column of each line in logs.txt regardless of how many columns exist.",
+    "objective": "awk '{print $NF}' logs.txt",
+    "hints": [
+      "Use $NF for the last column",
+      "Command: awk '{print $NF}' logs.txt"
+    ],
+    "solution": "awk '{print $NF}' logs.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\{\\s*print\\s+\\$NF\\s*\\}['\\\"]\\s+logs\\.txt"
+    ],
+    "setup_files": {
+      "logs.txt": "2026-10-09 GET 200 /index.html\n2026-10-09 POST /login\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-31",
+    "category": "Awk Processing",
+    "title": "Compute Sum and Average with AWK",
+    "difficulty": "Intermediate",
+    "description": "Calculate both the sum and average of column 2 values in stats.tsv.",
+    "objective": "awk '{sum+=$2} END {print \"Sum:\", sum, \"Avg:\", sum/NR}' stats.tsv",
+    "hints": [
+      "Command: awk '{sum+=$2} END {print \"Sum:\", sum, \"Avg:\", sum/NR}' stats.tsv"
+    ],
+    "solution": "awk '{sum+=$2} END {print \"Sum:\", sum, \"Avg:\", sum/NR}' stats.tsv",
+    "accepted_regex": [
+      "awk\\s+.*sum\\+=\\$2.*stats\\.tsv"
+    ],
+    "setup_files": {
+      "stats.tsv": "item1\t10\nitem2\t20\nitem3\t30\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-32",
+    "category": "Awk Processing",
+    "title": "Format Column Outputs with printf Table Padding",
+    "difficulty": "Intermediate",
+    "description": "Format columns 1 (left-aligned 15 chars) and 3 (right-aligned 8 chars) in table.txt.",
+    "objective": "awk '{printf \"%-15s %8s\\n\", $1, $3}' table.txt",
+    "hints": [
+      "Command: awk '{printf \"%-15s %8s\\n\", $1, $3}' table.txt"
+    ],
+    "solution": "awk '{printf \"%-15s %8s\\n\", $1, $3}' table.txt",
+    "accepted_regex": [
+      "awk\\s+.*printf.*table\\.txt"
+    ],
+    "setup_files": {
+      "table.txt": "alpha 1 100\nbeta 2 2500\ngamma 3 9\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-33",
+    "category": "Awk Processing",
+    "title": "Find Maximum Value in Column with Tracking Record",
+    "difficulty": "Intermediate",
+    "description": "Find the highest numeric score in column 2 and print the winner's name ($1) and score ($2).",
+    "objective": "awk '$2 > max {max=$2; winner=$1} END {print winner, max}' scores.txt",
+    "hints": [
+      "Command: awk '$2 > max {max=$2; winner=$1} END {print winner, max}' scores.txt"
+    ],
+    "solution": "awk '$2 > max {max=$2; winner=$1} END {print winner, max}' scores.txt",
+    "accepted_regex": [
+      "awk\\s+.*max.*scores\\.txt"
+    ],
+    "setup_files": {
+      "scores.txt": "Alice 88\nBob 95\nCharlie 91\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-34",
+    "category": "Awk Processing",
+    "title": "Filter Lines by String Length Function",
+    "difficulty": "Easy",
+    "description": "Print lines from phrases.txt where length of line exceeds 40 characters using length().",
+    "objective": "awk 'length($0) > 40' phrases.txt",
+    "hints": [
+      "Command: awk 'length($0) > 40' phrases.txt"
+    ],
+    "solution": "awk 'length($0) > 40' phrases.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]length(\\(\\$0\\)?|\\$0)?\\s*>\\s*40['\\\"]\\s+phrases\\.txt"
+    ],
+    "setup_files": {
+      "phrases.txt": "short\nthis is a longer sentence exceeding forty characters easily here\nanother medium phrase\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-35",
+    "category": "Awk Processing",
+    "title": "Count Occurrences of Values Using Associative Arrays",
+    "difficulty": "Intermediate",
+    "description": "Count how many times each HTTP method ($1) appears in access.log.",
+    "objective": "awk '{count[$1]++} END {for (m in count) print m, count[m]}' access.log",
+    "hints": [
+      "Command: awk '{count[$1]++} END {for (m in count) print m, count[m]}' access.log"
+    ],
+    "solution": "awk '{count[$1]++} END {for (m in count) print m, count[m]}' access.log",
+    "accepted_regex": [
+      "awk\\s+.*count\\[\\$1\\]\\+\\+.*access\\.log"
+    ],
+    "setup_files": {
+      "access.log": "GET /index\nPOST /login\nGET /style.css\nGET /logo.png\nPOST /api\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-36",
+    "category": "Awk Processing",
+    "title": "Substituted Text in Specific Field with gsub()",
+    "difficulty": "Intermediate",
+    "description": "Replace all slashes '/' with dashes '-' only in field 2 of paths.txt.",
+    "objective": "awk '{gsub(\"/\", \"-\", $2); print}' paths.txt",
+    "hints": [
+      "Command: awk '{gsub(\"/\", \"-\", $2); print}' paths.txt"
+    ],
+    "solution": "awk '{gsub(\"/\", \"-\", $2); print}' paths.txt",
+    "accepted_regex": [
+      "awk\\s+.*gsub.*paths\\.txt"
+    ],
+    "setup_files": {
+      "paths.txt": "server1 /var/log/app active\nserver2 /etc/httpd standby\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-37",
+    "category": "Awk Processing",
+    "title": "Print Fields in Reverse Order",
+    "difficulty": "Intermediate",
+    "description": "Print all fields of each line in reverse order from last (NF) down to 1.",
+    "objective": "awk '{for(i=NF; i>0; i--) printf \"%s \", $i; print \"\"}' words.txt",
+    "hints": [
+      "Command: awk '{for(i=NF; i>0; i--) printf \"%s \", $i; print \"\"}' words.txt"
+    ],
+    "solution": "awk '{for(i=NF; i>0; i--) printf \"%s \", $i; print \"\"}' words.txt",
+    "accepted_regex": [
+      "awk\\s+.*for.*NF.*words\\.txt"
+    ],
+    "setup_files": {
+      "words.txt": "one two three four\nalpha beta gamma\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-38",
+    "category": "Awk Processing",
+    "title": "Extract Field Matching Regex with match()",
+    "difficulty": "Advanced",
+    "description": "Extract the IP address from log message in syslog.txt using match() and substr().",
+    "objective": "awk 'match($0, /[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+/) {print substr($0, RSTART, RLENGTH)}' syslog.txt",
+    "hints": [
+      "Command: awk 'match($0, /[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+/) {print substr($0, RSTART, RLENGTH)}' syslog.txt"
+    ],
+    "solution": "awk 'match($0, /[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+/) {print substr($0, RSTART, RLENGTH)}' syslog.txt",
+    "accepted_regex": [
+      "awk\\s+.*match.*substr.*syslog\\.txt"
+    ],
+    "setup_files": {
+      "syslog.txt": "User connected from 192.168.1.100 port 5021\nDropped from 10.0.0.5\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-39",
+    "category": "Awk Processing",
+    "title": "Multi-Character Field Separator",
+    "difficulty": "Intermediate",
+    "description": "Parse log.txt separated by '::' and print field 1 and field 3.",
+    "objective": "awk -F '::' '{print $1, $3}' log.txt",
+    "hints": [
+      "Command: awk -F '::' '{print $1, $3}' log.txt"
+    ],
+    "solution": "awk -F '::' '{print $1, $3}' log.txt",
+    "accepted_regex": [
+      "awk\\s+-F\\s+['\\\"]::['\\\"]\\s+.*log\\.txt"
+    ],
+    "setup_files": {
+      "log.txt": "2026-10-09::auth::SUCCESS::user1\n2026-10-09::ssh::FAILED::root\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-40",
+    "category": "Awk Processing",
+    "title": "Custom Output Field Separator (OFS)",
+    "difficulty": "Easy",
+    "description": "Read whitespace-delimited columns and output them separated by commas (OFS=\",\").",
+    "objective": "awk -v OFS=',' '{print $1, $2, $3}' data.txt",
+    "hints": [
+      "Command: awk -v OFS=',' '{print $1, $2, $3}' data.txt"
+    ],
+    "solution": "awk -v OFS=',' '{print $1, $2, $3}' data.txt",
+    "accepted_regex": [
+      "awk\\s+.*OFS=.*data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "a b c\nd e f\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-41",
+    "category": "Awk Processing",
+    "title": "Process Multi-Line Records Separated by Blank Lines",
+    "difficulty": "Advanced",
+    "description": "Set record separator RS='' (paragraph mode) to process multi-line stanzas and print the first line of each record.",
+    "objective": "awk 'BEGIN {RS=\"\"} {print $1}' stanzas.txt",
+    "hints": [
+      "Command: awk 'BEGIN {RS=\"\"} {print $1}' stanzas.txt"
+    ],
+    "solution": "awk 'BEGIN {RS=\"\"} {print $1}' stanzas.txt",
+    "accepted_regex": [
+      "awk\\s+.*RS=.*stanzas\\.txt"
+    ],
+    "setup_files": {
+      "stanzas.txt": "Record1 Line1\nRecord1 Line2\n\nRecord2 Line1\nRecord2 Line2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-42",
+    "category": "Awk Processing",
+    "title": "Compute Running Total on Column",
+    "difficulty": "Intermediate",
+    "description": "Print each line along with the cumulative running total of field 2.",
+    "objective": "awk '{total += $2; print $0, \"Total:\" total}' ledger.txt",
+    "hints": [
+      "Command: awk '{total += $2; print $0, \"Total:\" total}' ledger.txt"
+    ],
+    "solution": "awk '{total += $2; print $0, \"Total:\" total}' ledger.txt",
+    "accepted_regex": [
+      "awk\\s+.*total\\s*\\+=\\s*\\$2.*ledger\\.txt"
+    ],
+    "setup_files": {
+      "ledger.txt": "deposit 100\nfee 5\ndeposit 50\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-43",
+    "category": "Awk Processing",
+    "title": "Filter Rows Where Two Columns Match",
+    "difficulty": "Easy",
+    "description": "Print lines from pairs.txt where column 1 equals column 2.",
+    "objective": "awk '$1 == $2' pairs.txt",
+    "hints": [
+      "Command: awk '$1 == $2' pairs.txt"
+    ],
+    "solution": "awk '$1 == $2' pairs.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\$1\\s*==\\s*\\$2['\\\"]\\s+pairs\\.txt"
+    ],
+    "setup_files": {
+      "pairs.txt": "foo bar\nfoo foo\ncat dog\napple apple\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-44",
+    "category": "Awk Processing",
+    "title": "Pass External Shell Variable into AWK with Flag -v",
+    "difficulty": "Easy",
+    "description": "Pass threshold=50 into awk via -v and print lines where field 2 is greater than threshold.",
+    "objective": "awk -v threshold=50 '$2 > threshold' data.txt",
+    "hints": [
+      "Command: awk -v threshold=50 '$2 > threshold' data.txt"
+    ],
+    "solution": "awk -v threshold=50 '$2 > threshold' data.txt",
+    "accepted_regex": [
+      "awk\\s+-v\\s+threshold=50\\s+['\\\"]\\$2\\s*>\\s*threshold['\\\"]\\s+data\\.txt"
+    ],
+    "setup_files": {
+      "data.txt": "a 10\nb 60\nc 45\nd 90\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-45",
+    "category": "Awk Processing",
+    "title": "Uppercase Field with toupper() Function",
+    "difficulty": "Easy",
+    "description": "Print all lines converting field 1 to uppercase using toupper().",
+    "objective": "awk '{$1 = toupper($1); print}' names.txt",
+    "hints": [
+      "Command: awk '{$1 = toupper($1); print}' names.txt"
+    ],
+    "solution": "awk '{$1 = toupper($1); print}' names.txt",
+    "accepted_regex": [
+      "awk\\s+.*toupper.*names\\.txt"
+    ],
+    "setup_files": {
+      "names.txt": "alice dev\nbob qa\ncharlie ops\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-46",
+    "category": "Awk Processing",
+    "title": "Lowercase Field with tolower() Function",
+    "difficulty": "Easy",
+    "description": "Print lines converting field 2 to lowercase using tolower().",
+    "objective": "awk '{$2 = tolower($2); print}' email.txt",
+    "hints": [
+      "Command: awk '{$2 = tolower($2); print}' email.txt"
+    ],
+    "solution": "awk '{$2 = tolower($2); print}' email.txt",
+    "accepted_regex": [
+      "awk\\s+.*tolower.*email\\.txt"
+    ],
+    "setup_files": {
+      "email.txt": "User1 JOHN@CORP.COM\nUser2 ALICE@CORP.COM\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-47",
+    "category": "Awk Processing",
+    "title": "Split Field into Sub-Array with split()",
+    "difficulty": "Intermediate",
+    "description": "Split the date field ($1 formatted as YYYY-MM-DD) by '-' and print the year and month.",
+    "objective": "awk '{split($1, d, \"-\"); print d[1], d[2]}' dates.txt",
+    "hints": [
+      "Command: awk '{split($1, d, \"-\"); print d[1], d[2]}' dates.txt"
+    ],
+    "solution": "awk '{split($1, d, \"-\"); print d[1], d[2]}' dates.txt",
+    "accepted_regex": [
+      "awk\\s+.*split.*dates\\.txt"
+    ],
+    "setup_files": {
+      "dates.txt": "2026-10-09 event1\n2025-05-12 event2\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-48",
+    "category": "Awk Processing",
+    "title": "Print Only Lines Having Odd Number of Fields",
+    "difficulty": "Intermediate",
+    "description": "Filter lines in rows.txt to print only records having an odd number of fields (NF % 2 != 0).",
+    "objective": "awk 'NF % 2 != 0' rows.txt",
+    "hints": [
+      "Command: awk 'NF % 2 != 0' rows.txt"
+    ],
+    "solution": "awk 'NF % 2 != 0' rows.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]NF\\s*%\\s*2\\s*(!=0|==1)['\\\"]\\s+rows\\.txt"
+    ],
+    "setup_files": {
+      "rows.txt": "a b c\na b\na b c d e\na\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-49",
+    "category": "Awk Processing",
+    "title": "Compute Standard Variance in Column",
+    "difficulty": "Advanced",
+    "description": "Compute the difference between each row's value ($2) and the first row's baseline value.",
+    "objective": "awk 'NR==1 {base=$2} {print $1, $2 - base}' baseline.txt",
+    "hints": [
+      "Command: awk 'NR==1 {base=$2} {print $1, $2 - base}' baseline.txt"
+    ],
+    "solution": "awk 'NR==1 {base=$2} {print $1, $2 - base}' baseline.txt",
+    "accepted_regex": [
+      "awk\\s+.*NR==1.*baseline\\.txt"
+    ],
+    "setup_files": {
+      "baseline.txt": "point1 100\npoint2 105\npoint3 98\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-50",
+    "category": "Awk Processing",
+    "title": "Print Header Line Before Data Processing",
+    "difficulty": "Easy",
+    "description": "Print a formatted header 'USER | PID' using BEGIN before printing /etc/passwd users.",
+    "objective": "awk -F: 'BEGIN {print \"USER | UID\"} {print $1, \"|\", $3}' passwd.sample",
+    "hints": [
+      "Command: awk -F: 'BEGIN {print \"USER | UID\"} {print $1, \"|\", $3}' passwd.sample"
+    ],
+    "solution": "awk -F: 'BEGIN {print \"USER | UID\"} {print $1, \"|\", $3}' passwd.sample",
+    "accepted_regex": [
+      "awk\\s+.*BEGIN.*passwd\\.sample"
+    ],
+    "setup_files": {
+      "passwd.sample": "root:x:0:0:root:/root:/bin/bash\nbin:x:1:1:bin:/bin:/sbin/nologin\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-51",
+    "category": "Awk Processing",
+    "title": "Print Specific Range of Line Numbers (NR)",
+    "difficulty": "Easy",
+    "description": "Print lines 5 through 10 of book.txt using NR condition.",
+    "objective": "awk 'NR>=5 && NR<=10' book.txt",
+    "hints": [
+      "Command: awk 'NR>=5 && NR<=10' book.txt"
+    ],
+    "solution": "awk 'NR>=5 && NR<=10' book.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"](NR>=5\\s*&&\\s*NR<=10|NR==5,NR==10)['\\\"]\\s+book\\.txt"
+    ],
+    "setup_files": {
+      "book.txt": "line 1\nline 2\nline 3\nline 4\nline 5\nline 6\nline 7\nline 8\nline 9\nline 10\nline 11\nline 12\nline 13\nline 14\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-52",
+    "category": "Awk Processing",
+    "title": "Check If Column Value Is Within Numeric Range",
+    "difficulty": "Easy",
+    "description": "Filter products.txt to show lines where price ($2) is between 20 and 50 inclusive.",
+    "objective": "awk '$2 >= 20 && $2 <= 50' products.txt",
+    "hints": [
+      "Command: awk '$2 >= 20 && $2 <= 50' products.txt"
+    ],
+    "solution": "awk '$2 >= 20 && $2 <= 50' products.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\$2\\s*>=\\s*20\\s*&&\\s*\\$2\\s*<=\\s*50['\\\"]\\s+products\\.txt"
+    ],
+    "setup_files": {
+      "products.txt": "itemA 10\nitemB 25\nitemC 50\nitemD 75\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-53",
+    "category": "Awk Processing",
+    "title": "Filter Lines by Regex Pattern on Specific Field",
+    "difficulty": "Easy",
+    "description": "Print lines from services.txt where field 2 matches the regex ~ /^https?$/.",
+    "objective": "awk '$2 ~ /^https?$/' services.txt",
+    "hints": [
+      "Command: awk '$2 ~ /^https?$/' services.txt"
+    ],
+    "solution": "awk '$2 ~ /^https?$/' services.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\$2\\s*~\\s*\\/(\\^https\\?\\$|https\\?)(\\/)?['\\\"]\\s+services\\.txt"
+    ],
+    "setup_files": {
+      "services.txt": "web http\nsecure https\nftp ftp\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-54",
+    "category": "Awk Processing",
+    "title": "Invert Regex Match on Specific Field with !~",
+    "difficulty": "Easy",
+    "description": "Filter lines where field 3 does NOT match 'ACTIVE' using !~ operator.",
+    "objective": "awk '$3 !~ /ACTIVE/' nodes.txt",
+    "hints": [
+      "Command: awk '$3 !~ /ACTIVE/' nodes.txt"
+    ],
+    "solution": "awk '$3 !~ /ACTIVE/' nodes.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]\\$3\\s*!~\\s*\\/ACTIVE\\/['\\\"]\\s+nodes\\.txt"
+    ],
+    "setup_files": {
+      "nodes.txt": "node1 10.0.0.1 ACTIVE\nnode2 10.0.0.2 STANDBY\nnode3 10.0.0.3 DOWN\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-55",
+    "category": "Awk Processing",
+    "title": "Print Fields Starting from Field 3 to End of Line",
+    "difficulty": "Intermediate",
+    "description": "Print from column 3 through the end of line ($NF) omitting columns 1 and 2.",
+    "objective": "awk '{for(i=3;i<=NF;i++) printf \"%s \", $i; print \"\"}' log.txt",
+    "hints": [
+      "Command: awk '{for(i=3;i<=NF;i++) printf \"%s \", $i; print \"\"}' log.txt"
+    ],
+    "solution": "awk '{for(i=3;i<=NF;i++) printf \"%s \", $i; print \"\"}' log.txt",
+    "accepted_regex": [
+      "awk\\s+.*for.*i=3.*log\\.txt"
+    ],
+    "setup_files": {
+      "log.txt": "2026-10-09 12:00:00 User root performed sudo reboot\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-56",
+    "category": "Awk Processing",
+    "title": "Compute Percentage Distribution of Column 1",
+    "difficulty": "Advanced",
+    "description": "Read totals.txt twice (or store in memory) to output each row's percentage of overall sum.",
+    "objective": "awk 'NR==FNR {total+=$2; next} {printf \"%s %.1f%%\\n\", $1, ($2/total)*100}' totals.txt totals.txt",
+    "hints": [
+      "Command: awk 'NR==FNR {total+=$2; next} {printf \"%s %.1f%%\\n\", $1, ($2/total)*100}' totals.txt totals.txt"
+    ],
+    "solution": "awk 'NR==FNR {total+=$2; next} {printf \"%s %.1f%%\\n\", $1, ($2/total)*100}' totals.txt totals.txt",
+    "accepted_regex": [
+      "awk\\s+.*total\\+=\\$2.*totals\\.txt"
+    ],
+    "setup_files": {
+      "totals.txt": "deptA 50\ndeptB 150\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-57",
+    "category": "Awk Processing",
+    "title": "Print Unique Rows Preserving Original Order",
+    "difficulty": "Intermediate",
+    "description": "Remove duplicate lines from duplicates.txt keeping only the first occurrence in original order using !seen[$0]++.",
+    "objective": "awk '!seen[$0]++' duplicates.txt",
+    "hints": [
+      "Command: awk '!seen[$0]++' duplicates.txt"
+    ],
+    "solution": "awk '!seen[$0]++' duplicates.txt",
+    "accepted_regex": [
+      "awk\\s+['\\\"]!seen\\[\\$0\\]\\+\\+['\\\"]\\s+duplicates\\.txt"
+    ],
+    "setup_files": {
+      "duplicates.txt": "orange\napple\norange\nbanana\napple\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-58",
+    "category": "Awk Processing",
+    "title": "Join Two Files by Common Key Column",
+    "difficulty": "Advanced",
+    "description": "Join users.txt (id, name) and roles.txt (id, role) on field 1.",
+    "objective": "awk 'NR==FNR {role[$1]=$2; next} $1 in role {print $1, $2, role[$1]}' roles.txt users.txt",
+    "hints": [
+      "Command: awk 'NR==FNR {role[$1]=$2; next} $1 in role {print $1, $2, role[$1]}' roles.txt users.txt"
+    ],
+    "solution": "awk 'NR==FNR {role[$1]=$2; next} $1 in role {print $1, $2, role[$1]}' roles.txt users.txt",
+    "accepted_regex": [
+      "awk\\s+.*NR==FNR.*roles\\.txt\\s+users\\.txt"
+    ],
+    "setup_files": {
+      "roles.txt": "1 admin\n2 user\n",
+      "users.txt": "1 Alice\n2 Bob\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-59",
+    "category": "Awk Processing",
+    "title": "Delete Trailing Spaces from All Records",
+    "difficulty": "Easy",
+    "description": "Strip trailing whitespace from every line using sub(/[[:space:]]+$/, \"\") in awk.",
+    "objective": "awk '{sub(/[[:space:]]+$/, \"\"); print}' dirty.txt",
+    "hints": [
+      "Command: awk '{sub(/[[:space:]]+$/, \"\"); print}' dirty.txt"
+    ],
+    "solution": "awk '{sub(/[[:space:]]+$/, \"\"); print}' dirty.txt",
+    "accepted_regex": [
+      "awk\\s+.*sub.*dirty\\.txt"
+    ],
+    "setup_files": {
+      "dirty.txt": "clean\nwith spaces    \n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  },
+  {
+    "id": "awk-60",
+    "category": "Awk Processing",
+    "title": "Print Line Number and Total Fields on Each Row",
+    "difficulty": "Easy",
+    "description": "Print 'Line NR has NF fields' for each row of matrix.txt.",
+    "objective": "awk '{print \"Line\", NR, \"has\", NF, \"fields\"}' matrix.txt",
+    "hints": [
+      "Command: awk '{print \"Line\", NR, \"has\", NF, \"fields\"}' matrix.txt"
+    ],
+    "solution": "awk '{print \"Line\", NR, \"has\", NF, \"fields\"}' matrix.txt",
+    "accepted_regex": [
+      "awk\\s+.*NR.*NF.*matrix\\.txt"
+    ],
+    "setup_files": {
+      "matrix.txt": "a b c\nd e\nf g h i\n"
+    },
+    "setup_perms": {},
+    "verify_cmd": ""
+  }
+]
